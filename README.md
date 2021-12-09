@@ -1,1 +1,1 @@
-# payMyBuddy
+# paymybuddy
