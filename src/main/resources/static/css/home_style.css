@@ -1,0 +1,68 @@
+.frame {
+	width: 350px;
+	margin-left: 30%;
+	margin-top: 5%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #A0A0A0;
+	border-radius: 5px;
+	text-align: center;
+	background: #FFFFFF;
+}
+
+h3 {
+	color: white;
+	border: 1px solid linear-gradient(to right, #7DC261, #87F05C);
+	border-radius: 5px;
+	margin-left: 26%;
+	margin-right: 26%;
+	font-family: sans-serif;
+	text-align: center;
+	line-height: 30px;
+	background: linear-gradient(to right, #7DC261, #87F05C);
+	height: 30px;
+}
+
+#email {
+	background:
+		url(C:\Users\Sèverine\Documents\1.Informatique\Professionnel\2.OpenClassrooms\1.Openclassrooms_Projets\P6\5.Development\paymybuddy\src\main\resources\static\img\enveloppe.jpg);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+.form-control-1 {
+	padding-left: 30px;
+	width: 300px;
+	height: 25px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+
+#password {
+	background:
+		url(C:\Users\Sèverine\Documents\1.Informatique\Professionnel\2.OpenClassrooms\1.Openclassrooms_Projets\P6\5.Development\paymybuddy\src\main\resources\static\img\asterisque.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.form-control-2 {
+	padding-left: 30px;
+	width: 300px;
+	height: 25px;
+	margin-bottom: 30px;
+	background-position: left;
+}
+
+.checkbox {
+	margin-top: 20px;
+}
+
+.btn-btn-primary {
+	background-color: #006CFF;
+	font-family: Arial Black;
+	color: white;
+	margin-top: 80px;
+	margin-bottom: 20px;
+	padding: 5px 40px 5px 40px;
+	border: 1px solid #006CFF;
+	border-radius: 5px;
+}

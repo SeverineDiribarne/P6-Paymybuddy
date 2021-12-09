@@ -1,0 +1,118 @@
+/*header */
+
+h3 {
+	color: white;
+	border: 1px solid linear-gradient(to right, #7DC261, #87F05C);
+	border-radius: 5px;
+	margin-top : 2px;
+	margin-left: 5px;
+	padding-left : 15px;
+	margin-right : 715px;
+	font-family: sans-serif;
+	font-size : 1.4em;
+	text-align: left;
+	line-height: 30px;
+	background: linear-gradient(to right, #7DC261, #87F05C);
+	height: 30px;
+}
+
+.nav{
+	margin-top:-10px;
+	background-color: rgb(240, 240, 240);
+	height: 35px;
+}
+
+.breadcrumb{
+	margin-left: 20px;
+	margin-top: 6px;
+	font-family: sans-serif;
+	font-size : 0.9em;
+	text-align: center;
+}
+
+.menu {
+	margin-top : -35px;
+	margin-right : 10px;
+	margin-left:550px;
+}
+
+/*money frame */
+
+.label_money {
+	margin-top: 20px;
+	margin-bottom: -2px;
+	margin-right: 600px;
+}
+
+.btn_connection  {
+	margin-left: 550px;	
+	margin-top: -25px;
+	
+	padding-left:15px;
+	padding-right: 15px;
+	border : 1px solid #006CFF;
+	background-color:  #006CFF;
+	border-radius: 5px;
+	
+}
+
+.money_frame1 {
+	display :flex;
+	flex-direction:column;
+	margin-left : 100px;
+	margin-right : 100px;
+}
+
+.money_frame2{
+	background-color: rgb(240, 240, 240);
+	height :100px;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.select {
+	margin : 17px 500px 0 120px;
+	padding : 25px 50px 25px 20px;
+	justify-content: space-around;
+}
+
+input[type="number"] {
+  width: 100px; 
+  margin: -52px 150px 0 320px ;
+}
+.btn_pay {
+	border : 1px solid #7DC261;
+	background-color:  #7DC261;
+	border-radius: 5px;
+	margin: -30px 115px 0 435px ;
+	padding : 2px 50px 2px 50px;
+	
+}
+
+/* transactions */
+.label_transaction{
+	margin-top: 10px;
+	margin-right: 580px;
+}
+.pages{
+	margin-top: -17px;
+}
+.table_transactions{
+	
+	display: inline-table;
+	width : 700px;
+	
+}
+.column{
+	background-color: #7DC261;
+	color: white;
+}
+th{
+	
+	height: 60px;
+	
+}
+td{
+	height: 50px;
+}
