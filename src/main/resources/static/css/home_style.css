@@ -1,7 +1,6 @@
 .frame {
 	width: 350px;
-	margin-left: 30%;
-	margin-top: 5%;
+	margin: 10% 40% 10% 40%;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border: 1px solid #A0A0A0;
@@ -23,44 +22,49 @@ h3 {
 	height: 30px;
 }
 
-#email {
-	background:
-		url(C:\Users\Sèverine\Documents\1.Informatique\Professionnel\2.OpenClassrooms\1.Openclassrooms_Projets\P6\5.Development\paymybuddy\src\main\resources\static\img\enveloppe.jpg);
-	background-repeat: no-repeat;
-	background-position: left;
-}
-
-.form-control-1 {
-	padding-left: 30px;
-	width: 300px;
+.input-group1 span {
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 5px;
 	height: 25px;
-	margin-top: 20px;
-	margin-bottom: 25px;
+	margin-top:55px; 
 }
 
-#password {
-	background:
-		url(C:\Users\Sèverine\Documents\1.Informatique\Professionnel\2.OpenClassrooms\1.Openclassrooms_Projets\P6\5.Development\paymybuddy\src\main\resources\static\img\asterisque.png);
-	background-repeat: no-repeat;
-	background-position: left;
-}
-.form-control-2 {
-	padding-left: 30px;
-	width: 300px;
+.input-group1 input {
+	padding-left: 50px;
 	height: 25px;
-	margin-bottom: 30px;
-	background-position: left;
+	width: 280px;
+	margin-bottom: 20px;
+	margin-top:50px; 
 }
 
-.checkbox {
-	margin-top: 20px;
+.input-group2 span {
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 5px;
+	height: 25px;
+}
+
+.input-group2 input {
+	padding-left: 50px;
+	height: 25px;
+	width: 280px;
+}
+
+.form-check-input {
+	margin-top: 50px;
+	margin-bottom: 80px;
+	margin-left: -10px;
+}
+
+.form-check-label {
+	margin-top: 50px;
 }
 
 .btn-btn-primary {
 	background-color: #006CFF;
 	font-family: Arial Black;
 	color: white;
-	margin-top: 80px;
 	margin-bottom: 20px;
 	padding: 5px 40px 5px 40px;
 	border: 1px solid #006CFF;
