@@ -1,12 +1,18 @@
 package com.paymybuddy.paymybuddy.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebController {
-   @RequestMapping(value = "/home")
-   public String index() {
-      return "home";
+	
+   @GetMapping("/index")
+   public String home() {
+      return "index";
+   }
+   
+   @GetMapping("transfer")
+   public String page1() {
+      return "transfer";
    }
 }
