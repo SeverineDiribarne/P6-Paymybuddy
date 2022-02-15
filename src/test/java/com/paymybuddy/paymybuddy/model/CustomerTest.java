@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.model;
 
-public enum TransferType {
+public class CustomerTest {
 
-		CREDIT, DEBIT
 }

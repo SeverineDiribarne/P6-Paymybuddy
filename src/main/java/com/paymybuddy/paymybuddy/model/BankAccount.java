@@ -2,22 +2,22 @@ package com.paymybuddy.paymybuddy.model;
 
 public class BankAccount {
 
-	private int id;
+	private int bankAccountId;
 	private String iban;
 	private String bic;
 	private String swift;
-	private int userId;
+
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return bankAccountId;
 	}
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.bankAccountId = id;
 	}
 	/**
 	 * @return the iban
@@ -55,18 +55,4 @@ public class BankAccount {
 	public void setSwift(String swift) {
 		this.swift = swift;
 	}
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
-	
 }

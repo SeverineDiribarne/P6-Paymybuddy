@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="/css/home_style.css" type="text/css">
+
+<title>Pay My Buddy</title>
+</head>
+
+<body>
+	<!--section -->
+	<div class="frame">
+
+		<div class="titre">
+			<h3>Pay My Buddy</h3>
+		</div>
+
+		<form th:action="@{/transfer}"method="GET" >
+
+			<div th:if="${param.error}">Invalid email and/or password.</div>
+
+			<div th:if="${param.logout}">You have been logged out.</div>
+
+			<div class="input-group1">
+				<span> <img src="/img/enveloppe.png" alt="enveloppe" />
+				</span> <input type="text" name="username" class="form-control"
+					placeholder="Email" />
+			</div>
+
+			<div class="input-group2">
+				<span> <img src="/img/asterisque.png" alt="asterisque" />
+				</span> <input type="password" name="password" class="form-control-2"
+					placeholder="Password" />
+			</div>
+
+
+			<div class="checkbox">
+				<input type="checkbox" class="form-check-input" /> <label
+					class="form-check-label" for="exampleCheck1">Remember me </label>
+			</div>
+
+
+			<div class="login">
+				<button type="submit"  class="btn-btn-primary">Login</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

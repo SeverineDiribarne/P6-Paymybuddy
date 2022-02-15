@@ -1,0 +1,84 @@
+/*HEADER*/
+.frame{
+	width: 350px;
+	margin: 10% 40% 10% 40%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #A0A0A0;
+	border-radius: 5px;
+	text-align: center;
+	background: #FFFFFF;
+}
+
+.title_menu{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.title{
+	color: white;
+	border: 1px solid linear-gradient(to right, #7DC261, #87F05C);
+	border-radius: 5px;
+	margin-top: 2px;
+	margin-left: 5px;
+	padding-left: 15px;
+	margin-right: 90%;
+	font-family: sans-serif;
+	font-size: 1.4em;
+	text-align: left;
+	line-height: 30px;
+	background: linear-gradient(to right, #7DC261, #87F05C);
+	height: 30px;
+	width: 200px;
+}
+
+.menu{
+	margin-right: 10px;
+	width: 350px;
+}
+
+.nav{
+	margin-top: -10px;
+	background-color: rgb(240, 240, 240);
+	height: 35px;
+}
+
+.breadcrumb{
+	margin-left: 20px;
+	margin-top: 6px;
+	font-family: sans-serif;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+/*MAIL FRAME*/
+
+.label_connection{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-end;
+	width: 68vw;
+}
+
+.email {
+	width: 400px;
+	height: 35px;
+	text-align: center;
+}
+
+.btn_add {
+	border: 1px solid rgb(40, 108, 234);
+	background-color: rgb(40, 108, 234);
+	border-radius: 5px;
+	padding: 5px 70px 5px 50px;
+}
+
+.btn_delete{
+	border: 1px solid rgb(233, 18, 18);
+	background-color: rgb(233, 18, 18);
+	border-radius: 5px;
+	padding: 5px 70px 5px 50px;
+	
+}
