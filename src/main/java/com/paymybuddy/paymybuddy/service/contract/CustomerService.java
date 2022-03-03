@@ -2,12 +2,11 @@ package com.paymybuddy.paymybuddy.service.contract;
 
 import java.util.List;
 
+import com.paymybuddy.paymybuddy.model.Customer;
+
 public interface CustomerService {
-
-	public boolean addFriend(String mail);
-
-	public boolean deleteFriend(String mail);
 	
-	public List<String> getFriendsList(String mail);
+	public List<Customer> getAllFriends(int customerId);
+
 
 }

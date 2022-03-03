@@ -19,6 +19,10 @@ public class Customer {
 	private List<Transfer> transfers = new ArrayList<>();
 
 
+	/**
+	 * Empty constructor
+	 */
+	public Customer() {}
 
 	/**
 	 * Complete Constructor 
@@ -35,7 +39,7 @@ public class Customer {
 		this.email = email;
 		this.balance = balance;
 	}
-	
+
 	/**
 	 * Constructor with id and password
 	 * @param customerId
@@ -53,11 +57,39 @@ public class Customer {
 	}
 
 	/**
-	 * constructor with email
+	 * constructor with only email
 	 * @param email
 	 */
 	public Customer(String email) {
 		this.email = email;
+	}
+	/**
+	 * patch constructor pour FriendsRowMapper
+	 * @param customerId
+	 * @param firstName
+	 * @param lastName
+	 */
+	public Customer(int customerId, String firstName, String lastName) {
+		this.customerId = customerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	/**
+	 * constructor with only customerId
+	 * @param customerId
+	 */
+	public Customer(int customerId) {
+		this.customerId = customerId;
+	}
+	/**
+	 * Constructor with firstName and lastName
+	 * @param firstName
+	 * @param lastName
+	 */
+	public Customer(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	/**
@@ -67,6 +99,13 @@ public class Customer {
 	public int getCustomerId() {
 		return customerId;
 	}
+	/**
+	 * Setter customerId
+	 * @param customerId
+	 */
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 
 	/**
 	 * Getter lastName
@@ -74,6 +113,13 @@ public class Customer {
 	 */
 	public String getLastName() {
 		return lastName;
+	}
+	/**
+	 * Setter lastName
+	 * @param lastName
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
@@ -83,6 +129,13 @@ public class Customer {
 	public String getFirstName() {
 		return firstName;
 	}
+	/**
+	 * Setter firstName
+	 * @param firstName
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
 	/**
 	 * Getter Email
@@ -90,6 +143,13 @@ public class Customer {
 	 */
 	public String getEmail() {
 		return email;
+	}
+	/**
+	 * Setter Email
+	 * @param email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
@@ -130,18 +190,39 @@ public class Customer {
 	}
 
 	/**
+	 * Setter account
+	 * @param account
+	 */
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	/**
 	 * @return the friends
 	 */
 	public List<Customer> getFriends() {
 		return friends;
 	}
-	
+	/**
+	 * Setter friends
+	 * @param friends
+	 */
+
+	public void setFriends(List<Customer> friends) {
+		this.friends = friends;
+	}
+
 	/**
 	 * @return the transfers
 	 */
 	public List<Transfer> getTransfers() {
 		return transfers;
 	}
-
-
+	/**
+	 * Setter transfers
+	 * @param transfers
+	 */
+	public void setTransfers(List<Transfer> transfers) {
+		this.transfers = transfers;
+	}
 }

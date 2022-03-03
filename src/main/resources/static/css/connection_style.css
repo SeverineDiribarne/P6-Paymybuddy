@@ -1,14 +1,4 @@
 /*HEADER*/
-.frame{
-	width: 350px;
-	margin: 10% 40% 10% 40%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: 1px solid #A0A0A0;
-	border-radius: 5px;
-	text-align: center;
-	background: #FFFFFF;
-}
 
 .title_menu{
 	display: flex;
@@ -16,7 +6,7 @@
 	justify-content: space-between;
 }
 
-.title{
+h3{
 	color: white;
 	border: 1px solid linear-gradient(to right, #7DC261, #87F05C);
 	border-radius: 5px;
@@ -54,18 +44,29 @@
 
 /*MAIL FRAME*/
 
-.label_connection{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: flex-end;
-	width: 68vw;
+.group1 span {
+	position: absolute;
+	margin-left:20px;
+	margin-top:4px; 
 }
 
-.email {
-	width: 400px;
+.group1{
+	margin-left: 300px;
+	margin-top: 250px;
+	width:900px;
+}
+
+.form-control {
+	width: 550px;
 	height: 35px;
-	text-align: center;
+	padding-top: 5px;
+	padding-bottom:5px;
+	padding-left:60px;
+	text-align: left;
+}
+.btns{
+	margin-top: -35px;
+	margin-left: 560px;
 }
 
 .btn_add {
@@ -73,12 +74,12 @@
 	background-color: rgb(40, 108, 234);
 	border-radius: 5px;
 	padding: 5px 70px 5px 50px;
+	
 }
 
 .btn_delete{
 	border: 1px solid rgb(233, 18, 18);
 	background-color: rgb(233, 18, 18);
 	border-radius: 5px;
-	padding: 5px 70px 5px 50px;
-	
+	padding: 5px 50px 5px 50px;
 }

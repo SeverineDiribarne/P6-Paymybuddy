@@ -18,7 +18,7 @@
 			<h3>Pay My Buddy</h3>
 		</div>
 
-		<form th:action="@{/transfer}"method="GET" >
+		<form th:action="@{/login}"method="POST" >
 
 			<div th:if="${param.error}">Invalid email and/or password.</div>
 

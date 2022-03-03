@@ -40,29 +40,34 @@
 		<div class="money_frame1">
 			<div class="label_connection">
 				<label class="label_money">Send Money</label>
-				<form th:action="@{/transfer/connection}" method="post" 
-					th:object="${customer}">
+				<form th:action="@{/connection}" method="GET">
 					<button type="submit" class="btn_connection">Add Connection</button>
 				</form>
 			</div>
-			<div class="money_frame2">
-
+			<form th:action="@{/transfer}" th:object="${transfer}" method="POST" >
+			<div class="money_frame2" >
+			<div><input type="date" class="date"  th:field="*{date}"
+			 ></div>
 				<div class="frame_select">
-					<select class="select">
-						<option class="option">Select A Connection</option>
-						<option class="option" value="1"></option>
-						<option class="option" value="2"></option>
-						<option class="option" value="3"></option>
-						<option class="option" value="4"></option>
+					<select class="select"  th:field="*{friend}">
+						<option class="option" value="0">Select A Connection</option>
+				 		<option class="option" th:each="customer : ${customers}" 
+							th:value="${customer.customerId}" 
+							th:text="${customer.firstName} + ' ' + ${customer.lastName}"> 
+						</option> 
 					</select>
 				</div>
+				<div>
+				<input type="text" class="description" th:field="*{description}" placeholder="Description">
+				</div>
 				<div class="frame_number">
-					<input type="number" class="number" placeholder="0 €">
+					<input type="number" class="number" th:field="*{amount}"  placeholder="0 €">
 				</div>
 				<div class="frame_button">
-					<button type="button" class="btn_pay">Pay</button>
+					<input type="submit" value = "Pay" class="btn_pay"></input>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 	<div class="transactions">
@@ -73,15 +78,17 @@
 			<table class="table table-striped">
 				<thead>
 					<tr class="column">
-						<th scope="col">Connections</th>
+					    <th scope="col">Date</th>
+					   <th scope="col">Connection </th>
 						<th scope="col">Description</th>
-						<th scope="col">Amount</th>
+			     		<th scope="col">Amount</th>
 
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="transfer: ${transfers}">
-						<td><span th:text="${transfer.connection}"></span></td>
+						<td><span th:text="${transfer.date}"></span></td>
+						<td><span th:text="${transfer.friend}"></span></td>
 						<td><span th:text="${transfer.description}"></span></td>
 						<td><span th:text="${transfer.amount}"></span></td>
 					</tr>
@@ -95,10 +102,7 @@
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
+					
 					<li class="page-item"><a class="page-link" href="#"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
