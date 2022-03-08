@@ -6,7 +6,13 @@ public class BankAccount {
 	private String iban;
 	private String bic;
 	private String swift;
+<<<<<<< Updated upstream
 	private int userId;
+=======
+	private double balance;
+
+	
+>>>>>>> Stashed changes
 	/**
 	 * @return the id
 	 */
@@ -56,6 +62,7 @@ public class BankAccount {
 		this.swift = swift;
 	}
 	/**
+<<<<<<< Updated upstream
 	 * @return the userId
 	 */
 	public int getUserId() {
@@ -69,4 +76,19 @@ public class BankAccount {
 	}
 	
 	
+=======
+	 * 
+	 * @return balance
+	 */
+	public double getBalance() {
+		return balance;
+	}
+	/**
+	 * 
+	 * @param balance
+	 */
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+>>>>>>> Stashed changes
 }
