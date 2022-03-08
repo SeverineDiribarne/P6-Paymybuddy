@@ -2,58 +2,73 @@ package com.paymybuddy.paymybuddy.model;
 
 public class Account {
 
-	private int id;
-	private String password;
-	private int userId;
-	private int state;
 	/**
+	 * Account Attributes
+	 */
+	private int accountId;
+	private String password;
+	private AccountState state;
+	
+	/**
+	 * Constructor
+	 * @param id
+	 * @param password
+	 * @param userId
+	 * @param state
+	 */
+	public Account (int id, String password, AccountState state ) {
+		this.accountId = id;
+		this.password = password;
+		this.state = state;
+	}
+	
+	/**
+	 * Empty contructor
+	 */
+	public Account() {
+		this.accountId = 0;
+		this.password = "";
+		this.state = AccountState.DISABLE;
+	}
+	
+	/**
+	 * Getter Id
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return accountId;
 	}
+	
+	
 	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	/**
+	 * Getter Password
 	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
+	
 	/**
+	 * Setter Password
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	/**
+	 * Getter State
 	 * @return the state
 	 */
-	public int getState() {
+	public AccountState getState() {
 		return state;
 	}
+	
 	/**
+	 * Setter State
 	 * @param state the state to set
 	 */
-	public void setState(int state) {
+	public void setState(AccountState state) {
 		this.state = state;
 	}
-	
-	
 }

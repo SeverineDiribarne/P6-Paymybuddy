@@ -7,6 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
+<<<<<<< HEAD
+=======
+import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendIdRowMapper;
+>>>>>>> feature/daoBranch
 import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendsRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
 

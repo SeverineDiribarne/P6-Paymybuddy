@@ -1,25 +1,17 @@
 package com.paymybuddy.paymybuddy.model;
 
-public class TransferType {
+public enum TransferType {
 
-	private int id;
+		CREDIT (1),
+		DEBIT (2);
+
+	private final int value;
 	
-	public enum type {
-		CREDIT, DEBIT
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+	private TransferType(int value) {
+	    this.value = value;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
+	public int getValue() {
+	    return value;
 	}
-
 }

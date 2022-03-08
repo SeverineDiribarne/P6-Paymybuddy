@@ -1,85 +1,88 @@
-package com.paymybuddy.paymybuddy.model;
+  package com.paymybuddy.paymybuddy.model;
+
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 public class Transfer {
 
-	private int id;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
+	private String friend;
 	private String description;
 	private double amount;
-	private int beneficiary;
-	private int userId;
-	private int transferType;
+	private TransferType transferType;
+
 	/**
-	 * @return the id
+	 * Constructor
 	 */
-	public int getId() {
-		return id;
+	public Transfer (Date date, String friend, String description, double amount) {
+		this.date = date;
+		this.friend = friend;
+		this.description = description;
+		this.amount = amount;
+		if(amount <0) {
+		this.transferType = TransferType.DEBIT;
+		}
+		else {
+			this.transferType = TransferType.CREDIT;
+		}
 	}
+	
 	/**
-	 * @param id the id to set
+	 * empty constructor
 	 */
-	public void setId(int id) {
-		this.id = id;
+	 public Transfer() {}
+	 
+	/**
+	 * 
+	 * @param friend
+	 * @param description
+	 * @param amount
+	 */
+	public Transfer(String friend, String description, double amount) {
+		this.friend = friend;
+		this.description = description;
+		this.amount = amount;
 	}
-	/**
-	 * @return the description
-	 */
+	
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public String getFriend() {
+		return friend;
+	}
+	
+	public void setFriend(String friend) {
+		this.friend = friend;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
-	/**
-	 * @param description the description to set
-	 */
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/**
-	 * @return the amount
-	 */
+	
 	public double getAmount() {
 		return amount;
 	}
-	/**
-	 * @param amount the amount to set
-	 */
+	
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	/**
-	 * @return the beneficiary
-	 */
-	public int getBeneficiary() {
-		return beneficiary;
-	}
-	/**
-	 * @param beneficiary the beneficiary to set
-	 */
-	public void setBeneficiary(int beneficiary) {
-		this.beneficiary = beneficiary;
-	}
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	/**
-	 * @return the transferType
-	 */
-	public int getTransferType() {
+	
+	public TransferType getTransferType() {
 		return transferType;
 	}
-	/**
-	 * @param transferType the transferType to set
-	 */
-	public void setTransferType(int transferType) {
+	
+	public void setTransferType(TransferType transferType) {
 		this.transferType = transferType;
 	}
-	
-	
 }

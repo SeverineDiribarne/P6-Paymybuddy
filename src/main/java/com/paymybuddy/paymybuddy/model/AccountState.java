@@ -1,26 +1,17 @@
 package com.paymybuddy.paymybuddy.model;
 
-public class AccountState {
+public enum AccountState {
 
-	private int id;
+	ENABLE (1),
+	DISABLE (2);
+
+private final int value;
 	
-	public enum state {
-		ENABLE, DISABLE
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+	private AccountState(int value) {
+	    this.value = value;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
+	public int getValue() {
+	    return value;
 	}
-
-	
 }

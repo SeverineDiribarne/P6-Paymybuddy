@@ -28,7 +28,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.formLogin()
 					.loginPage("/login")
 					.permitAll()
+<<<<<<< HEAD
 					.defaultSuccessUrl("/home",true)
+=======
+					.defaultSuccessUrl("/transfer",true)
+>>>>>>> feature/daoBranch
 					.and()
 			.logout()
 					.permitAll();

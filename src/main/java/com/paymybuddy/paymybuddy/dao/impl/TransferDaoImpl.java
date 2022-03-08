@@ -10,6 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
+<<<<<<< HEAD
+=======
+import com.paymybuddy.paymybuddy.dao.impl.mapper.UserIdRowMapper;
+import com.paymybuddy.paymybuddy.model.Customer;
+>>>>>>> feature/daoBranch
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.model.TransferType;
 

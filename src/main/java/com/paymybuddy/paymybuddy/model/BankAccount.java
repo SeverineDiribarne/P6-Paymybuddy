@@ -2,10 +2,11 @@ package com.paymybuddy.paymybuddy.model;
 
 public class BankAccount {
 
-	private int id;
+	private int bankAccountId;
 	private String iban;
 	private String bic;
 	private String swift;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 	private int userId;
 =======
@@ -13,17 +14,20 @@ public class BankAccount {
 
 	
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> feature/daoBranch
 	/**
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return bankAccountId;
 	}
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.bankAccountId = id;
 	}
 	/**
 	 * @return the iban
@@ -61,6 +65,7 @@ public class BankAccount {
 	public void setSwift(String swift) {
 		this.swift = swift;
 	}
+<<<<<<< HEAD
 	/**
 <<<<<<< Updated upstream
 	 * @return the userId
@@ -91,4 +96,6 @@ public class BankAccount {
 		this.balance = balance;
 	}
 >>>>>>> Stashed changes
+=======
+>>>>>>> feature/daoBranch
 }
