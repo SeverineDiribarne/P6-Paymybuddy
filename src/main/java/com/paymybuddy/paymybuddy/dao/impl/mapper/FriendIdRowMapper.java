@@ -3,7 +3,6 @@ package com.paymybuddy.paymybuddy.dao.impl.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.paymybuddy.paymybuddy.model.Customer;

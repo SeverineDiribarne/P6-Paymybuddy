@@ -91,7 +91,7 @@ public class Customer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-<<<<<<< HEAD
+
 	/**
 	 * Constructor with only balance
 	 * @param balance
@@ -99,8 +99,7 @@ public class Customer {
 	public Customer(double balance) {
 		this.balance = balance;
 	}
-=======
->>>>>>> feature/daoBranch
+
 
 	/**
 	 * Getter Id

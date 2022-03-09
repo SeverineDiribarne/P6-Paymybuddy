@@ -38,31 +38,38 @@
 		</nav>
 	</div>
 	<div>
-		<div th:action="@{/home}" th:object="${customer}" class="customer_balance" >
-		<h2>Your balance : <span th:utext="${balance}"class="balance_amount"></span> </h2>
-		</div>
-		
-       
-	
-		<!--  	<form th:action="@{/home}" th:object="${customer}" method="POST" >
-			<div class="money_frame2" >
-				<div class="frame_number">
-				<p>Make a transfer on the application : </p>
-					<input type="number" step="any" class="number"  th:field="*{amount}"  placeholder="0 €">
-				</div>
-				<div class="frame_button">
-					<input type="submit" value = "Pay" class="btn_pay"></input>
-				</div>
-				<div class="frame_number">
-				<p>Make a transfer to your bank account : </p>
-					<input type="number" step="any" class="number"  th:field="*{amount}"  placeholder="0 €">
-				</div>
-				<div class="frame_button">
-					<input type="submit" value = "Pay" class="btn_pay"></input>
-				</div>  
+		<div>
+			<div th:action="@{/home}" th:object="${customer}"
+				class="customer_balance">
+				<h2>
+					Your balance : <span th:utext="${balance}" class="balance_amount"></span>
+				</h2>
 			</div>
-			</form>   -->
-
+			<form th:action="@{/paymentOnApp}" th:object="${transfer}"
+				method="POST">
+				<div class="money_frame2">
+					<div class="frame_number">
+						<p>Make a transfer on the application :</p>
+						<input type="number" step="any" class="number"
+							th:field="*{amount}" placeholder="0 €">
+					</div>
+					<div class="frame_button">
+						<input type="submit" value="Pay" class="btn_pay"></input>
+					</div>
+				</div>
+			</form>
+			<form th:action="@{/paymentOnBank}" th:object="${transfer}"
+				method="POST">
+				<div class="frame_number">
+					<p>Make a transfer to your bank account :</p>
+					<input type="number" step="any" class="number" th:field="*{amount}"
+						placeholder="0 €">
+				</div>
+				<div class="frame_button">
+					<input type="submit" value="Pay" class="btn_pay"></input>
+				</div>
+			</form>
+		</div>
 		<div class="btn_goTransfer">
 			<a href="/transfer" class="button">Go to Transfer page</a>
 		</div>

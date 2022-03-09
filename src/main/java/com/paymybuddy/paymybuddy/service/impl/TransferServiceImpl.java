@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
-import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
-import com.paymybuddy.paymybuddy.model.TransferType;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
 
 @Service

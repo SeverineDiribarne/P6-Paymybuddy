@@ -6,17 +6,10 @@ public class BankAccount {
 	private String iban;
 	private String bic;
 	private String swift;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 	private int userId;
-=======
 	private double balance;
 
-	
->>>>>>> Stashed changes
-=======
 
->>>>>>> feature/daoBranch
 	/**
 	 * @return the id
 	 */
@@ -65,7 +58,7 @@ public class BankAccount {
 	public void setSwift(String swift) {
 		this.swift = swift;
 	}
-<<<<<<< HEAD
+	
 	/**
 <<<<<<< Updated upstream
 	 * @return the userId
@@ -80,9 +73,7 @@ public class BankAccount {
 		this.userId = userId;
 	}
 	
-	
-=======
-	 * 
+	 /**
 	 * @return balance
 	 */
 	public double getBalance() {
@@ -95,7 +86,5 @@ public class BankAccount {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
->>>>>>> Stashed changes
-=======
->>>>>>> feature/daoBranch
+
 }

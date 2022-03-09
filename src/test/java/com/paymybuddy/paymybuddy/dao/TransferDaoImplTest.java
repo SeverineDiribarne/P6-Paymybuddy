@@ -1,11 +1,7 @@
 package com.paymybuddy.paymybuddy.dao;
 
-<<<<<<< HEAD
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -31,8 +27,4 @@ class TransferDaoImplTest {
 //		Mockito.when(jdbcTemplate.query(GET_TRANSFERS_QUERY, transferRowMapper.mapRow(null, 0),customer)).th
 
 	}
-=======
-public class TransferDaoImplTest {
-
->>>>>>> feature/daoBranch
 }

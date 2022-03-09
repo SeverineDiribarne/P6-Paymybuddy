@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.paymybuddy.paymybuddy.model.Customer;
@@ -28,5 +29,19 @@ public class HomeController {
 		model.addAttribute( "balance", balance);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		return "home";
+	}
+	
+	@PostMapping("/paymentOnApp")
+	public String getPaymentFromBankToApp(Model model, @AuthenticationPrincipal MyMainUser user) {
+		
+		
+		return "redirect:/home";
+	}
+	
+	@PostMapping("/paymentOnBank")
+	public String getPaymentFromAppToBank(Model model, @AuthenticationPrincipal MyMainUser user) {
+		
+		
+		return "redirect:/home";
 	}
 }

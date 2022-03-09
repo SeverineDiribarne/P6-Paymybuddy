@@ -10,7 +10,10 @@ import com.paymybuddy.paymybuddy.model.Customer;
 
 public class MyMainUser implements UserDetails {
 
-	private Customer customer;
+	private static final long serialVersionUID = 1L;
+	
+	private transient Customer customer;
+	
 	/**
 	 * Constructor
 	 * @param customer
