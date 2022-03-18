@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.paymybuddy.paymybuddy.model.Connexion;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
@@ -31,7 +32,6 @@ public class TransferController {
 
 	@GetMapping 
 	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user) {
-
 		List<Transfer> transfers = transferService.getTransfers(user.getCustomer().getCustomerId());
 		model.addAttribute( "transfers", transfers);
 		model.addAttribute("username", user.getCustomer().getFirstName());
@@ -42,8 +42,11 @@ public class TransferController {
 	}
 
 	@PostMapping
-	public String addPaiement(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer) {
-		transferService.addPaiement(user.getCustomer().getCustomerId(), transfer.getDate(),Integer.parseInt(transfer.getFriend()), transfer.getDescription(),transfer.getAmount());
+	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer) {
+		Connexion connexion = new Connexion();
+		connexion.setCustomerSource(user.getCustomer());
+		connexion.setCustomerDestinataire(transfer.getConnexion().getCustomerDestinataire());
+		transferService.addPayment(transfer.getDate(),connexion, transfer.getDescription(),transfer.getAmount());
 		List<Transfer> transfers = transferService.getTransfers(user.getCustomer().getCustomerId());
 		model.addAttribute( "transfers", transfers);
 		model.addAttribute("username", user.getCustomer().getFirstName());

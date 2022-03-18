@@ -7,7 +7,7 @@ public class Account {
 	 */
 	private int accountId;
 	private String password;
-	private AccountState state;
+	
 	
 	/**
 	 * Constructor
@@ -16,10 +16,9 @@ public class Account {
 	 * @param userId
 	 * @param state
 	 */
-	public Account (int id, String password, AccountState state ) {
+	public Account (int id, String password) {
 		this.accountId = id;
 		this.password = password;
-		this.state = state;
 	}
 	
 	/**
@@ -28,7 +27,7 @@ public class Account {
 	public Account() {
 		this.accountId = 0;
 		this.password = "";
-		this.state = AccountState.DISABLE;
+
 	}
 	
 	/**
@@ -56,19 +55,5 @@ public class Account {
 		this.password = password;
 	}
 	
-	/**
-	 * Getter State
-	 * @return the state
-	 */
-	public AccountState getState() {
-		return state;
-	}
 	
-	/**
-	 * Setter State
-	 * @param state the state to set
-	 */
-	public void setState(AccountState state) {
-		this.state = state;
-	}
 }

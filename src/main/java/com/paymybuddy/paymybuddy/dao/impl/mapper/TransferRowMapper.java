@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.paymybuddy.paymybuddy.model.Connexion;
+import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
 
 public class TransferRowMapper  implements RowMapper<Transfer>{

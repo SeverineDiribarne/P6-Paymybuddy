@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
+import com.paymybuddy.paymybuddy.model.Connexion;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.model.TransferType;
 
@@ -19,34 +20,34 @@ public class TransferDaoImpl implements TransferDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-
-	private static final String GET_TRANSFERS_QUERY =  "SELECT c.firstName, c.lastName, t.description, t.amount, t.transfer_type FROM transfer t JOIN customer c ON t.friend = c.id WHERE t.owner = ?;"; 
-
+	/**
+	 * Get all transfers in the list
+	 */
+	private static final String GET_TRANSFERS_QUERY =  "SELECT cust.firstName, cust.lastName, t.description, t.amount, t.transfer_type FROM transfer t JOIN connexion con ON t.connexion = con.connexionId JOIN customer cus ON con.ConnexionSource = cus.id JOIN customer cust ON con.ConnexionDestinataire = cust.id WHERE con.ConnexionSource = ?;"; 
 	@Override
 	public List<Transfer> getTransfers(int customerId) {
 		return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), customerId);
 	}
-
-	
-	
-	private static final String INSERT_TRANSFER = "INSERT INTO transfer (friend, transferDate, owner, description, amount, transfer_type) VALUES (?,?,?,?,?,?);" ;
-	
+	/**
+	 * add a payment in database
+	 */
+	private static final String INSERT_TRANSFER = "INSERT INTO transfer ( transferDate, connexion, description, amount, transfer_type) VALUES (?,?,?,?,?);" ;
 	@Override
-	public void addPaiement(int friend, Date date, int owner, String description, double amount) {
-			jdbcTemplate.update(INSERT_TRANSFER, friend, date, owner, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
+	public void addPayment(Date date, Connexion connexion, String description, double amount) {
+		jdbcTemplate.update(INSERT_TRANSFER, date, connexion, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
 	}
-	
-	
-	
-	
-//private static final String FIND_USER_NAME_BY_EMAIL = "SELECT c.firstName, c.lastName FROM customer c WHERE c.email = ?;";
-//	
-//	public void addAConnection(int customerId, String email) {
-//		Customer friend = jdbcTemplate.queryForObject(FIND_USER_NAME_BY_EMAIL, new UserNameRowMapper(),email);
-//		
-//	}
 
-	
+
+
+
+	//private static final String FIND_USER_NAME_BY_EMAIL = "SELECT c.firstName, c.lastName FROM customer c WHERE c.email = ?;";
+	//	
+	//	public void addAConnection(int customerId, String email) {
+	//		Customer friend = jdbcTemplate.queryForObject(FIND_USER_NAME_BY_EMAIL, new UserNameRowMapper(),email);
+	//		
+	//	}
+
+
 	//	
 	//	private static final String DELETE_FRIEND_INFORMATION_QUERY = "DELETE FROM friend WHERE customer_id1 = :friendId";
 	//

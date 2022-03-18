@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
+import com.paymybuddy.paymybuddy.model.Connexion;
+import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
 
@@ -18,23 +20,32 @@ public class TransferServiceImpl implements TransferService{
 	@Autowired
 	TransferDao transferDao;
 
-	private static final Logger logger = LogManager.getLogger(); 
+	//private static final Logger logger = LogManager.getLogger(); 
 
 	/**
 	 * 
 	 */
 	@Override
-	public List<Transfer> getTransfers(int customerId) {
-		return transferDao.getTransfers(customerId);
+	public List<Transfer> getTransfers(int mainUserId) {
+		return transferDao.getTransfers(mainUserId);
 	}
 
 	/**
 	 * 
 	 */
 	@Override
-	public void addPaiement(int owner, Date date,  int friend, String description, double amount) {
-		transferDao.addPaiement (owner, date, friend, description, amount);
-		transferDao.addPaiement (friend, date,owner , description, (amount * (-1)));
+	public void addPayment(Date date, Connexion connexion, String description, double amount) {
+		if(amount < 0) {
+		transferDao.addPayment (date, connexion, description, amount);
+		}
+		else {
+			double	negativeAmount = amount * (-1);
+			Connexion reverseConnection = new Connexion();
+			connexion.setCustomerSource(connexion.getCustomerDestinataire());
+			connexion.setCustomerDestinataire(connexion.getCustomerSource());
+			transferDao.addPayment (date, reverseConnection, description, negativeAmount);
+		}
+		
 
 	}
 

@@ -44,5 +44,10 @@ public class ConnectionController {
 //		model.addAttribute("customers", customers);
 //		return "redirect:/transfer";
 //	}
-
+	
+	@GetMapping("/add")
+	public String addConnectionForm(Model model) {
+	  model.addAttribute("customer", new Customer());
+	  return "connection";
+	}
 }
