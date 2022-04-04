@@ -9,7 +9,7 @@ public class Transfer {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	
 	private Date date;
-	private Connexion connexion;
+	private Connection connection;
 	private String description;
 	private double amount;
 	private TransferType transferType;
@@ -17,9 +17,9 @@ public class Transfer {
 	/**
 	 * Complete Constructor
 	 */
-	public Transfer (Date date, Connexion connexion, String description, double amount) {
+	public Transfer ( Connection connection, Date date, String description, double amount) {
+		this.connection = connection;
 		this.date = date;
-		this.connexion = connexion;
 		this.description = description;
 		this.amount = amount;
 		if(amount <0) {
@@ -35,16 +35,24 @@ public class Transfer {
 	 */
 	 public Transfer() {}
 	 
+	
 	/**
-	 * 
-	 * @param connexionDestinataire
+	 * Constructor with connectionId, description and amount
+	 * @param connectionId
 	 * @param description
 	 * @param amount
 	 */
-	public Transfer(Connexion connexion, String description, double amount) {
-		this.connexion = connexion;
+	public Transfer (int connectionId, int connectionSource, int connectionRecipient, Date date, String description, double amount) {
+		this.connection = new Connection(connectionId, connectionSource, connectionRecipient);
+		this.date = date;
 		this.description = description;
 		this.amount = amount;
+		if(amount <0) {
+			this.transferType = TransferType.DEBIT;
+			}
+			else {
+				this.transferType = TransferType.CREDIT;
+			}
 	}
 
 	/**
@@ -63,19 +71,19 @@ public class Transfer {
 	}
 	
 	/**
-	 * Getter connexion 
-	 * @return connexion
+	 * Getter connection 
+	 * @return connection
 	 */
-	public Connexion getConnexion() {
-		return connexion;
+	public Connection getConnection() {
+		return connection;
 	}
 	
 	/**
-	 * Setter connexion 
-	 * @param connexion
+	 * Setter connection 
+	 * @param connection
 	 */
-	public void setConnexion(Connexion connexion) {
-		this.connexion = connexion;
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 	
 	/**

@@ -36,8 +36,8 @@ public class HomeDaoImpl implements HomeDao{
 		return jdbcTemplate.update(INSERT_TRANSFER, setFriend, setDate, customerId, setDescription, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	
 	}
 
-	@Override
-	public List<Transfer> getTransfers(int customerId) {
-		return transferDaoImpl.getTransfers(customerId);
-	}
+//	@Override
+//	public List<Transfer> getTransfers(int customerId) {
+//		return transferDaoImpl.getTransfers(customerId);
+//	}
 }

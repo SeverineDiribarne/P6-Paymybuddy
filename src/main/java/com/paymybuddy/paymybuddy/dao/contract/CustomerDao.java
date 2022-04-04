@@ -6,7 +6,10 @@ import com.paymybuddy.paymybuddy.model.Customer;
 
 public interface CustomerDao {
 	
-	public List<Customer> getAllFriends(int customerId);
+	public List<Customer> getAllCustomerRecipients(int customerId);
+
+	public Customer getCustomerRecipientNameById(int connection);
+
 
 	
 }

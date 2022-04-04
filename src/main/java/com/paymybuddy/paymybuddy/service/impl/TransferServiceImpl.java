@@ -3,14 +3,11 @@ package com.paymybuddy.paymybuddy.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
-import com.paymybuddy.paymybuddy.model.Connexion;
-import com.paymybuddy.paymybuddy.model.Customer;
+import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
 
@@ -26,27 +23,25 @@ public class TransferServiceImpl implements TransferService{
 	 * 
 	 */
 	@Override
-	public List<Transfer> getTransfers(int mainUserId) {
-		return transferDao.getTransfers(mainUserId);
+	public List<Transfer> getListOfTransfers(int mainUserId) {
+		return transferDao.getListOfTransfers(mainUserId);
 	}
 
 	/**
 	 * 
 	 */
 	@Override
-	public void addPayment(Date date, Connexion connexion, String description, double amount) {
+	public void addPayment(Date date, Connection connection, String description, double amount) {
 		if(amount < 0) {
-		transferDao.addPayment (date, connexion, description, amount);
+		transferDao.addPayment (date, connection, description, amount);
 		}
 		else {
 			double	negativeAmount = amount * (-1);
-			Connexion reverseConnection = new Connexion();
-			connexion.setCustomerSource(connexion.getCustomerDestinataire());
-			connexion.setCustomerDestinataire(connexion.getCustomerSource());
+			Connection reverseConnection = new Connection();
+			connection.setCustomerSource(connection.getCustomerRecipient());
+			connection.setCustomerRecipient(connection.getCustomerSource());
 			transferDao.addPayment (date, reverseConnection, description, negativeAmount);
 		}
-		
-
 	}
 
 	/**

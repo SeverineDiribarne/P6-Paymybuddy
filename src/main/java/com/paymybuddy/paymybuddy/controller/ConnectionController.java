@@ -32,7 +32,7 @@ public class ConnectionController {
 	@PostMapping("/add")
 	public String addAConnection(Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
 		connectionService.addAConnection(user.getCustomer().getCustomerId(), customer.getEmail());
-		List<Customer> customers =  customerService.getAllFriends(user.getCustomer().getCustomerId());
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
 		model.addAttribute("customers", customers);
 		return "redirect:/transfer";
 	}

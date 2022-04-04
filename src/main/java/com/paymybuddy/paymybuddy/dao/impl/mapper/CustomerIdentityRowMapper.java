@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.paymybuddy.paymybuddy.model.Customer;
 
-public class FriendsRowMapper implements RowMapper<Customer>{
+public class CustomerIdentityRowMapper implements RowMapper<Customer>{
 
 	@Override
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {

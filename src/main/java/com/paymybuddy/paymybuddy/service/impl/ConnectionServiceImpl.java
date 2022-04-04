@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
 import com.paymybuddy.paymybuddy.service.contract.ConnectionService;
+
 @Service
 public class ConnectionServiceImpl implements ConnectionService {
 
@@ -16,6 +17,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 		connectionDao.addAConnection( customerId, email);
 		
 	}
+
 
 //	@Override
 //	public void deleteAConnection(int customerId, String email) {

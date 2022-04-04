@@ -1,5 +1,6 @@
 package com.paymybuddy.paymybuddy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.paymybuddy.paymybuddy.model.Connexion;
+import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
+import com.paymybuddy.paymybuddy.model.TransferAdd;
+import com.paymybuddy.paymybuddy.model.TransferDisplay;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.CustomerService;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
@@ -24,33 +27,52 @@ public class TransferController {
 
 	@Autowired
 	private TransferService transferService;
-	
+
 	@Autowired
 	private CustomerService customerService;
-	
+
 	private static final String TRANSFER = "transfer";
 
 	@GetMapping 
 	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user) {
-		List<Transfer> transfers = transferService.getTransfers(user.getCustomer().getCustomerId());
-		model.addAttribute( "transfers", transfers);
+		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId()); 
+		List<TransferDisplay> transferDisplayList = new ArrayList<>();
+		for(Transfer transfer : transfers) {
+			Connection connection = transfer.getConnection();
+			Customer customerRecipient = customerService.getCustomerRecipientNameById(connection.getCustomerRecipient().getCustomerId());
+			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(), customerRecipient.getFirstName(), customerRecipient.getLastName(), transfer.getDescription(), transfer.getAmount());
+			transferDisplayList.add(transferDisplay);			
+		}
+		model.addAttribute( "transferDisplayList", transferDisplayList);
 		model.addAttribute("username", user.getCustomer().getFirstName());
-		List<Customer> customers =  customerService.getAllFriends(user.getCustomer().getCustomerId());
-		model.addAttribute("customers", customers);
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
+		List<Connection> connections = new ArrayList<>();
+		for(Customer customer : customers) {
+			Connection connection = new Connection(customer);
+			connections.add(connection);
+		}
+		model.addAttribute("connections", connections);
 		model.addAttribute(TRANSFER, new Transfer());
 		return TRANSFER;
 	}
 
-	@PostMapping
-	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer) {
-		Connexion connexion = new Connexion();
-		connexion.setCustomerSource(user.getCustomer());
-		connexion.setCustomerDestinataire(transfer.getConnexion().getCustomerDestinataire());
-		transferService.addPayment(transfer.getDate(),connexion, transfer.getDescription(),transfer.getAmount());
-		List<Transfer> transfers = transferService.getTransfers(user.getCustomer().getCustomerId());
-		model.addAttribute( "transfers", transfers);
-		model.addAttribute("username", user.getCustomer().getFirstName());
-		
-		return TRANSFER;
-	}
+//	@PostMapping
+//	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer) {
+//		Connection connection = new Connection();
+//		connection.setCustomerSource(user.getCustomer());
+//		connection.setCustomerRecipient(transfer.getConnection().getCustomerRecipient());
+//		
+//		transferService.addPayment(transfer.getDate(),connection, transfer.getDescription(), transfer.getAmount());
+//		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId());
+//		List<TransferDisplay> transferDisplayList = new ArrayList<>();
+//		for(Transfer transfer1 : transfers) {
+//			Connection connection1 = transfer.getConnection();
+//			Customer customerRecipient = customerService.getCustomerRecipientNameById(connection.getCustomerRecipient().getCustomerId());
+//			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(), customerRecipient.getFirstName(), customerRecipient.getLastName(), transfer.getDescription(), transfer.getAmount());
+//			transferDisplayList.add(transferDisplay);			
+//		}
+//		model.addAttribute( "transferDisplayList", transferDisplayList);
+//		model.addAttribute("username", user.getCustomer().getFirstName());
+//		return TRANSFER;
+//	}
 }

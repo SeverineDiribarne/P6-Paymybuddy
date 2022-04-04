@@ -27,8 +27,8 @@ public HomeDao homeDao;
 		
 	}
 
-	@Override
-	public List<Transfer> getTransfers(int customerId) {	
-		return homeDao.getTransfers(customerId);	
-	}
+//	@Override
+//	public List<Transfer> getTransfers(int customerId) {	
+//		return homeDao.getTransfers(customerId);	
+//	}
 }

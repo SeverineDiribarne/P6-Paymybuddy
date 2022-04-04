@@ -4,6 +4,9 @@ public interface ConnectionService {
 
 	void addAConnection(int customerId, String email);
 
+	
+	
+
 //	void deleteAConnection(int customerId, String email);
 
 }

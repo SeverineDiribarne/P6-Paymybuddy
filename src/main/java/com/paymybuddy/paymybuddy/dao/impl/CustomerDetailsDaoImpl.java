@@ -12,7 +12,7 @@ import com.paymybuddy.paymybuddy.model.Customer;
 @Repository
 public class CustomerDetailsDaoImpl implements CustomerDetailsDao {
 
-	private static final String FIND_BY_EMAIL = "SELECT customer.id, customer.email, account.password, customer.firstName, customer.lastName FROM customer customer JOIN account account ON customer.id = account.user_id WHERE customer.email = :email;";
+	private static final String FIND_BY_EMAIL = "SELECT cust.id, cust.email, acc.password, cust.firstName, cust.lastName FROM customer cust JOIN account acc ON cust.id = acc.customer_id WHERE cust.email  = :email;";
 	
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

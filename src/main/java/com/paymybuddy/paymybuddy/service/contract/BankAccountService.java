@@ -9,9 +9,9 @@ public interface BankAccountService {
 
 	public int getBankAccountId(String iban);
 	
-	void addWidrawalFromBank(int owner, Date date, int bankId, String description, double amount);
-	
-	void addDepositeToBank(int bankId, Date date, int owner, String description, double amount);
-	
-	List<BankOperation> getBankOperations();
+//	void addWidrawalFromBank(int owner, Date date, int bankId, String description, double amount);
+//	
+//	void addDepositeToBank(int bankId, Date date, int owner, String description, double amount);
+//	
+//	List<BankOperation> getBankOperations();
 }

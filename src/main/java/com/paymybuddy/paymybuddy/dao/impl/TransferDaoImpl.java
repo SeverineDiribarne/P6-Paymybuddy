@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
-import com.paymybuddy.paymybuddy.model.Connexion;
+import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.model.TransferType;
 
@@ -20,25 +20,32 @@ public class TransferDaoImpl implements TransferDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	
+	private static final String GET_TRANSFERS_QUERY =  
+			"SELECT con.connectionId, con.connectionSource, con.connectionRecipient, t.transferDate, t.description, t.amount "
+			+ "FROM transfer t "
+			+ "JOIN connection con ON t.connection = con.connectionId "
+			+ "JOIN customer cust ON con.connectionSource = cust.id "
+			+ "WHERE cust.id = ?;";
 	/**
 	 * Get all transfers in the list
 	 */
-	private static final String GET_TRANSFERS_QUERY =  "SELECT cust.firstName, cust.lastName, t.description, t.amount, t.transfer_type FROM transfer t JOIN connexion con ON t.connexion = con.connexionId JOIN customer cus ON con.ConnexionSource = cus.id JOIN customer cust ON con.ConnexionDestinataire = cust.id WHERE con.ConnexionSource = ?;"; 
 	@Override
-	public List<Transfer> getTransfers(int customerId) {
-		return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), customerId);
+	public List<Transfer> getListOfTransfers(int mainUserId) {
+	 return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), mainUserId);	
 	}
+	
+	private static final String INSERT_TRANSFER = "INSERT INTO transfer "
+			+ "(transferDate, connection, description, amount, transfer_type)"
+			+ " VALUES (?,?,?,?,?);" ;
 	/**
 	 * add a payment in database
 	 */
-	private static final String INSERT_TRANSFER = "INSERT INTO transfer ( transferDate, connexion, description, amount, transfer_type) VALUES (?,?,?,?,?);" ;
 	@Override
-	public void addPayment(Date date, Connexion connexion, String description, double amount) {
-		jdbcTemplate.update(INSERT_TRANSFER, date, connexion, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
+	public void addPayment(Date date, Connection connection, String description, double amount) {
+		jdbcTemplate.update(INSERT_TRANSFER, date, connection, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
 	}
-
-
-
+	
 
 	//private static final String FIND_USER_NAME_BY_EMAIL = "SELECT c.firstName, c.lastName FROM customer c WHERE c.email = ?;";
 	//	

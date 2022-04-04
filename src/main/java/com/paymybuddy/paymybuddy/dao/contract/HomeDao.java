@@ -11,6 +11,6 @@ public interface HomeDao {
 
 	int addPaiement(int customerId, Object setDate, Object setFriend, Object setDescription, double amount);
 
-	List<Transfer> getTransfers(int customerId);
+	//List<Transfer> getTransfers(int customerId);
 
 }

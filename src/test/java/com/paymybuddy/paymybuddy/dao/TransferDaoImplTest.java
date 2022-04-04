@@ -31,16 +31,19 @@ class TransferDaoImplTest {
 				(Transfer) DataTestsHelpers.creationTransfersForMock());
 				
 
-		List<Transfer> transfers = transferDao.getTransfers(1)	;	
-		Assertions.assertEquals("Jane Doe", transfers.get(0).getFriend());
+		List<Transfer> transfers = transferDao.getListOfTransfers(1)	;	
+		Assertions.assertEquals("Jane", transfers.get(0).getConnection().getCustomerRecipient().getFirstName());
+		Assertions.assertEquals("Doe", transfers.get(0).getConnection().getCustomerRecipient().getLastName());
 		Assertions.assertEquals( "Patisserie",transfers.get(0).getDescription());
 		Assertions.assertEquals(33.50, transfers.get(0).getAmount());
 		
-		Assertions.assertEquals("Marie Curie", transfers.get(1).getFriend());
+		Assertions.assertEquals("Marie", transfers.get(1).getConnection().getCustomerRecipient().getFirstName());
+		Assertions.assertEquals("Curie", transfers.get(1).getConnection().getCustomerRecipient().getLastName());
 		Assertions.assertEquals("patinoire",transfers.get(1).getDescription());
 		Assertions.assertEquals(10.80, transfers.get(1).getAmount());
 		
-		Assertions.assertEquals("Kira Alliant", transfers.get(2).getFriend());
+		Assertions.assertEquals("Kira", transfers.get(2).getConnection().getCustomerRecipient().getFirstName());
+		Assertions.assertEquals("Alliant", transfers.get(2).getConnection().getCustomerRecipient().getLastName());
 		Assertions.assertEquals( "Cinema",transfers.get(2).getDescription());
 		Assertions.assertEquals(23.40, transfers.get(2).getAmount());
 

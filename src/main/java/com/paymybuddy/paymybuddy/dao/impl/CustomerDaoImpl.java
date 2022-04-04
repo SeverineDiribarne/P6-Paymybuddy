@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendsRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdentityRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
 
 @Repository
@@ -17,13 +18,27 @@ public class CustomerDaoImpl implements CustomerDao {
 	
 	
 	
-	private static final String GET_ALL_FRIENDS_QUERY = "SELECT c.id, c.firstName, c.lastName FROM customer c JOIN friend f ON c.id = f.customer_id_friend WHERE f.customer_id_user = ? UNION SELECT c.id, c.firstName, c.lastName FROM friend f JOIN customer c  ON f.customer_id_user = c.id  WHERE f.customer_id_friend = ?;";
+	private static final String GET_ALL_CUSTOMER_RECIPIENTS_QUERY = "SELECT cust.id, cust.firstName, cust.lastName"
+			+ " FROM customer cust "
+			+ " JOIN connection con ON cust.id = con.connectionRecipient"
+			+ " WHERE con.connectionSource = ?;";
 	/**
 	 * getFriendsList Method
 	 * @return list of friends
 	 */
 	@Override
-	public List<Customer> getAllFriends(int customerId) {
-		return jdbcTemplate.query(GET_ALL_FRIENDS_QUERY, new FriendsRowMapper(), customerId, customerId);
+	public List<Customer> getAllCustomerRecipients(int customerId) {
+		return jdbcTemplate.query(GET_ALL_CUSTOMER_RECIPIENTS_QUERY, new CustomerIdentityRowMapper(), customerId);
+	}
+	
+	private static final String GET_CUSTOMER_NAME_QUERY = "SELECT cust.id, cust.firstName, cust.lastName "
+			+ "FROM customer cust "
+			+ "WHERE cust.id = ?;";
+	/**
+	 * getCustomerRecipientNameById Method
+	 * @Return list of customer with firstName and lastName
+	 */
+	public Customer getCustomerRecipientNameById (int connection){
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_NAME_QUERY, new CustomerRecipientRowMapper(), connection);
 	}
 }
