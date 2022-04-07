@@ -8,6 +8,8 @@ public interface CustomerService {
 	
 	public List<Customer> getAllCustomerRecipients(int customerId);
 
-	public Customer getCustomerRecipientNameById(int connectionRecipientId);
+	public Customer getCustomerRecipientIdAndEmailById(int connectionRecipientId);
+
+	public int getCustomerIdByEmail(String email);
 
 }

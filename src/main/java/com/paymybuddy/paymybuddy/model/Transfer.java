@@ -54,6 +54,14 @@ public class Transfer {
 				this.transferType = TransferType.CREDIT;
 			}
 	}
+	
+//	public Transfer(Date date, String connection, String description, double amount) {
+//		 this.date = date;
+//		
+//		 
+//		 this.description = description;
+//		 this.amount = amount;
+//	}
 
 	/**
 	 * Getter date

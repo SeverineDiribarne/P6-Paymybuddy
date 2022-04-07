@@ -8,7 +8,11 @@ public interface CustomerDao {
 	
 	public List<Customer> getAllCustomerRecipients(int customerId);
 
-	public Customer getCustomerRecipientNameById(int connection);
+	public Customer getCustomerRecipientIdAndEmailById(int connection);
+
+	public int getCustomerIdByEmail(String email);
+
+	public List<Customer> getAllInformationsOfCustomerById(int customerSourceId);
 
 
 	

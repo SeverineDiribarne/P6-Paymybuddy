@@ -56,8 +56,8 @@
 						<select class="select" th:field="*{connection}">
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
-								th:value="${connection.customerRecipient}"
-								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName}">
+						 th:value="${connection.customerRecipient}" 
+								th:text="${connection.customerRecipient.email}" >
 							</option>
 						</select>
 					</div>
@@ -94,9 +94,7 @@
 					<tr th:each="transferDisplay: ${transferDisplayList}">
 						<td><span th:text="${transferDisplay.date}"></span></td>
 						<td><span
-							th:text="${transferDisplay.firstName}
-											+ ' ' + 
-											${transferDisplay.lastName}"></span></td>
+							th:text="${transferDisplay.email}"></span></td>
 						<td><span th:text="${transferDisplay.description}"></span></td>
 						<td><span th:text="${transferDisplay.amount}"></span></td>
 					</tr>

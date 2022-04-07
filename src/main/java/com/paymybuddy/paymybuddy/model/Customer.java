@@ -23,6 +23,7 @@ public class Customer {
 	 * Empty constructor
 	 */
 	public Customer() {}
+	
 
 	/**
 	 * Complete Constructor 
@@ -69,10 +70,9 @@ public class Customer {
 	 * @param firstName
 	 * @param lastName
 	 */
-	public Customer(int customerId, String firstName, String lastName) {
+	public Customer(int customerId, String email) {
 		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.email = email;
 	}
 
 	/**
@@ -234,4 +234,10 @@ public class Customer {
 	public void setTransfers(List<Transfer> transfers) {
 		this.transfers = transfers;
 	}
+	/**
+	 * toString method
+	 */
+	public String toString() {
+		   return  this.email;
+		}
 }

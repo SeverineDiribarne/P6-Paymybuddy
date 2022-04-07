@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.ConnectionIdByCustomersIdRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendIdRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
 
@@ -25,6 +26,15 @@ public class ConnectionDaoImpl implements ConnectionDao{
 		jdbcTemplate.update(ADD_CONNECTION_QUERY, customerId, friendId );	
 	}
 
+	private static final String GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY = "SELECT con.connectionId"
+			+ " FROM connection con"
+			+ " WHERE con.connectionSource = ?"
+			+ " AND con.connectionRecipient = ? ;";
+	
+	@Override
+	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
+		return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
+	}
 
 
 //	private static final String DELETE_CONNECTION_QUERY =  "DELETE FROM friend WHERE customer_id_user = ? AND customer_id_friend = ?;"; 

@@ -43,7 +43,7 @@ public class TransferDaoImpl implements TransferDao {
 	 */
 	@Override
 	public void addPayment(Date date, Connection connection, String description, double amount) {
-		jdbcTemplate.update(INSERT_TRANSFER, date, connection, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
+		jdbcTemplate.update(INSERT_TRANSFER, date, connection.getConnectionId(), description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
 	}
 	
 

@@ -5,8 +5,7 @@ import java.util.Date;
 public class TransferDisplay  {
 
 	private Date date;
-	private String firstName;
-	private String lastName;
+	private String email;
 	private String description;
 	private double amount;
 	private TransferType transferType;
@@ -20,10 +19,9 @@ public class TransferDisplay  {
 	 * @param amount
 	 * @param transferType
 	 */
-	public TransferDisplay(Date date, String firstName, String lastName, String description, double amount) {
+	public TransferDisplay(Date date, String email, String description, double amount) {
 		this.date = date;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.setEmail(email);
 		this.description = description;
 		this.amount = amount;
 		if(amount <0) {
@@ -52,28 +50,17 @@ public class TransferDisplay  {
 		this.date = date;
 	}
 	/**
-	 * @return the firstName
+	 * @return the email
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getEmail() {
+		return email;
 	}
+
 	/**
-	 * @param firstName the firstName to set
+	 * @param email the email to set
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the description
@@ -111,6 +98,4 @@ public class TransferDisplay  {
 	public void setTransferType(TransferType transferType) {
 		this.transferType = transferType;
 	}
-	
-	
 }

@@ -18,6 +18,11 @@ public class ConnectionServiceImpl implements ConnectionService {
 		
 	}
 
+	@Override
+	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
+		return connectionDao.getConnectionIdByCustomersId(customerSourceId, customerRecipientId);
+	}
+
 
 //	@Override
 //	public void deleteAConnection(int customerId, String email) {

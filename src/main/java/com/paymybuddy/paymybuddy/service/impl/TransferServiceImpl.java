@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
+import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.model.Connection;
+import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
 
@@ -16,6 +19,12 @@ public class TransferServiceImpl implements TransferService{
 
 	@Autowired
 	TransferDao transferDao;
+	
+	@Autowired
+	ConnectionDao connectionDao;
+	
+	@Autowired
+	CustomerDao customerDao;
 
 	//private static final Logger logger = LogManager.getLogger(); 
 
@@ -28,21 +37,60 @@ public class TransferServiceImpl implements TransferService{
 	}
 
 	/**
+	 * Save Customer Source Attributes
+	 * @param customerSourceId
+	 * @param connection
+	 */
+	private void saveCustomerSourceAttributes(int customerSourceId, Connection connection) {
+		List<Customer> customerSourceAttributes = customerDao.getAllInformationsOfCustomerById(customerSourceId);
+		for (Customer customer : customerSourceAttributes) {
+			connection.getCustomerSource().setFirstName(customer.getFirstName());
+			connection.getCustomerSource().setLastName(customer.getLastName());
+			connection.getCustomerSource().setEmail(customer.getEmail());
+			connection.getCustomerSource().setBalance(customer.getBalance());
+			connection.getCustomerSource().setCustomerId(customerSourceId);
+		}
+	}
+	/**
+	 * @param customerRecipientId
+	 * @param connection
+	 */
+	private void saveCustomerRecipientAttributes(int customerRecipientId, Connection connection) {
+		List<Customer> customerRecipientAttributes = customerDao.getAllInformationsOfCustomerById(customerRecipientId);
+		for (Customer customer : customerRecipientAttributes) {
+		connection.getCustomerRecipient().setFirstName(customer.getFirstName());
+		connection.getCustomerRecipient().setLastName(customer.getLastName());
+		connection.getCustomerRecipient().setEmail(customer.getEmail());
+		connection.getCustomerRecipient().setBalance(customer.getBalance());
+		connection.getCustomerRecipient().setCustomerId(customerRecipientId);
+		}
+	}
+	/**
 	 * 
 	 */
 	@Override
-	public void addPayment(Date date, Connection connection, String description, double amount) {
-		if(amount < 0) {
-		transferDao.addPayment (date, connection, description, amount);
-		}
-		else {
-			double	negativeAmount = amount * (-1);
-			Connection reverseConnection = new Connection();
-			connection.setCustomerSource(connection.getCustomerRecipient());
-			connection.setCustomerRecipient(connection.getCustomerSource());
-			transferDao.addPayment (date, reverseConnection, description, negativeAmount);
+	public void addPayment(Date date, int customerSourceId, int customerRecipientId, String description, double amount) {
+		if(amount > 0) {
+			//negative amount for main user
+			double negativeAmount = amount * (-1);
+			int connectionId = connectionDao.getConnectionIdByCustomersId(customerSourceId,customerRecipientId);
+			Connection connection = new Connection(connectionId, customerSourceId, customerRecipientId);
+			saveCustomerSourceAttributes(customerSourceId, connection);
+			saveCustomerRecipientAttributes(customerRecipientId, connection);
+			transferDao.addPayment (date, connection, description, negativeAmount);
+		
+			//positive amount for recipient customer
+			int secondConnectionId = connectionDao.getConnectionIdByCustomersId(customerRecipientId, customerSourceId);
+			Connection reverseConnection = new Connection(secondConnectionId, customerRecipientId, customerSourceId);
+			saveCustomerRecipientAttributes(customerRecipientId, reverseConnection);
+			saveCustomerSourceAttributes(customerSourceId, reverseConnection);
+			transferDao.addPayment (date, reverseConnection, description, amount);
 		}
 	}
+
+	
+
+	
 
 	/**
 	 * 

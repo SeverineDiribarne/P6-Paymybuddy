@@ -24,8 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerRecipientNameById(int connection) {
-		return customerDao.getCustomerRecipientNameById(connection);
+	public Customer getCustomerRecipientIdAndEmailById(int connection) {
+		return customerDao.getCustomerRecipientIdAndEmailById(connection);
+	}
+
+	@Override
+	public int getCustomerIdByEmail(String email) {
+		return customerDao.getCustomerIdByEmail(email);
 	}
 	
 }
