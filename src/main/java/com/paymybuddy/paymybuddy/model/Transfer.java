@@ -1,4 +1,4 @@
-  package com.paymybuddy.paymybuddy.model;
+package com.paymybuddy.paymybuddy.model;
 
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -6,8 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Transfer {
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	
+	private int transferId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private Connection connection;
 	private String description;
@@ -23,19 +24,19 @@ public class Transfer {
 		this.description = description;
 		this.amount = amount;
 		if(amount <0) {
-		this.transferType = TransferType.DEBIT;
+			this.transferType = TransferType.DEBIT;
 		}
 		else {
 			this.transferType = TransferType.CREDIT;
 		}
 	}
-	
+
 	/**
 	 * empty constructor
 	 */
-	 public Transfer() {}
-	 
-	
+	public Transfer() {}
+
+
 	/**
 	 * Constructor with connectionId, description and amount
 	 * @param connectionId
@@ -49,20 +50,27 @@ public class Transfer {
 		this.amount = amount;
 		if(amount <0) {
 			this.transferType = TransferType.DEBIT;
-			}
-			else {
-				this.transferType = TransferType.CREDIT;
-			}
+		}
+		else {
+			this.transferType = TransferType.CREDIT;
+		}
+	}
+
+	/**
+	 * constructor with only transfer id 
+	 * @param transferId
+	 */
+	public Transfer(int transferId) {
+		this.transferId = transferId;
+	}
+	/**
+	 * Getter transferId
+	 * @return transferId
+	 */
+	public int getTransferId() {
+		return transferId;
 	}
 	
-//	public Transfer(Date date, String connection, String description, double amount) {
-//		 this.date = date;
-//		
-//		 
-//		 this.description = description;
-//		 this.amount = amount;
-//	}
-
 	/**
 	 * Getter date
 	 * @return date
@@ -77,7 +85,7 @@ public class Transfer {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	/**
 	 * Getter connection 
 	 * @return connection
@@ -85,7 +93,7 @@ public class Transfer {
 	public Connection getConnection() {
 		return connection;
 	}
-	
+
 	/**
 	 * Setter connection 
 	 * @param connection
@@ -93,7 +101,7 @@ public class Transfer {
 	public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
-	
+
 	/**
 	 * Getter description
 	 * @return description
@@ -101,7 +109,7 @@ public class Transfer {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * Setter description
 	 * @param description
@@ -109,7 +117,7 @@ public class Transfer {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Getter amount
 	 * @return amount
@@ -117,7 +125,7 @@ public class Transfer {
 	public double getAmount() {
 		return amount;
 	}
-	
+
 	/**
 	 * Setter amount
 	 * @param amount
@@ -125,7 +133,7 @@ public class Transfer {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	
+
 	/**
 	 * Getter transfer Type
 	 * @return transferType
@@ -133,7 +141,7 @@ public class Transfer {
 	public TransferType getTransferType() {
 		return transferType;
 	}
-	
+
 	/**
 	 * Setter transfer Type
 	 * @param transferType

@@ -65,4 +65,16 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Customer> getAllInformationsOfCustomerById(int customerSourceId) {
 		return jdbcTemplate.query(GET_ALL_INFORMATIONS_OF_CUSTOMER_BY_ID_QUERY, new InformationsOfCustomerByIdRowMapper(), customerSourceId);
 	}
+	public static final String BALANCE_CALCULATION_QUERY = "UPDATE customer cust"
+			+ " JOIN connection con"
+			+ " ON cust.id = con.connectionSource"
+			+ " JOIN transfer t "
+			+ " ON con.connectionId = t.connection"
+			+ " SET cust.balance = (cust.balance + t.amount)"
+			+ " WHERE cust.id = ? AND t.transferId = ? ;";
+	
+	@Override
+	public void updateCustomerBalance(int customerId, int transferId) {
+		jdbcTemplate.update(BALANCE_CALCULATION_QUERY, customerId, transferId);
+	}
 }

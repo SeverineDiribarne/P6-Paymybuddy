@@ -12,4 +12,6 @@ public interface TransferDao {
 
 	void addPayment(Date date, Connection connection, String description, double amount);
 
+	Transfer getLastTransferId();
+
 }

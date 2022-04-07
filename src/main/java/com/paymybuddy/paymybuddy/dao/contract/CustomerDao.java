@@ -14,6 +14,6 @@ public interface CustomerDao {
 
 	public List<Customer> getAllInformationsOfCustomerById(int customerSourceId);
 
+	void updateCustomerBalance(int customerId, int transferId);
 
-	
 }

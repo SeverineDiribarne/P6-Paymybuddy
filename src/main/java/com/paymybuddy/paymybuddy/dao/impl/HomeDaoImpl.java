@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.dao.impl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,9 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.HomeDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BalanceRowMapper;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
-import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.model.TransferType;
 
 

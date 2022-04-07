@@ -32,5 +32,4 @@ public class CustomerServiceImpl implements CustomerService {
 	public int getCustomerIdByEmail(String email) {
 		return customerDao.getCustomerIdByEmail(email);
 	}
-	
 }

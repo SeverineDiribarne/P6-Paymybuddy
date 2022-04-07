@@ -77,14 +77,21 @@ public class TransferServiceImpl implements TransferService{
 			Connection connection = new Connection(connectionId, customerSourceId, customerRecipientId);
 			saveCustomerSourceAttributes(customerSourceId, connection);
 			saveCustomerRecipientAttributes(customerRecipientId, connection);
+			//add negative payment
 			transferDao.addPayment (date, connection, description, negativeAmount);
-		
+			// balance calculation for customerSource
+			Transfer transfer = transferDao.getLastTransferId();
+			customerDao.updateCustomerBalance(customerSourceId, transfer.getTransferId());
+			
 			//positive amount for recipient customer
 			int secondConnectionId = connectionDao.getConnectionIdByCustomersId(customerRecipientId, customerSourceId);
 			Connection reverseConnection = new Connection(secondConnectionId, customerRecipientId, customerSourceId);
 			saveCustomerRecipientAttributes(customerRecipientId, reverseConnection);
 			saveCustomerSourceAttributes(customerSourceId, reverseConnection);
 			transferDao.addPayment (date, reverseConnection, description, amount);
+			// balance calculation for customerSource
+			transfer = transferDao.getLastTransferId();
+			customerDao.updateCustomerBalance(customerRecipientId, transfer.getTransferId());	
 		}
 	}
 

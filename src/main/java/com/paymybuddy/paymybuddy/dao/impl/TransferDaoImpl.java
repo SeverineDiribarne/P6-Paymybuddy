@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.LastTransferIdRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Transfer;
@@ -44,6 +45,13 @@ public class TransferDaoImpl implements TransferDao {
 	@Override
 	public void addPayment(Date date, Connection connection, String description, double amount) {
 		jdbcTemplate.update(INSERT_TRANSFER, date, connection.getConnectionId(), description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
+	}
+	
+	public static final String GET_LAST_TRANSFER_ID_QUERY = "select max(t.transferId) AS transferId  FROM transfer t;";
+	
+	@Override
+	public Transfer getLastTransferId() {
+		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
 	
 
