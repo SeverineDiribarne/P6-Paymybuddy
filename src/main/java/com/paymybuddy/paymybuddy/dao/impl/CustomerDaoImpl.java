@@ -26,7 +26,6 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ " JOIN connection con ON cust.id = con.connectionRecipient"
 			+ " WHERE con.connectionSource = ?;";
 
-	private static final String GET_ALL_FRIENDS_QUERY = "SELECT c.id, c.firstName, c.lastName FROM customer c JOIN friend f ON c.id = f.customer_id_friend WHERE f.customer_id_user = ? UNION SELECT c.id, c.firstName, c.lastName FROM friend f JOIN customer c  ON f.customer_id_user = c.id  WHERE f.customer_id_friend = ?;";
 
 	/**
 	 * get Friends List 
@@ -69,6 +68,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Customer> getAllInformationsOfCustomerById(int customerSourceId) {
 		return jdbcTemplate.query(GET_ALL_INFORMATIONS_OF_CUSTOMER_BY_ID_QUERY, new InformationsOfCustomerByIdRowMapper(), customerSourceId);
 	}
+	
 	public static final String BALANCE_CALCULATION_QUERY = "UPDATE customer cust"
 			+ " JOIN connection con"
 			+ " ON cust.id = con.connectionSource"

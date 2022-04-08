@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.BankAccountDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BankIdRowMapper;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendIdRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
 
 @Repository

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
@@ -16,6 +17,7 @@ import com.paymybuddy.paymybuddy.service.contract.ConnectionService;
 import com.paymybuddy.paymybuddy.service.contract.CustomerService;
 
 @Controller
+@RequestMapping ("/connection")
 public class ConnectionController {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class ConnectionController {
 	CustomerService customerService;
 	
 	
-	@GetMapping("/connection")
+	@GetMapping
 	public String getConnection() {
 		return "connection";
 	}

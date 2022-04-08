@@ -35,20 +35,22 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Home</a></li>
 				<li class="breadcrumb-item" aria-current="page">Transfer</li>
-				<li class="breadcrumb-item active" aria-current="page">Add Connection</li>
+				<li class="breadcrumb-item active" aria-current="page">Add
+					Connection</li>
 			</ol>
 		</nav>
 	</div>
-
-	<form  action="#" th:action="@{/transfer}"  th:object="${customer}" method="POST">
-
+	<form th:action="@{/add}" th:object="${customer}" method="POST">
 		<div class="group1">
-			<span> <img src="/img/enveloppe.png" alt="enveloppe" />
-			</span> <input type="email" th:field="*{email}" class="form-control" required
-				placeholder="Email" />
+			<div>
+				<span> <img src="/img/enveloppe.png" alt="enveloppe" /></span> <input
+					type="text" class="email" th:field="*{email}"
+					placeholder="Email">
+			</div>
+
 			<div class="btns">
-				<input type="submit"  name="add"    value="Add"   class="btn_add">
-		 		<input type="submit"  name="delete" value="Delete"class="btn_delete"/> 
+				<input type="submit" name="add" value="Add" class="btn_add"></input>
+				<input type="submit" name="delete" value="Delete" class="btn_delete" />
 			</div>
 		</div>
 	</form>
