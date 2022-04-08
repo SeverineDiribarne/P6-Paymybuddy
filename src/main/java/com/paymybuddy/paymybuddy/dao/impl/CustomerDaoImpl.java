@@ -70,9 +70,12 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ " ON cust.id = con.connectionSource"
 			+ " JOIN transfer t "
 			+ " ON con.connectionId = t.connection"
-			+ " SET cust.balance = (cust.balance + t.amount)"
+			+ " SET cust.balance = (cust.balance + t.amount + (t.amount * 0.5 /100))"
 			+ " WHERE cust.id = ? AND t.transferId = ? ;";
-	
+		
+	/**
+	 * Update Customer balance
+	 */
 	@Override
 	public void updateCustomerBalance(int customerId, int transferId) {
 		jdbcTemplate.update(BALANCE_CALCULATION_QUERY, customerId, transferId);
