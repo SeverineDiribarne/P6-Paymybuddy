@@ -16,7 +16,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	
-	
 	private static final String GET_ALL_FRIENDS_QUERY = "SELECT c.id, c.firstName, c.lastName FROM customer c JOIN friend f ON c.id = f.customer_id_friend WHERE f.customer_id_user = ? UNION SELECT c.id, c.firstName, c.lastName FROM friend f JOIN customer c  ON f.customer_id_user = c.id  WHERE f.customer_id_friend = ?;";
 	/**
 	 * getFriendsList Method
