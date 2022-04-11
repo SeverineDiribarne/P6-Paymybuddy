@@ -116,5 +116,45 @@
 			</nav>
 		</div>
 	</div>
+	<div class="transactions">
+		<div class="title_transactions">
+			<label class="label_transaction">My Bank Transactions</label>
+		</div>
+		<div class="table_transactions">
+			<table class="table table-striped">
+				<thead>
+					<tr class="column">
+						<th scope="col">Date</th>
+						<th scope="col">Recipient</th>
+						<th scope="col">Description</th>
+						<th scope="col">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="transferDisplay: ${transferDisplayList}">
+						<td><span th:text="${transferDisplay.date}"></span></td>
+						<td><span
+							th:text="${transferDisplay.email}"></span></td>
+						<td><span th:text="${transferDisplay.description}"></span></td>
+						<td><span th:text="${transferDisplay.amount}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="pages">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 </body>
 </html>

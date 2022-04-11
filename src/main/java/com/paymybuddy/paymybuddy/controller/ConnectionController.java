@@ -27,7 +27,8 @@ public class ConnectionController {
 	
 	
 	@GetMapping
-	public String getConnection() {
+	public String getConnection(Model model) {
+		model.addAttribute("customer", new Customer());
 		return "connection";
 	}
 	
