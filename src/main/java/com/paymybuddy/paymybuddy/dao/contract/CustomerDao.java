@@ -16,4 +16,8 @@ public interface CustomerDao {
 
 	void updateCustomerBalance(int customerId, int transferId);
 
+	void updateCustomerBalanceAfterPaymentFromBankToApp(int bankOperationId);
+
+	void updateCustomerBalanceAfterPaymentFromAppToBank(int bankOperationId);
+
 }

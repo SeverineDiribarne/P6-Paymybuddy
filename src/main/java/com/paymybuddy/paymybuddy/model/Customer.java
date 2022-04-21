@@ -39,6 +39,7 @@ public class Customer {
 		this.firstName = firstName;
 		this.email = email;
 		this.balance = balance;
+		this.bankAccount = new BankAccount();
 	}
 
 	/**
@@ -55,6 +56,7 @@ public class Customer {
 		account.setPassword(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.bankAccount = new BankAccount();
 	}
 
 	/**

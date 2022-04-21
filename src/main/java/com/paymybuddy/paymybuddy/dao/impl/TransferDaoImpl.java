@@ -54,15 +54,6 @@ public class TransferDaoImpl implements TransferDao {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
 	
-
-	//private static final String FIND_USER_NAME_BY_EMAIL = "SELECT c.firstName, c.lastName FROM customer c WHERE c.email = ?;";
-	//	
-	//	public void addAConnection(int customerId, String email) {
-	//		Customer friend = jdbcTemplate.queryForObject(FIND_USER_NAME_BY_EMAIL, new UserNameRowMapper(),email);
-	//		
-	//	}
-
-
 	//	
 	//	private static final String DELETE_FRIEND_INFORMATION_QUERY = "DELETE FROM friend WHERE customer_id1 = :friendId";
 	//

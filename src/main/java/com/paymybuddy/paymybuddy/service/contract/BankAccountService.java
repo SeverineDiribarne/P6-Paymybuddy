@@ -1,17 +1,14 @@
 package com.paymybuddy.paymybuddy.service.contract;
 
-import java.util.Date;
 import java.util.List;
 
-import com.paymybuddy.paymybuddy.model.BankOperation;
+import com.paymybuddy.paymybuddy.model.BankAccount;
 
 public interface BankAccountService {
 
-	public int getBankAccountId(String iban);
+	public int getBankAccountId(int customerId);
+
+	List<BankAccount> getAllElementsOfBankAccount(int customerId);
 	
-//	void addWidrawalFromBank(int owner, Date date, int bankId, String description, double amount);
-//	
-//	void addDepositeToBank(int bankId, Date date, int owner, String description, double amount);
-//	
-//	List<BankOperation> getBankOperations();
+	
 }

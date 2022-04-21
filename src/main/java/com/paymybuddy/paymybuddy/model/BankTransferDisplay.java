@@ -2,126 +2,99 @@ package com.paymybuddy.paymybuddy.model;
 
 import java.util.Date;
 
-public class TransferDisplay  {
+public class BankTransferDisplay {
 
 	private Date date;
 	private String sourceName;
 	private String recipientName;
 	private String description;
 	private double amount;
-	private TransferType transferType;
 	
-	/**
-	 * Complete constructor
-	 * @param date
-	 * @param firstName
-	 * @param lastName
-	 * @param description
-	 * @param amount
-	 * @param transferType
-	 */
-	public TransferDisplay(Date date, String sourceName, String recipientName, String description, double amount) {
+	//Empty Constructor
+	public BankTransferDisplay() {}
+
+	//Complete Constructor
+	public BankTransferDisplay(Date date, String sourceName, String recipientName, String description, double amount) {
 		this.date = date;
 		this.sourceName = sourceName;
 		this.recipientName = recipientName;
 		this.description = description;
-		this.amount = amount;
-		if(amount <0) {
-			this.transferType = TransferType.DEBIT;
-			}
-			else {
-				this.transferType = TransferType.CREDIT;
-			}
+		this.amount = amount;	
 	}
 
 	/**
-	 * Getter date
 	 * @return the date
 	 */
 	public Date getDate() {
 		return date;
 	}
-	
 	/**
-	 * Setter date
 	 * @param date the date to set
 	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	/**
-	 * Getter sourceName
-	 * @return sourceName
+	 * @return the sourceName
 	 */
 	public String getSourceName() {
 		return sourceName;
 	}
 
 	/**
-	 * Setter sourceName
-	 * @param sourceName
+	 * @param sourceName the sourceName to set
 	 */
 	public void setSourceName(String sourceName) {
 		this.sourceName = sourceName;
 	}
 
 	/**
-	 * Getter recipientName
-	 * @return recipientName
+	 * @return the recipientName
 	 */
 	public String getRecipientName() {
 		return recipientName;
 	}
 
 	/**
-	 * Setter RecipientName
-	 * @param recipientName
+	 * @param recipientName the recipientName to set
 	 */
 	public void setRecipientName(String recipientName) {
 		this.recipientName = recipientName;
 	}
 
 	/**
-	 * Getter Description
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
 	/**
-	 * Setter Description
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	/**
-	 * Getter Amount
 	 * @return the amount
 	 */
 	public double getAmount() {
 		return amount;
 	}
 	/**
-	 * Setter Amount
 	 * @param amount the amount to set
 	 */
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	/**
-	 * Getter TransferType
-	 * @return the transferType
+	 * toString method
 	 */
-	public TransferType getTransferType() {
-		return transferType;
-	}
-	/**
-	 * Setter TransferType
-	 * @param transferType the transferType to set
-	 */
-	public void setTransferType(TransferType transferType) {
-		this.transferType = transferType;
+	public String toString() {
+		return "" + this.date 
+				+ this.sourceName
+				+ this.recipientName
+				+ this.description
+				+ this.amount;
 	}
 }

@@ -10,7 +10,7 @@ public class BankIdRowMapper implements RowMapper<Integer> {
 
 	@Override
 	public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return Integer.valueOf(rs.getInt("id"));
+		return Integer.valueOf(rs.getInt("bankAccount_id"));
 		
 	}
 

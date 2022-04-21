@@ -7,10 +7,6 @@ public interface ConnectionDao {
 
 	int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId);
 
-
-
-
-
 //	void deleteAConnection(int customerId, String email);
 
 }

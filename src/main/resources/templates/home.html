@@ -45,7 +45,7 @@
 					Your balance : <span th:utext="${balance}" class="balance_amount"></span>
 				</h2>
 			</div>
-			<form th:action="@{/home}" th:object="${transfer}" method="POST">
+			<form th:action="@{/home/paymentOnApp}" th:object="${bankOperation}" method="POST">
 				<div class="money_frame1">
 					<div class="frame_number">
 						<div class="sentence">
@@ -53,30 +53,27 @@
 						</div>
 						<div class="number">
 							<input type="number" step="any" class="amount"
-								 placeholder="0 €">
-							<!--  th:field="*{amount}" -->
+								th:field="*{bankOperationAmount}" placeholder="0 €">
 						</div>
 					</div>
 					<div class="frame_button">
-						<input type="submit" formaction="/transfer" value="Pay"
-							class="btn_pay"></input>
+						<input type="submit" value="Pay" class="btn_pay"></input>
 					</div>
 				</div>
 			</form>
-			<form th:action="@{/home}" th:object="${transfer}" method="POST">
+			<form th:action="@{/home/paymentOnBank}" th:object="${bankOperation}" method="POST">
 				<div class="money_frame2">
 					<div class="frame_number">
 						<div class="sentence">
 							<p>Make a transfer to your bank account :</p>
 						</div>
 						<div class="number">
-							<input type="number" step="any" class="amount" placeholder="0 €">
-							<!--  th:field="*{amount}" -->
+							<input type="number" step="any" class="amount"
+								th:field="*{bankOperationAmount}" placeholder="0 €">
 						</div>
 					</div>
 					<div class="frame_button">
-						<input type="submit" formaction="/transfer" value="Pay"
-							class="btn_pay"></input>
+						<input type="submit" value="Pay" class="btn_pay"></input>
 					</div>
 				</div>
 			</form>

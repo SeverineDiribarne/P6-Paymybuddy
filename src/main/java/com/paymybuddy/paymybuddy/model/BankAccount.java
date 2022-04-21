@@ -3,25 +3,93 @@ package com.paymybuddy.paymybuddy.model;
 public class BankAccount {
 
 	private int bankAccountId;
+	private String bankAccountName;
 	private String iban;
 	private String bic;
 	private String swift;
 	private int userId;
-	private double balance;
-
+	
+	/**
+	 * Empty constructor
+	 */
+	public BankAccount() {}
+	
+	/**
+	 * Constructor with bankAccountName, iban, bic, swift, and userId
+	 * @param bankAccountName
+	 * @param iban
+	 * @param bic
+	 * @param swift
+	 * @param userId
+	 */
+	public BankAccount(String bankAccountName, String iban, String bic, String swift, int userId) {
+		this.bankAccountName = bankAccountName;
+		this.iban = iban;
+		this.bic = bic;
+		this.swift = swift;
+		this.userId = userId;
+	}
+	/**
+	 * constructor with only bankAccountId
+	 * @param bankAccountId
+	 */
+	public BankAccount(int bankAccountId) {
+		this.bankAccountId = bankAccountId;
+	}
+	/**
+	 * Complete Constructor
+	 * @param bankAccountId
+	 * @param bankAccountName
+	 * @param iban
+	 * @param bic
+	 * @param swift
+	 * @param userId
+	 */
+	public BankAccount(int bankAccountId, String bankAccountName, String iban, String bic, String swift, int userId) {
+		this.bankAccountId = bankAccountId;
+		this.bankAccountName = bankAccountName;
+		this.iban = iban;
+		this.bic = bic;
+		this.swift = swift;
+		this.userId = userId;
+	}
 
 	/**
-	 * @return the id
+	 * Constructor with bankAccountName only
+	 * @param bankAccountName
 	 */
-	public int getId() {
+	public BankAccount(String bankAccountName) {
+		this.bankAccountName = bankAccountName;
+	}
+
+	/**
+	 * @return the bankAccountId
+	 */
+	public int getBankAccountId() {
 		return bankAccountId;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param bankAccountId the bankAccountId to set
 	 */
-	public void setId(int id) {
-		this.bankAccountId = id;
+	public void setBankAccountId(int bankAccountId) {
+		this.bankAccountId = bankAccountId;
 	}
+
+	/**
+	 * @return the bankAccountName
+	 */
+	public String getBankAccountName() {
+		return bankAccountName;
+	}
+
+	/**
+	 * @param bankAccountName the bankAccountName to set
+	 */
+	public void setBankAccountName(String bankAccountName) {
+		this.bankAccountName = bankAccountName;
+	}
+
 	/**
 	 * @return the iban
 	 */
@@ -58,9 +126,7 @@ public class BankAccount {
 	public void setSwift(String swift) {
 		this.swift = swift;
 	}
-	
 	/**
-<<<<<<< Updated upstream
 	 * @return the userId
 	 */
 	public int getUserId() {
@@ -73,18 +139,15 @@ public class BankAccount {
 		this.userId = userId;
 	}
 	
-	 /**
-	 * @return balance
-	 */
-	public double getBalance() {
-		return balance;
-	}
 	/**
-	 * 
-	 * @param balance
+	 * toString method
 	 */
-	public void setBalance(double balance) {
-		this.balance = balance;
+	public String toString() {
+		return  "" + this.bankAccountId
+				+ this.bankAccountName
+				+ this.iban
+				+ this.bic
+				+ this.swift
+				+ this.userId;
 	}
-
 }

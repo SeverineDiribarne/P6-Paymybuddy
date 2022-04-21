@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Transfer {
 
-	
+	//Attributes
 	private int transferId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
