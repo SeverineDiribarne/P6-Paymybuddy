@@ -53,22 +53,4 @@ public class TransferDaoImpl implements TransferDao {
 	public Transfer getLastTransferId() {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
-	
-	//	
-	//	private static final String DELETE_FRIEND_INFORMATION_QUERY = "DELETE FROM friend WHERE customer_id1 = :friendId";
-	//
-	//	@Override
-	//	public void deleteAConnection(String email) {
-	//		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-	//		paramSource.addValue("friendId", findFriendId(email));
-	//		jdbcTemplate.execute(DELETE_FRIEND_INFORMATION_QUERY);
-	//	}
-	//
-	//	private static final String GET_FRIENDS_LIST_DONATE_QUERY =  "SELECT  customer.firstName, customer.lastName FROM customer customer JOIN friend friend  ON customer.id = friend.customer_id1 WHERE friend.customer_id = ?;";
-	//	private static final String GET_FRIENDS_LIST_RECEIVE_QUERY =  "SELECT  customer.firstName, customer.lastName FROM friend friend JOIN customer customer  ON friend.customer_id = customer.id  WHERE friend.customer_id1 = ?;";
-	//
-	//	@Override
-	//	public List<Customer> getFriendsList() {
-	//		return null;
-	//	}
 }

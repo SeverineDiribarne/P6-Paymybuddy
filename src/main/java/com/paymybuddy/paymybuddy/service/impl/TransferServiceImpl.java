@@ -82,6 +82,7 @@ public class TransferServiceImpl implements TransferService{
 			// balance calculation for customerSource
 			Transfer transfer = transferDao.getLastTransferId();
 			customerDao.updateCustomerBalance(customerSourceId, transfer.getTransferId());
+			customerDao.monetizationApp(customerSourceId, transfer.getTransferId());
 			
 			//positive amount for recipient customer
 			int secondConnectionId = connectionDao.getConnectionIdByCustomersId(customerRecipientId, customerSourceId);
@@ -94,49 +95,4 @@ public class TransferServiceImpl implements TransferService{
 			customerDao.updateCustomerBalance(customerRecipientId, transfer.getTransferId());	
 		}
 	}
-
-	
-
-	
-
-	/**
-	 * 
-	 */
-//	@Override
-//	public void addAConnection(int customerId, String email) {
-//
-//
-//		transferDao.addAConnection(customerId, email);
-
-//		else {
-//			logger.debug("Veuillez écrire une adresse email valide. "); 
-//		}
-//	}
-	//
-	//	@Override
-	//	public void deleteAConnection(String email) {
-	//		if(email != null) {
-	//			int friendId = transferDao.findFriendId(email);
-	//			transferDao.deleteAConnection(email);
-	//		}
-	//		else {
-	//			logger.debug("Veuillez écrire une adresse email valide. "); 
-	//		}
-	//		
-	//	}
-	//
-	//	@Override
-	//	public List<Customer> getFriendsList() {
-	//		return transferDao.getFriendsList();
-	//	}
-
-	//	@Autowired
-	//	BankAccountDao bankAccountDao;
-	//	
-	//	@Override
-	//	public void getPaiement() {
-	//	bankAccountDao.getBankAccount();
-	//		
-	//	}
-
 }

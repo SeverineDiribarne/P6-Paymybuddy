@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.BankOperationDao;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
+import com.paymybuddy.paymybuddy.dao.contract.HomeDao;
 import com.paymybuddy.paymybuddy.model.BankAccount;
 import com.paymybuddy.paymybuddy.model.BankOperation;
 import com.paymybuddy.paymybuddy.service.contract.BankOperationService;
@@ -20,6 +21,9 @@ public class BankOperationServiceImpl implements BankOperationService {
 	
 	@Autowired
 	CustomerDao customerDao;
+	
+	@Autowired
+	HomeDao homeDao;
 	/**
 	 * 
 	 */
@@ -36,6 +40,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 		bankOperationDao.addPaymentFromBankToApp(date, description, amount, source, recipient);	
 		BankOperation bankOperation = bankOperationDao.getLastOperationId();
 		customerDao.updateCustomerBalanceAfterPaymentFromBankToApp(bankOperation.getBankOperationId());
+		//homeDao.monetizationAppFromBankToApp(source, bankOperation.getBankOperationId());
 	}
 
 	/**
@@ -47,6 +52,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 		bankOperationDao.addPaymentFromAppToBank(date, description, bankOperationAmount, source, recipient);	
 		BankOperation bankOperation = bankOperationDao.getLastOperationId();
 		customerDao.updateCustomerBalanceAfterPaymentFromAppToBank(bankOperation.getBankOperationId());
+		homeDao.monetizationAppFromAppToBank(source, bankOperation.getBankOperationId());
 	}
 	
 	/**

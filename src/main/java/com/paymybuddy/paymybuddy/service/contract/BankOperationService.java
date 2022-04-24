@@ -14,7 +14,6 @@ public interface BankOperationService {
 
 	void addPaymentFromAppToBank(Date date, String description, double bankOperationAmount, int source, int recipient);
 	
-	
 	BankOperation getLastOperationId();
 
 	List<BankAccount> getName(int Id);

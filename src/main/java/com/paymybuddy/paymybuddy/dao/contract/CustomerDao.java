@@ -20,4 +20,6 @@ public interface CustomerDao {
 
 	void updateCustomerBalanceAfterPaymentFromAppToBank(int bankOperationId);
 
+	public void monetizationApp(int customerSourceId, int transferId);
+
 }

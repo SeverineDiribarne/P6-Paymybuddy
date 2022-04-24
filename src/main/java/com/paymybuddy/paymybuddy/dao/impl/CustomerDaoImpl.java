@@ -70,7 +70,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ " ON cust.id = con.connectionSource"
 			+ " JOIN transfer t "
 			+ " ON con.connectionId = t.connection"
-			+ " SET cust.balance = (cust.balance + t.amount + (t.amount * 0.5 /100))"
+			+ " SET cust.balance = (cust.balance + t.amount)"
 			+ " WHERE cust.id = ? AND t.transferId = ? ;";
 
 	/**
@@ -111,5 +111,17 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void updateCustomerBalanceAfterPaymentFromAppToBank( int bankOperationId) {
 		jdbcTemplate.update(BALANCE_CALCULATION_FROM_APP_TO_BANK_QUERY, bankOperationId);
+	}
+
+	public static final String MONETIZATION_APPLICATION_TRANSFER_ON_ONLY_SOURCE = "UPDATE customer cust"
+			+ " JOIN connection con"
+			+ " ON cust.id = con.connectionSource"
+			+ " JOIN transfer t"
+			+ " ON con.connectionId = t.connection"
+			+ " SET cust.balance = (cust.balance + (t.amount * 0.5 / 100))"
+			+ " WHERE cust.id = ? AND t.transferId = ? ;";
+	@Override
+	public void monetizationApp(int customerSourceId, int transferId) {
+		jdbcTemplate.update(MONETIZATION_APPLICATION_TRANSFER_ON_ONLY_SOURCE, customerSourceId, transferId);	
 	}
 }
