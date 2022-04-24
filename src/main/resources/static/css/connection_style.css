@@ -43,7 +43,11 @@ h3{
 }
 
 /*MAIL FRAME*/
-
+.group0{
+	margin-top: 200px;
+	margin-left: 100px;
+	height:500px;
+}
 .group1 span {
 	position: absolute;
 	margin-left:20px;
@@ -52,17 +56,17 @@ h3{
 
 .group1{
 	margin-left: 300px;
-	margin-top: 250px;
+	margin-top: 100px;
 	width:900px;
 }
-
-.form-control {
-	width: 550px;
+.email1{
+	width: 500px;
+	padding-left: 50px;
 	height: 35px;
-	padding-top: 5px;
-	padding-bottom:5px;
-	padding-left:60px;
-	text-align: left;
+}
+.mail1{
+	padding-bottom: 3px;
+	padding-right: 490px;
 }
 .btns{
 	margin-top: -35px;
@@ -73,13 +77,38 @@ h3{
 	border: 1px solid rgb(40, 108, 234);
 	background-color: rgb(40, 108, 234);
 	border-radius: 5px;
-	padding: 5px 70px 5px 50px;
+	padding: 5px 70px 5px 70px;
 	
 }
+.group2 span {
+	position: absolute;
+	margin-left:20px;
+	margin-top:4px; 
+}
 
-.btn_delete{
+.group2{
+	margin-left: 300px;
+	margin-top: 100px;
+	width:900px;
+}
+.email2{
+	width: 500px;
+	padding-left: 50px;
+	height: 35px;
+}
+.mail2{
+	padding-bottom: 3px;
+	padding-right: 490px;
+}
+.btns{
+	margin-top: -35px;
+	margin-left: 560px;
+}
+
+.btn_delete {
 	border: 1px solid rgb(233, 18, 18);
 	background-color: rgb(233, 18, 18);
 	border-radius: 5px;
-	padding: 5px 50px 5px 50px;
+	padding: 5px 70px 5px 50px;
+	
 }

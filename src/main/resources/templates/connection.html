@@ -39,18 +39,29 @@
 			</ol>
 		</nav>
 	</div>
-
-	<form  action="#" th:action="@{/transfer}"  th:object="${customer}" method="POST">
-
+	<div class="group0">
+	<form  th:action="@{/connection/add}" th:object="${customer}" method="POST">
 		<div class="group1">
-			<span> <img src="/img/enveloppe.png" alt="enveloppe" />
-			</span> <input type="email" th:field="*{email}" class="form-control" required
-				placeholder="Email" />
+			<div>
+				<span> <img src="/img/enveloppe.png" alt="enveloppe" class="mail1"/></span> 
+				<input type="text" class="email1" th:field="*{email}" placeholder="Email">
+			</div>
 			<div class="btns">
-				<input type="submit"  name="add"    value="Add"   class="btn_add">
-		 		<input type="submit"  name="delete" value="Delete"class="btn_delete"/> 
+				<input type="submit"  name="add" value="Add" class="btn_add"></input>
 			</div>
 		</div>
 	</form>
+	<form  th:action="@{/connection/delete}" th:object="${customer}" method="POST">
+		<div class="group2">
+			<div>
+				<span> <img src="/img/enveloppe.png" alt="enveloppe" class="mail2" /></span> 
+				<input type="text" class="email2" th:field="*{email}" placeholder="Email">	
+			</div>
+			<div class="btns">
+				<input type="submit"  name="delete" value="Delete" class="btn_delete" />
+			</div>
+		</div>
+	</form>
+	</div>
 </body>
 </html>

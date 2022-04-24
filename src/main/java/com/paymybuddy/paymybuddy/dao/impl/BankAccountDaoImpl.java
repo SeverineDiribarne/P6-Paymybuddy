@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.BankAccountDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BankAccountAllElementsRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BankIdRowMapper;
+<<<<<<< HEAD
 import com.paymybuddy.paymybuddy.model.BankAccount;
+=======
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdRowMapper;
+import com.paymybuddy.paymybuddy.model.Customer;
+>>>>>>> feature/connection
 
 @Repository
 public class BankAccountDaoImpl implements BankAccountDao{

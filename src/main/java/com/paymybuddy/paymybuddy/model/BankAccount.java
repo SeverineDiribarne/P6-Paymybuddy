@@ -3,11 +3,16 @@ package com.paymybuddy.paymybuddy.model;
 public class BankAccount {
 
 	private int bankAccountId;
+<<<<<<< HEAD
 	private String bankAccountName;
+=======
+	private String name;
+>>>>>>> feature/connection
 	private String iban;
 	private String bic;
 	private String swift;
 	private int userId;
+<<<<<<< HEAD
 	
 	/**
 	 * Empty constructor
@@ -61,6 +66,8 @@ public class BankAccount {
 	public BankAccount(String bankAccountName) {
 		this.bankAccountName = bankAccountName;
 	}
+=======
+>>>>>>> feature/connection
 
 	/**
 	 * @return the bankAccountId
@@ -68,7 +75,11 @@ public class BankAccount {
 	public int getBankAccountId() {
 		return bankAccountId;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> feature/connection
 	/**
 	 * @param bankAccountId the bankAccountId to set
 	 */
@@ -77,6 +88,7 @@ public class BankAccount {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * @return the bankAccountName
 	 */
 	public String getBankAccountName() {
@@ -90,36 +102,56 @@ public class BankAccount {
 		this.bankAccountName = bankAccountName;
 	}
 
+=======
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+>>>>>>> feature/connection
 	/**
 	 * @return the iban
 	 */
 	public String getIban() {
 		return iban;
 	}
+	
 	/**
 	 * @param iban the iban to set
 	 */
 	public void setIban(String iban) {
 		this.iban = iban;
 	}
+	
 	/**
 	 * @return the bic
 	 */
 	public String getBic() {
 		return bic;
 	}
+	
 	/**
 	 * @param bic the bic to set
 	 */
 	public void setBic(String bic) {
 		this.bic = bic;
 	}
+	
 	/**
 	 * @return the swift
 	 */
 	public String getSwift() {
 		return swift;
 	}
+	
 	/**
 	 * @param swift the swift to set
 	 */
@@ -138,6 +170,7 @@ public class BankAccount {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * toString method
@@ -150,4 +183,6 @@ public class BankAccount {
 				+ this.swift
 				+ this.userId;
 	}
+=======
+>>>>>>> feature/connection
 }

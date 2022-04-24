@@ -13,8 +13,8 @@ public class ConnectionServiceImpl implements ConnectionService {
 	ConnectionDao connectionDao;
 	
 	@Override
-	public void addAConnection(int customerId, String email) {
-		connectionDao.addAConnection( customerId, email);
+	public void addAConnection(int customerSourceId, String email) {
+		connectionDao.addAConnection( customerSourceId, email);
 		
 	}
 

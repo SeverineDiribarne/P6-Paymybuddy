@@ -1,10 +1,13 @@
 package com.paymybuddy.paymybuddy.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public class Customer implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 	User Attributes
 	 */
@@ -13,10 +16,10 @@ public class Customer {
 	private String firstName;
 	private String email;
 	private double balance;
-	private BankAccount bankAccount;
-	private Account account = new Account();
+	private transient BankAccount bankAccount;
+	private transient Account account = new Account();
 	private List<Customer> friends = new ArrayList<>();
-	private List<Transfer> transfers = new ArrayList<>();
+	private transient List<Transfer> transfers = new ArrayList<>();
 
 
 	/**

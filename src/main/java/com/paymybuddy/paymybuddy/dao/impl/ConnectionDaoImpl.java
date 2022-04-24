@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.ConnectionIdByCustomersIdRowMapper;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.FriendIdRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
 
 @Repository
@@ -16,14 +16,14 @@ public class ConnectionDaoImpl implements ConnectionDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private static final String SELECT_FRIEND_ID_QUERY =  "SELECT c.id FROM customer c WHERE c.email = ? ;"; 
+	private static final String SELECT_FRIEND_ID_QUERY =  "SELECT cust.id FROM customer cust WHERE cust.email = ? ;"; 
 
-	private static final String ADD_CONNECTION_QUERY =  "INSERT INTO friend (customer_id_user, customer_id_friend) VALUES (?,?);"; 
+	private static final String ADD_CONNECTION_QUERY =  "INSERT INTO connection (connectionSource, connectionRecipient) VALUES (?,?);"; 
 
 	@Override
-	public void addAConnection(int customerId, String email) {
-		Customer friendId = jdbcTemplate.queryForObject(SELECT_FRIEND_ID_QUERY, new FriendIdRowMapper(), email );
-		jdbcTemplate.update(ADD_CONNECTION_QUERY, customerId, friendId );	
+	public void addAConnection(int customerSourceId, String email) {
+		Customer customerRecipientId = jdbcTemplate.queryForObject(SELECT_FRIEND_ID_QUERY, new CustomerRecipientIdRowMapper(), email);
+		jdbcTemplate.update(ADD_CONNECTION_QUERY, customerSourceId, customerRecipientId );	
 	}
 
 	private static final String GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY = "SELECT con.connectionId"

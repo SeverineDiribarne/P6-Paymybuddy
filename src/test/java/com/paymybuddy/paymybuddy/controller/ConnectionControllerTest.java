@@ -20,8 +20,10 @@ import com.paymybuddy.paymybuddy.security.MyMainUser;
 	
 	@Test
 	void getConnectionTest() {
-		connectionController.getConnection();
-		Assertions.assertTrue(connectionController.getConnection().contains("connection"));
+		Model model = null;
+		
+		connectionController.getConnection(model);
+		Assertions.assertTrue(connectionController.getConnection(model).contains("connection"));
 	}
 	
 	@Test
