@@ -13,5 +13,4 @@ public class CustomerIdentityRowMapper implements RowMapper<Customer>{
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 		return new Customer(rs.getInt("id"), rs.getString("email"));
 	}
-
 }

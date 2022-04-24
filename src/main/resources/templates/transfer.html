@@ -50,15 +50,14 @@
 			<form th:action="@{/transfer}" th:object="${transfer}" method="POST">
 				<div class="money_frame2">
 					<div>
-	 				<input type="date" class="date" th:field="*{date}">     
+						<input type="date" class="date" th:field="*{date}">
 					</div>
 					<div class="frame_select">
 						<select class="select" th:field="*{connection}">
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
-						 th:value="${connection.customerRecipient}" 
-								th:text="${connection.customerRecipient.email}" >
-							</option>
+								th:value="${connection.customerRecipient}"
+								th:text="${connection.customerRecipient.email}"></option>
 						</select>
 					</div>
 					<div>
@@ -119,43 +118,26 @@
 	</div>
 	<div class="transactions">
 		<div class="title_transactions">
-<<<<<<< HEAD
 			<label class="label_transaction">My Banking Transactions</label>
-=======
-			<label class="label_transaction">My Bank Transactions</label>
->>>>>>> feature/connection
 		</div>
 		<div class="table_transactions">
 			<table class="table table-striped">
 				<thead>
 					<tr class="column">
 						<th scope="col">Date</th>
-<<<<<<< HEAD
 						<th scope="col">From</th>
 						<th scope="col">To</th>
-=======
-						<th scope="col">Recipient</th>
->>>>>>> feature/connection
 						<th scope="col">Description</th>
 						<th scope="col">Amount</th>
 					</tr>
 				</thead>
 				<tbody>
-<<<<<<< HEAD
 					<tr th:each="bankTransferDisplay: ${bankTransferDisplayList}">
 						<td><span th:text="${bankTransferDisplay.date}"></span></td>
 						<td><span th:text="${bankTransferDisplay.sourceName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.recipientName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.description}"></span></td>
 						<td><span th:text="${bankTransferDisplay.amount}"></span></td>
-=======
-					<tr th:each="transferDisplay: ${transferDisplayList}">
-						<td><span th:text="${transferDisplay.date}"></span></td>
-						<td><span
-							th:text="${transferDisplay.email}"></span></td>
-						<td><span th:text="${transferDisplay.description}"></span></td>
-						<td><span th:text="${transferDisplay.amount}"></span></td>
->>>>>>> feature/connection
 					</tr>
 				</tbody>
 			</table>
