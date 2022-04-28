@@ -23,11 +23,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ " FROM customer cust "
 			+ " JOIN connection con ON cust.id = con.connectionRecipient"
 			+ " WHERE con.connectionSource = ?;";
-<<<<<<< HEAD
-=======
 
-
->>>>>>> feature/connection
 	/**
 	 * get Friends List 
 	 * @return list of friends
@@ -69,11 +65,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Customer> getAllInformationsOfCustomerById(int customerSourceId) {
 		return jdbcTemplate.query(GET_ALL_INFORMATIONS_OF_CUSTOMER_BY_ID_QUERY, new InformationsOfCustomerByIdRowMapper(), customerSourceId);
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> feature/connection
 	public static final String BALANCE_CALCULATION_QUERY = "UPDATE customer cust"
 			+ " JOIN connection con"
 			+ " ON cust.id = con.connectionSource"
