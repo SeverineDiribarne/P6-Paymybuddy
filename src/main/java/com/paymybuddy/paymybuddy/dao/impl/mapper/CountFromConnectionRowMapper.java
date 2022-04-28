@@ -5,11 +5,10 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class ConnectionIdByCustomersIdRowMapper implements RowMapper<Integer>{
+public class CountFromConnectionRowMapper implements RowMapper<Integer>{
 
 	@Override
 	public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return Integer.valueOf(rs.getInt("connectionId"));
+		return Integer.valueOf(rs.getInt("count(*)"));
 	}
-
 }

@@ -24,10 +24,10 @@ public class ConnectionServiceImpl implements ConnectionService {
 	}
 
 
-//	@Override
-//	public void deleteAConnection(int customerId, String email) {
-//		connectionDao.deleteAConnection( customerId, email);
-//		
-//	}
+	@Override
+	public void deleteAConnection(int customerSourceId, String email) {
+		connectionDao.deleteAConnection( customerSourceId, email);
+		
+	}
 
 }
