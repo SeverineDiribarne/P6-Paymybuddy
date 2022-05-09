@@ -27,7 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		 auth
 		  .jdbcAuthentication()
-		  .passwordEncoder(new BCryptPasswordEncoder())
+		//  .passwordEncoder(new BCryptPasswordEncoder())
 	      .dataSource(dataSource)
 	      .usersByUsernameQuery("SELECT login, password, enabled"
 	      		+ " FROM account"
@@ -53,7 +53,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.permitAll()
 		.defaultSuccessUrl("/home",true)
 		.and()
+		.rememberMe()
+		.and()
 .logout()
 		.permitAll();
 	}
+	
+	/**
+	 * setPassWordEncoder Method
+	 * @return instance of password encoder
+	 */
+	@Bean
+	public PasswordEncoder setPassWordEncoder() {
+		return new BCryptPasswordEncoder();
+
+	}
 }
+
