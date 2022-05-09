@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.security;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,28 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    //@Autowired
-    //private CustomerDetailsService customerDetailsService;
+    @Autowired
+    private CustomerDetailsService customerDetailsService;
     
-	@Autowired
-	private DataSource dataSource;
-	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		 auth
-		  .jdbcAuthentication()
-		//  .passwordEncoder(new BCryptPasswordEncoder())
-	      .dataSource(dataSource)
-	      .usersByUsernameQuery("SELECT login, password, enabled"
-	      		+ " FROM account"
-	      		+ " WHERE login=?")
-          .authoritiesByUsernameQuery("SELECT login, role"
-          		+ " FROM authorities"
-          		+ " JOIN account"
-          		+ " ON account.id = authorities.account_id"
-          		+ " WHERE login=?");
-	}
-	
 	/**
 	 * configure HTTP security
 	 */
@@ -58,6 +38,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 .logout()
 		.permitAll();
 	}
+	
+	/**
+	 * configure method with AuthenticationManagerBuilder
+	 */
+	 @Override
+	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	        auth.userDetailsService(customerDetailsService).passwordEncoder(setPassWordEncoder());
+	    }
 	
 	/**
 	 * setPassWordEncoder Method
