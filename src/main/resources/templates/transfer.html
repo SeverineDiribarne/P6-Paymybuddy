@@ -133,13 +133,13 @@
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr th:each="bankTransferDisplay: ${bankTransferDisplayList}">
 						<td><span th:text="${bankTransferDisplay.date}"></span></td>
 						<td><span th:text="${bankTransferDisplay.sourceName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.recipientName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.description}"></span></td>
 						<td><span th:text="${bankTransferDisplay.amount}"></span></td>
+
 				</tbody>
 			</table>
 		</div>
