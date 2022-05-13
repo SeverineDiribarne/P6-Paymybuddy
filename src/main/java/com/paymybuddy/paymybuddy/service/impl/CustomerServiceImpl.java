@@ -38,9 +38,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
-			String bankAccountName, String iban, String bic, String swift) {
-		String encryptionPassword = passwordEncoder.encode(password);
-		customerDao.registerNewCustomerIntoDatabase(lastName, firstName, email, encryptionPassword, bankAccountName, iban, bic, swift);
+	public void registerNewCustomerIntoDatabase(Customer customer) {
+		String encryptionPassword = passwordEncoder.encode(customer.getAccount().getPassword());
+		customerDao.registerNewCustomerIntoDatabase(customer, encryptionPassword);
 	}
 }

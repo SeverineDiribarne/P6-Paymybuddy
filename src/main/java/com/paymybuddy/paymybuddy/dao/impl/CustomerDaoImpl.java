@@ -139,12 +139,11 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ "VALUES (?,?,?,?,?);";
 	
 	@Override
-	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
-			String bankAccountName, String iban, String bic, String swift) {
+	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword) {
 		double balance = 0;
-		jdbcTemplate.update(REGISTER_NEW_CUSTOMER_INTO_DATABASE, lastName, firstName, email, balance);
-		int customerId = getCustomerIdByEmail(email);
-		jdbcTemplate.update(REGISTER_NEW_ACCOUNT_INTO_DATABASE, email, password, customerId);
-		jdbcTemplate.update(REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE, bankAccountName, iban, bic, swift, customerId);
+		jdbcTemplate.update(REGISTER_NEW_CUSTOMER_INTO_DATABASE, customer.getLastName(), customer.getFirstName(), customer.getEmail(), balance);
+		int customerId = getCustomerIdByEmail(customer.getEmail());
+		jdbcTemplate.update(REGISTER_NEW_ACCOUNT_INTO_DATABASE, customer.getEmail(), encryptionPassword, customerId);
+		jdbcTemplate.update(REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE, customer.getBankAccount().getBankAccountName(), customer.getBankAccount().getIban(), customer.getBankAccount().getBic(), customer.getBankAccount().getSwift(), customerId);
 	}
 }

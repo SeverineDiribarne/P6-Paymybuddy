@@ -22,7 +22,6 @@ public interface CustomerDao {
 
 	public void monetizationApp(int customerSourceId, int transferId);
 
-	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
-			String bankAccountName, String iban, String bic, String swift);
+	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword);
 
 }
