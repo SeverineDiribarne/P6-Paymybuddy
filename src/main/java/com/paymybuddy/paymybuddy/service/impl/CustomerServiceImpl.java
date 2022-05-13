@@ -3,6 +3,7 @@ package com.paymybuddy.paymybuddy.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
@@ -14,6 +15,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerDao customerDao;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	/**
 	 * 
@@ -31,5 +35,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int getCustomerIdByEmail(String email) {
 		return customerDao.getCustomerIdByEmail(email);
+	}
+
+	@Override
+	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
+			String bankAccountName, String iban, String bic, String swift) {
+		String encryptionPassword = passwordEncoder.encode(password);
+		customerDao.registerNewCustomerIntoDatabase(lastName, firstName, email, encryptionPassword, bankAccountName, iban, bic, swift);
 	}
 }

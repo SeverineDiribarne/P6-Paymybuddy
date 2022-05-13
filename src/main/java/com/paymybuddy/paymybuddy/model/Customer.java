@@ -27,9 +27,26 @@ public class Customer implements Serializable{
 	 */
 	public Customer() {}
 	
+	/**
+	 * Complete Constructor
+	 */
+	public Customer(String lastName, String firstName, String email, String password, String bankAccountName, String iban, String bic, String swift) {
+		this.customerId = 0;
+		this.lastName= lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.balance = 0;
+		this.account = new Account();
+		this.account.setPassword(password);
+		this.bankAccount = new BankAccount();
+		this.bankAccount.setBankAccountName(bankAccountName);
+		this.bankAccount.setIban(iban);
+		this.bankAccount.setBic(bic);
+		this.bankAccount.setSwift(swift);	
+	}
 
 	/**
-	 * Complete Constructor 
+	 * Constructor with id, lastName, firstName, email, balance and bankAccount
 	 * @param id
 	 * @param lastName
 	 * @param firstName
@@ -104,7 +121,6 @@ public class Customer implements Serializable{
 	public Customer(double balance) {
 		this.balance = balance;
 	}
-
 
 	/**
 	 * Getter Id

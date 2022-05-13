@@ -12,4 +12,7 @@ public interface CustomerService {
 
 	public int getCustomerIdByEmail(String email);
 
+	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
+			String bankAccountName, String iban, String bic, String swift);
+
 }

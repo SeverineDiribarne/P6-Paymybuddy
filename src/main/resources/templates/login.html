@@ -21,36 +21,37 @@
 		<div class="titre">
 			<h3>Pay My Buddy</h3>
 		</div>
+		<div>
+			<form th:action="@{/login}" method="POST">
 
-		<form th:action="@{/login}"method="POST" >
+				<div th:if="${param.error}">Invalid email and/or password.</div>
 
-			<div th:if="${param.error}">Invalid email and/or password.</div>
+				<div th:if="${param.logout}">You have been logged out.</div>
 
-			<div th:if="${param.logout}">You have been logged out.</div>
+				<div class="input-group1">
+					<span> <img src="/img/enveloppe.png" alt="enveloppe" />
+					</span> <input type="text" name="username" class="form-control"
+						placeholder="Email" />
+				</div>
 
-			<div class="input-group1">
-				<span> <img src="/img/enveloppe.png" alt="enveloppe" />
-				</span> <input type="text" name="username" class="form-control"
-					placeholder="Email" />
-			</div>
+				<div class="input-group2">
+					<span> <img src="/img/asterisque.png" alt="asterisque" />
+					</span> <input type="password" name="password" class="form-control-2"
+						placeholder="Password" />
+				</div>
 
-			<div class="input-group2">
-				<span> <img src="/img/asterisque.png" alt="asterisque" />
-				</span> <input type="password" name="password" class="form-control-2"
-					placeholder="Password" />
-			</div>
-
-
-			<div class="checkbox">
-				<input type="checkbox" class="form-check-input" /> <label
-					class="form-check-label" for="exampleCheck1">Remember me </label>
-			</div>
-
-
-			<div class="login">
-				<button type="submit"  class="btn-btn-primary">Login</button>
-			</div>
-		</form>
+				<div class="checkbox">
+					<input type="checkbox" class="form-check-input" /> <label
+						class="form-check-label" for="exampleCheck1">Remember me </label>
+				</div>
+				<div class="login">
+					<button type="submit" class="btn-btn-primary">Login</button>
+				</div>
+			</form>
+		</div>
+		<div class="register">
+			<a href="/register" class="btn-register">Register</a>
+		</div>
 	</div>
 </body>
 </html>

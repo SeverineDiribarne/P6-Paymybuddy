@@ -20,8 +20,10 @@ public class BankOperationDaoImpl implements BankOperationDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate; 
 	
-	private static final String GET_BANK_OPERATIONS_QUERY = "SELECT bo.operationId, bo.operationDate, bo.operationDescription, bo.operationAmount, bo.customerId, bo.bank_accountId FROM bank_operation bo"
-			+ " WHERE bo.customerId = ?;";
+	private static final String GET_BANK_OPERATIONS_QUERY = "SELECT bo.operationId, bo.operationDate, bo.operationDescription, bo.operationAmount, ba.customer_Id, bo.bank_accountId FROM bank_operation bo"
+			+ " JOIN bank_account ba"
+			+ " ON bo.bank_accountId = ba.bankAccount_id"
+			+ " WHERE ba.customer_id = ?;";
 	/**
 	 * Get all bank operations 
 	 */

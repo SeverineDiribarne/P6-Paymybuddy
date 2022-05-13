@@ -125,4 +125,26 @@ public class CustomerDaoImpl implements CustomerDao {
 	public void monetizationApp(int customerSourceId, int transferId) {
 		jdbcTemplate.update(MONETIZATION_APPLICATION_TRANSFER_ON_ONLY_SOURCE, customerSourceId, transferId);	
 	}
+	
+	public static final String REGISTER_NEW_CUSTOMER_INTO_DATABASE = "INSERT INTO customer"
+			+ " (lastName, firstName, email, balance)"
+			+ " VALUES (?,?,?,?);";
+	
+	public static final String REGISTER_NEW_ACCOUNT_INTO_DATABASE = "INSERT INTO account"
+			+ " (login, password, customer_id)"
+			+ " VALUES (?,?,?);";
+	
+	public static final String REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE = "INSERT INTO bankAccount"
+			+ " (bankAccountName, iban, bic, swift, customerId)"
+			+ "VALUES (?,?,?,?,?);";
+	
+	@Override
+	public void registerNewCustomerIntoDatabase(String lastName, String firstName, String email, String password,
+			String bankAccountName, String iban, String bic, String swift) {
+		double balance = 0;
+		jdbcTemplate.update(REGISTER_NEW_CUSTOMER_INTO_DATABASE, lastName, firstName, email, balance);
+		int customerId = getCustomerIdByEmail(email);
+		jdbcTemplate.update(REGISTER_NEW_ACCOUNT_INTO_DATABASE, email, password, customerId);
+		jdbcTemplate.update(REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE, bankAccountName, iban, bic, swift, customerId);
+	}
 }
