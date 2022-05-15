@@ -3,12 +3,12 @@ package com.paymybuddy.paymybuddy.model;
 public class BankAccount {
 
 	private int bankAccountId;
+
 	private String bankAccountName;
 	private String iban;
 	private String bic;
 	private String swift;
 	private int userId;
-
 	
 	/**
 	 * Empty constructor
@@ -93,8 +93,6 @@ public class BankAccount {
 		this.bankAccountName = bankAccountName;
 	}
 
-
-	
 	/**
 	 * @return the iban
 	 */
