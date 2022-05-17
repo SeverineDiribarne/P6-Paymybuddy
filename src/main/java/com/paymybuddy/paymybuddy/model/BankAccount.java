@@ -79,7 +79,6 @@ public class BankAccount {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * @return the bankAccountName
 	 */
 	public String getBankAccountName() {

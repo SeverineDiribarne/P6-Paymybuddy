@@ -22,8 +22,8 @@ public class ConnectionDaoImpl implements ConnectionDao{
 
 	@Override
 	public void addAConnection(int customerSourceId, String email) {
-		Customer customerRecipientId = jdbcTemplate.queryForObject(SELECT_FRIEND_ID_QUERY, new CustomerRecipientIdRowMapper(), email);
-		jdbcTemplate.update(ADD_CONNECTION_QUERY, customerSourceId, customerRecipientId );	
+		Customer customerRecipient = jdbcTemplate.queryForObject(SELECT_FRIEND_ID_QUERY, new CustomerRecipientIdRowMapper(), email);
+		jdbcTemplate.update(ADD_CONNECTION_QUERY, customerSourceId, customerRecipient.getCustomerId() );	
 	}
 
 	private static final String GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY = "SELECT con.connectionId"

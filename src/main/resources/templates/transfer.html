@@ -57,7 +57,7 @@
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
 						 th:value="${connection.customerRecipient}" 
-								th:text="${connection.customerRecipient.email}" >
+								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName} " >
 							</option>
 						</select>
 					</div>
@@ -128,7 +128,6 @@
 						<th scope="col">Date</th>
 						<th scope="col">From</th>
 						<th scope="col">To</th>
-						<th scope="col">Recipient</th>
 						<th scope="col">Description</th>
 						<th scope="col">Amount</th>
 					</tr>

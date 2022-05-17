@@ -45,28 +45,28 @@
 						<br> 
 						<label class="labels">Password : </label> 
 						<input type="password" class="password"
-						th:field="*{account}" th:value="${account.password}"
+						th:field="*{account.password}" th:value="${account.password}"
 						th:text="${account.password}">
 						<br>
-						<label class="label_underTitle">Bank Data</label>
+				 	<label class="label_underTitle">Bank Data</label>
 						<br>
 						<label class="labels">Bank Name : </label>
-						<input type="text" class="bankAccountName" th:field="*{bankAccount}"
+						<input type="text" class="bankAccountName" th:field="*{bankAccount.bankAccountName}"
 						th:value="${bankAccount.bankAccountName}"
 						th:text="${bankAccount.bankAccountName}"> 
 						<br>
 						<label class="labels">Iban : </label>
-						<input type="text" class="bankAccountIban" th:field="*{bankAccount}"
+						<input type="text" class="bankAccountIban" th:field="*{bankAccount.iban}"
 						th:value="${bankAccount.iban}" th:text="${bankAccount.iban}"> 
 						<br>
 						<label class="labels">BIC :</label>
 						<input type="text" class="bankAccountBic"
-						th:field="*{bankAccount}" th:value="${bankAccount.bic}"
+						th:field="*{bankAccount.bic}" th:value="${bankAccount.bic}"
 						th:text="${bankAccount.bic}">
 						<br>
 						<label class="labels">Swift : </label>
-						<input type="text" class="bankAccountSwift" th:field="*{bankAccount}"
-						th:value="${bankAccount.swift}" th:text="${bankAccount.swift}">
+						<input type="text" class="bankAccountSwift" th:field="*{bankAccount.swift}"
+						th:value="${bankAccount.swift}" th:text="${bankAccount.swift}">  
 						
 					<button type="submit" class="btn_register">Register</button>
 				</form>

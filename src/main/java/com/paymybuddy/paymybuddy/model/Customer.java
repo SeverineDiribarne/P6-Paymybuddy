@@ -17,7 +17,7 @@ public class Customer implements Serializable{
 	private String email;
 	private double balance;
 	private transient BankAccount bankAccount;
-	private transient Account account = new Account();
+	private transient Account account;
 	private List<Customer> friends = new ArrayList<>();
 	private transient List<Transfer> transfers = new ArrayList<>();
 
@@ -73,10 +73,10 @@ public class Customer implements Serializable{
 	public Customer(int customerId, String email, String password, String firstName, String lastName) {
 		this.customerId= customerId;
 		this.email = email;
+		this.account = new Account();
 		account.setPassword(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.bankAccount = new BankAccount();
 	}
 
 	/**
@@ -87,14 +87,15 @@ public class Customer implements Serializable{
 		this.email = email;
 	}
 	/**
-	 * patch constructor pour FriendsRowMapper
+	 * constructor pour CustomerRecipientIdAndNameRowMapper
 	 * @param customerId
 	 * @param firstName
 	 * @param lastName
 	 */
-	public Customer(int customerId, String email) {
+	public Customer(int customerId, String firstName, String lastName) {
 		this.customerId = customerId;
-		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	/**
@@ -114,6 +115,16 @@ public class Customer implements Serializable{
 		this.lastName = lastName;
 	}
 
+//	/**
+//	 * constructor with id and email only
+//	 * @param customerId
+//	 * @param email
+//	 */
+//	public Customer(int customerId, String email) {
+//		this.customerId = customerId;
+//		this.email = email;
+//	}
+	
 	/**
 	 * Constructor with only balance
 	 * @param balance

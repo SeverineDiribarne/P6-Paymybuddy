@@ -28,8 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerRecipientIdAndEmailById(int connection) {
-		return customerDao.getCustomerRecipientIdAndEmailById(connection);
+	public Customer getCustomerRecipientIdAndNameById(int connection) {
+		return customerDao.getCustomerRecipientIdAndNameById(connection);
 	}
 
 	@Override

@@ -27,8 +27,10 @@ public class HomeDaoImpl implements HomeDao{
 	}
 	 
 	public static final String MONETIZATION_APPLICATION_BANK_OPERATION_FROM_SOURCE_TO_RECIPIENT_ON_ONLY_SOURCE = "UPDATE customer cust"
-			+ " JOIN  bank_operation bo"
-			+ " ON cust.id = bo.customerId"
+			+ " JOIN  bankaccount ba"
+			+ " ON cust.id = ba.customer_Id"
+			+ " JOIN bank_operation bo"
+			+ " ON bo.bank_accountId = ba.bankAccount_id" 
 			+ " SET cust.balance = (cust.balance - (bo.operationAmount * 0.5 / 100))"
 			+ " WHERE cust.id = ? AND bo.operationId  = ?;";
 	/**
