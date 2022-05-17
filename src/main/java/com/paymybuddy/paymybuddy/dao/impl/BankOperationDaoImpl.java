@@ -20,8 +20,10 @@ public class BankOperationDaoImpl implements BankOperationDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate; 
 	
-	private static final String GET_BANK_OPERATIONS_QUERY = "SELECT bo.operationId, bo.operationDate, bo.operationDescription, bo.operationAmount, bo.customerId, bo.bank_accountId FROM bank_operation bo"
-			+ " WHERE bo.customerId = ?;";
+	private static final String GET_BANK_OPERATIONS_QUERY = "SELECT bo.operationId, bo.operationDate, bo.operationDescription, bo.operationAmount, ba.customer_Id, bo.bank_accountId FROM bank_operation bo"
+			+ " JOIN bankaccount ba"
+			+ " ON bo.bank_accountId = ba.bankAccount_id"
+			+ " WHERE ba.customer_id = ?;";
 	/**
 	 * Get all bank operations 
 	 */
@@ -31,26 +33,26 @@ public class BankOperationDaoImpl implements BankOperationDao {
 	}
 	
 	private static final String ADD_PAYMENT_FROM_BANK_TO_APP_QUERY = "INSERT INTO bank_operation"
-			+ " (operationDate, operationDescription, operationAmount, customerId, bank_accountId)"
-			+ " VALUES (?,?,?,?,?);";
+			+ " (operationDate, operationDescription, operationAmount, bank_accountId)"
+			+ " VALUES (?,?,?,?);";
 	/**
 	 * Add a payment from bank to application
 	 */
 	@Override
 	public void addPaymentFromBankToApp(Date date, String description, double amount, int source, int recipient) {
-		jdbcTemplate.update(ADD_PAYMENT_FROM_BANK_TO_APP_QUERY,date,description, amount, source, recipient);
+		jdbcTemplate.update(ADD_PAYMENT_FROM_BANK_TO_APP_QUERY,date,description, amount, recipient);
 	}
 	
 	private static final String ADD_PAYMENT_FROM_APP_TO_BANK_QUERY = "INSERT INTO bank_operation"
-			+ " (operationDate, operationDescription, operationAmount, customerId, bank_accountId)"
-			+ " VALUES (?,?,?,?,?);";
+			+ " (operationDate, operationDescription, operationAmount, bank_accountId)"
+			+ " VALUES (?,?,?,?);";
 	/**
 	 * Add a payment from application to bank
 	 */
 	@Override
 	public void addPaymentFromAppToBank(Date date, String description, double bankOperationAmount, int source,
 			int recipient) {
-		jdbcTemplate.update(ADD_PAYMENT_FROM_APP_TO_BANK_QUERY,date,description, bankOperationAmount, source, recipient);
+		jdbcTemplate.update(ADD_PAYMENT_FROM_APP_TO_BANK_QUERY,date,description, bankOperationAmount, recipient);
 	}	
 	
 	public static final String GET_LAST_OPERATION_ID_QUERY = "SELECT max(bo.operationId) AS operationId FROM bank_operation bo;";
@@ -62,7 +64,7 @@ public class BankOperationDaoImpl implements BankOperationDao {
 		return jdbcTemplate.queryForObject(GET_LAST_OPERATION_ID_QUERY, new LastOperationIdRowMapper());
 	}
 	
-	public static final String GET_BANK_ACCOUNT_NAME_QUERY = "SELECT ba.bank_accountName FROM bank_account ba"
+	public static final String GET_BANK_ACCOUNT_NAME_QUERY = "SELECT ba.bankAccountName FROM bankaccount ba"
 			+ " JOIN bank_operation bo"
 			+ " ON bo.bank_accountId = ba.bankAccount_id"
 			+ " WHERE bo.bank_accountId = ?; ";

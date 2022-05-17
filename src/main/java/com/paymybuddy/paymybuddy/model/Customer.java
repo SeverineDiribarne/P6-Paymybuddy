@@ -17,7 +17,7 @@ public class Customer implements Serializable{
 	private String email;
 	private double balance;
 	private transient BankAccount bankAccount;
-	private transient Account account = new Account();
+	private transient Account account;
 	private List<Customer> friends = new ArrayList<>();
 	private transient List<Transfer> transfers = new ArrayList<>();
 
@@ -27,9 +27,26 @@ public class Customer implements Serializable{
 	 */
 	public Customer() {}
 	
+	/**
+	 * Complete Constructor
+	 */
+	public Customer(String lastName, String firstName, String email, String password, String bankAccountName, String iban, String bic, String swift) {
+		this.customerId = 0;
+		this.lastName= lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.balance = 0;
+		this.account = new Account();
+		this.account.setPassword(password);
+		this.bankAccount = new BankAccount();
+		this.bankAccount.setBankAccountName(bankAccountName);
+		this.bankAccount.setIban(iban);
+		this.bankAccount.setBic(bic);
+		this.bankAccount.setSwift(swift);	
+	}
 
 	/**
-	 * Complete Constructor 
+	 * Constructor with id, lastName, firstName, email, balance and bankAccount
 	 * @param id
 	 * @param lastName
 	 * @param firstName
@@ -56,10 +73,10 @@ public class Customer implements Serializable{
 	public Customer(int customerId, String email, String password, String firstName, String lastName) {
 		this.customerId= customerId;
 		this.email = email;
+		this.account = new Account();
 		account.setPassword(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.bankAccount = new BankAccount();
 	}
 
 	/**
@@ -70,14 +87,15 @@ public class Customer implements Serializable{
 		this.email = email;
 	}
 	/**
-	 * patch constructor pour FriendsRowMapper
+	 * constructor pour CustomerRecipientIdAndNameRowMapper
 	 * @param customerId
 	 * @param firstName
 	 * @param lastName
 	 */
-	public Customer(int customerId, String email) {
+	public Customer(int customerId, String firstName, String lastName) {
 		this.customerId = customerId;
-		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	/**
@@ -97,6 +115,16 @@ public class Customer implements Serializable{
 		this.lastName = lastName;
 	}
 
+//	/**
+//	 * constructor with id and email only
+//	 * @param customerId
+//	 * @param email
+//	 */
+//	public Customer(int customerId, String email) {
+//		this.customerId = customerId;
+//		this.email = email;
+//	}
+	
 	/**
 	 * Constructor with only balance
 	 * @param balance
@@ -104,7 +132,6 @@ public class Customer implements Serializable{
 	public Customer(double balance) {
 		this.balance = balance;
 	}
-
 
 	/**
 	 * Getter Id

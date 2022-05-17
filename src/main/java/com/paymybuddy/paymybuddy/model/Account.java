@@ -30,7 +30,6 @@ public class Account implements Serializable{
 	public Account() {
 		this.accountId = 0;
 		this.password = "";
-
 	}
 	
 	/**
@@ -57,6 +56,4 @@ public class Account implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }

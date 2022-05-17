@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdAndEmailRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdAndNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.InformationsOfCustomerByIdRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByEmailRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdentityRowMapper;
@@ -19,7 +19,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	private JdbcTemplate jdbcTemplate;
 
 
-	private static final String GET_ALL_CUSTOMER_RECIPIENTS_QUERY = "SELECT cust.id, cust.email"
+	private static final String GET_ALL_CUSTOMER_RECIPIENTS_QUERY = "SELECT cust.id, cust.firstName, cust.lastName"
 			+ " FROM customer cust "
 			+ " JOIN connection con ON cust.id = con.connectionRecipient"
 			+ " WHERE con.connectionSource = ?;";
@@ -32,16 +32,15 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Customer> getAllCustomerRecipients(int customerId) {
 		return jdbcTemplate.query(GET_ALL_CUSTOMER_RECIPIENTS_QUERY, new CustomerIdentityRowMapper(), customerId);
 	}
-
-	private static final String GET_CUSTOMER_ID_AND_EMAIL_QUERY = "SELECT cust.id, cust.email"
+	private static final String GET_CUSTOMER_ID_AND_EMAIL_QUERY = "SELECT cust.id, cust.firstName, cust.lastName"
 			+ " FROM customer cust"
 			+ " WHERE cust.id = ?;";
 	/**
 	 * get CustomerRecipientName By Id
 	 * @Return list of customer recipient with firstName and lastName
 	 */
-	public Customer getCustomerRecipientIdAndEmailById (int connection){
-		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_AND_EMAIL_QUERY, new CustomerRecipientIdAndEmailRowMapper(), connection);
+	public Customer getCustomerRecipientIdAndNameById (int connection){
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_AND_EMAIL_QUERY, new CustomerRecipientIdAndNameRowMapper(), connection);
 	}
 
 	private static final String GET_CUSTOMER_ID_BY_EMAIL_QUERY ="SELECT cust.id"
@@ -83,10 +82,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	public static final String BALANCE_CALCULATION_FROM_BANK_TO_APP_QUERY ="UPDATE customer cust"
+			+ " JOIN bankaccount ba"
+			+ " ON cust.id = ba.customer_id"
 			+ " JOIN bank_operation bo"
-			+ " ON cust.id = bo.customerId"
-			+ " JOIN bank_account ba"
-			+ " ON bo.bank_accountId = ba.bankAccount_id"
+			+ " ON ba.bankAccount_id = bo.bank_accountId"
 			+ " SET cust.balance = (cust.balance + bo.operationAmount)"
 			+ " WHERE bo.operationId = ?;";
 	/**
@@ -99,12 +98,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	public static final String BALANCE_CALCULATION_FROM_APP_TO_BANK_QUERY = "UPDATE customer cust"
+			+ " JOIN bankaccount ba"
+			+ " ON cust.id = ba.customer_id"
 			+ " JOIN bank_operation bo"
-			+ " ON cust.id = bo.customerId"
-			+ " JOIN bank_account ba"
-			+ " ON bo.bank_accountId = ba.bankAccount_id"
+			+ " ON ba.bankAccount_id = bo.bank_accountId"
 			+ " SET cust.balance = (cust.balance - bo.operationAmount)"
-			+ " WHERE bo.operationId = ? ;";
+			+ " WHERE bo.operationId = ?;";
 
 	/**
 	 * Update customer's balance after payment from app to bank
@@ -124,5 +123,27 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void monetizationApp(int customerSourceId, int transferId) {
 		jdbcTemplate.update(MONETIZATION_APPLICATION_TRANSFER_ON_ONLY_SOURCE, customerSourceId, transferId);	
+	}
+
+	public static final String REGISTER_NEW_CUSTOMER_INTO_DATABASE = "INSERT INTO customer"
+			+ " (lastName, firstName, email, balance)"
+			+ " VALUES (?,?,?,?);";
+
+	public static final String REGISTER_NEW_ACCOUNT_INTO_DATABASE = "INSERT INTO account"
+			+ " (login, password, customer_id)"
+			+ " VALUES (?,?,?);";
+
+	public static final String REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE = "INSERT INTO bankaccount"
+			+ " (bankAccountName, iban, bic, swift, customer_Id)"
+			+ " VALUES (?,?,?,?,?);";
+
+	@Override
+	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword) {
+		double balance = 0;
+		jdbcTemplate.update(REGISTER_NEW_CUSTOMER_INTO_DATABASE, customer.getLastName(), customer.getFirstName(), customer.getEmail(), balance);
+		int customerId = getCustomerIdByEmail(customer.getEmail());
+		jdbcTemplate.update(REGISTER_NEW_ACCOUNT_INTO_DATABASE, customer.getEmail(), encryptionPassword, customerId);
+		jdbcTemplate.update(REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE, customer.getBankAccount().getBankAccountName(), customer.getBankAccount().getIban(),
+				customer.getBankAccount().getBic(), customer.getBankAccount().getSwift(), customerId);
 	}
 }

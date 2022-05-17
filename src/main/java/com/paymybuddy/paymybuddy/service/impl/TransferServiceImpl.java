@@ -26,10 +26,9 @@ public class TransferServiceImpl implements TransferService{
 	@Autowired
 	CustomerDao customerDao;
 
-	//private static final Logger logger = LogManager.getLogger(); 
-
 	/**
-	 * 
+	 * get List Of transfers
+	 * @param mainUserId
 	 */
 	@Override
 	public List<Transfer> getListOfTransfers(int mainUserId) {
@@ -66,7 +65,12 @@ public class TransferServiceImpl implements TransferService{
 		}
 	}
 	/**
-	 * 
+	 * Add a payment
+	 * @param date
+	 * @param customerSourceId
+	 * @param customerRecipientId
+	 * @param description
+	 * @param amount
 	 */
 	@Override
 	public void addPayment(Date date, int customerSourceId, int customerRecipientId, String description, double amount) {

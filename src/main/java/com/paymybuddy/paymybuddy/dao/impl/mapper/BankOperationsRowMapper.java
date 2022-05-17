@@ -11,6 +11,6 @@ public class BankOperationsRowMapper implements RowMapper<BankOperation> {
 
 	@Override
 	public BankOperation mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new BankOperation (rs.getInt("operationId"), rs.getDate("operationDate"), rs.getString("operationDescription"), rs.getDouble("operationAmount"), rs.getInt("customerId"), rs.getInt("bank_accountId"));
+		return new BankOperation (rs.getInt("operationId"), rs.getDate("operationDate"), rs.getString("operationDescription"), rs.getDouble("operationAmount"), rs.getInt("customer_Id"), rs.getInt("bank_accountId"));
 	}
 }

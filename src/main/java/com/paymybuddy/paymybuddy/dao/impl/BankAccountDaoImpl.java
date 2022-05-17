@@ -17,7 +17,7 @@ public class BankAccountDaoImpl implements BankAccountDao{
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	private static final String SELECT_BANK_ID_QUERY = "SELECT b.bankAccount_id FROM bank_account b"
+	private static final String SELECT_BANK_ID_QUERY = "SELECT b.bankAccount_id FROM bankaccount b"
 			+ " JOIN customer cust"
 			+ " ON cust.id = b.customer_id"
 			+ " WHERE cust.id = ?;"; 
@@ -31,7 +31,8 @@ public class BankAccountDaoImpl implements BankAccountDao{
 	return jdbcTemplate.queryForObject(SELECT_BANK_ID_QUERY, new BankIdRowMapper(), customerId);	
 	}
 	
-	private static final String GET_BANK_ACCOUNT_ELEMENTS_QUERY = "SELECT ba.bankAccount_id, ba.bank_accountName, ba.iban, ba.bic, ba.swift, ba.customer_id FROM bank_account ba"
+	private static final String GET_BANK_ACCOUNT_ELEMENTS_QUERY = "SELECT ba.bankAccount_id, ba.bankAccountName, ba.iban, ba.bic, ba.swift, ba.customer_id"
+			+ " FROM bankaccount ba"
 			+ " JOIN customer cust"
 			+ " ON cust.id = ba.customer_id"
 			+ " WHERE cust.id = ?;";

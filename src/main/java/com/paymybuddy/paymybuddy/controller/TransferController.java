@@ -34,10 +34,10 @@ public class TransferController {
 
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private ConnectionService connectionService;
-	
+
 	@Autowired
 	private BankOperationService bankOperationService;
 
@@ -51,8 +51,9 @@ public class TransferController {
 		List<TransferDisplay> transferDisplayList = new ArrayList<>();
 		for(Transfer transfer : transfers) {
 			Connection connection = transfer.getConnection();
-			Customer customerRecipient = customerService.getCustomerRecipientIdAndEmailById(connection.getCustomerRecipient().getCustomerId());
-			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(),userMainName, customerRecipient.getEmail(), transfer.getDescription(), transfer.getAmount());
+			Customer customerRecipient = customerService.getCustomerRecipientIdAndNameById(connection.getCustomerRecipient().getCustomerId());
+			String customerRecipientName = customerRecipient.getFirstName() + " " + customerRecipient.getLastName();
+			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(),userMainName, customerRecipientName, transfer.getDescription(), transfer.getAmount());
 			transferDisplayList.add(transferDisplay);			
 		}
 		//For the arraylist of bank transfers
@@ -71,7 +72,7 @@ public class TransferController {
 				BankTransferDisplay bankTransferDisplay = new BankTransferDisplay(bankOperation.getDate(),sourceName, recipientName.get(0).getBankAccountName(), bankOperation.getDescription(), bankOperation.getBankOperationAmount());
 				bankTransferDisplayList.add(bankTransferDisplay);
 			}
-			
+
 		}
 		//for drop-down list of relationships
 		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
@@ -96,7 +97,7 @@ public class TransferController {
 		int customerRecipientId = customerService.getCustomerIdByEmail(connection.getCustomerRecipient().getEmail());
 		connection.getCustomerRecipient().setCustomerId(customerRecipientId); 
 		connection.setConnectionId(connectionService.getConnectionIdByCustomersId(user.getCustomer().getCustomerId(), customerRecipientId));
-		
+
 		transferService.addPayment(transfer.getDate(),connection.getCustomerSource().getCustomerId(), connection.getCustomerRecipient().getCustomerId(), transfer.getDescription(), transfer.getAmount());
 		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId());
 		List<TransferDisplay> transferDisplayList = new ArrayList<>();

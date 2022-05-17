@@ -39,3 +39,81 @@ h3 {
 	margin-right: 10px;
 	width: 350px;
 }
+
+.frame {
+	width: 500px;
+	height: 600px;
+	margin: 2% 30% 0% 30%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #A0A0A0;
+	border-radius: 10px;
+	background: #FFFFFF;
+	font-size: 1em;
+}
+
+.label_register {
+	margin-left: 220px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.label_underTitle {
+	margin : 15px 0px 20px 50px;
+	font-style: italic;
+	text-decoration: underline;
+}
+
+.labels {
+	margin: 5px 10px 5px 10px;
+}
+
+.lastName {
+	margin: 5px 10px 10px 7px;
+	width: 300px;
+}
+
+.firstName {
+	margin: 5px 10px 10px 6px;
+	width: 300px;
+}
+.email{
+	margin: 5px 10px 10px 41px;
+	width: 300px;
+}
+
+.password{
+	margin: 5px 10px 10px 13px;
+	width: 300px;
+}
+
+.bankAccountName{
+	margin: 5px 10px 10px 1px;
+	width: 300px;
+}
+
+.bankAccountIban{
+	margin: 5px 10px 10px 50px;
+	width: 300px;
+}
+
+.bankAccountBic{
+	margin: 5px 10px 10px 57px;
+	width: 300px;
+}
+
+.bankAccountSwift{
+	margin: 5px 10px 10px 47px;
+	width: 300px;
+}
+
+.btn_register{
+	background-color: #006CFF;
+	font-family: Arial Black;
+	color: white;
+	margin : 10px 100px 10px 168px;
+	padding: 5px 40px 5px 40px;
+	border: 1px solid #006CFF;
+	border-radius: 5px;
+	font-size: 0.9em;
+}

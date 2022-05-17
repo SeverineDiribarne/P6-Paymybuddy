@@ -8,7 +8,7 @@ public interface CustomerDao {
 	
 	public List<Customer> getAllCustomerRecipients(int customerId);
 
-	public Customer getCustomerRecipientIdAndEmailById(int connection);
+	public Customer getCustomerRecipientIdAndNameById(int connection);
 
 	public int getCustomerIdByEmail(String email);
 
@@ -21,5 +21,7 @@ public interface CustomerDao {
 	void updateCustomerBalanceAfterPaymentFromAppToBank(int bankOperationId);
 
 	public void monetizationApp(int customerSourceId, int transferId);
+
+	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword);
 
 }

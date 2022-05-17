@@ -53,12 +53,28 @@ h3 {
 
 .form-check-input {
 	margin-top: 50px;
-	margin-bottom: 80px;
+	margin-bottom: 40px;
 	margin-left: -10px;
 }
 
 .form-check-label {
 	margin-top: 50px;
+}
+
+.register{
+	padding-bottom:10%;
+	margin-bottom: 20px;
+}
+
+.btn-register{
+	background-color: #7DC261;
+	font-family: Arial black;
+	font-size: 0.8em;
+	margin-bottom: 20px;
+	color: white;
+	padding: 5px 40px 5px 40px;
+	border: 1px solid #7DC261;
+	border-radius: 5px;
 }
 
 .btn-btn-primary {

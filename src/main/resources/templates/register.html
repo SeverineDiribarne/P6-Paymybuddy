@@ -9,8 +9,8 @@
 
 <title>Pay My Buddy</title>
 </head>
-<body>
 
+<body>
 	<!--section -->
 	<div class="title_menu">
 		<div class="titre">
@@ -21,45 +21,54 @@
 	<div class="nav">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Home</li>
 				<li class="breadcrumb-item active" aria-current="page">Register</li>
 			</ol>
 		</nav>
 	</div>
-	<div class="money_frame">
-		<div class="money_frame1">
-			<div class="label_connection">
-				<label class="label_money">Register</label>
+	<div class="register_frame">
+		<div class="register_frame1">
+			<div class="frame">
+				<label class="label_register">Register</label>
+				<br>
+				<label class="label_underTitle">Personal informations</label>
+				<br>
 				<form th:action="@{/register}" th:object="${customer}" method="POST">
-				
-				<input type="text" class="firstName" th:field="*{firstName}" placeholder="Your firstname">
-				
-				<input type="text" class="lastName" th:field="*{lastName}"placeholder="Your lastname">
-				
-				<input type="email" class="email" th:field="*{email}" placeholder="Your email">
-				
-				<input type="password" class="password" th:field="*{account}"
-					th:value="${account.password}" 
-					th:text="${account.password}" placeholder="Your password">
-					
-				<label class="label_money">Bank Data</label>	
-				<input type="text" class="bankAccount" th:field="*{bankAccount}"
-				th:value="${bankAccount.bankAccountName}" 
-					th:text="${bankAccount.bankAccountName}" placeholder="Your bank name">
-					
-				<input type="text" class="bankAccount" th:field="*{bankAccount}"
-				th:value="${bankAccount.iban}" 
-					th:text="${bankAccount.iban}" placeholder="Iban">
+					<label class="labels">LastName : </label> 
+					<input type="text" class="lastName" th:field="*{lastName}"> 
+						<br> 
+						<label class="labels">FirstName : </label> 
+						<input type="text"
+						class="firstName" th:field="*{firstName}"> 
+						<br> 
+						<label class="labels">Email : </label> 
+						<input type="email" class="email" th:field="*{email}">
+						<br> 
+						<label class="labels">Password : </label> 
+						<input type="password" class="password"
+						th:field="*{account.password}" th:value="${account.password}"
+						th:text="${account.password}">
+						<br>
+				 	<label class="label_underTitle">Bank Data</label>
+						<br>
+						<label class="labels">Bank Name : </label>
+						<input type="text" class="bankAccountName" th:field="*{bankAccount.bankAccountName}"
+						th:value="${bankAccount.bankAccountName}"
+						th:text="${bankAccount.bankAccountName}"> 
+						<br>
+						<label class="labels">Iban : </label>
+						<input type="text" class="bankAccountIban" th:field="*{bankAccount.iban}"
+						th:value="${bankAccount.iban}" th:text="${bankAccount.iban}"> 
+						<br>
+						<label class="labels">BIC :</label>
+						<input type="text" class="bankAccountBic"
+						th:field="*{bankAccount.bic}" th:value="${bankAccount.bic}"
+						th:text="${bankAccount.bic}">
+						<br>
+						<label class="labels">Swift : </label>
+						<input type="text" class="bankAccountSwift" th:field="*{bankAccount.swift}"
+						th:value="${bankAccount.swift}" th:text="${bankAccount.swift}">  
 						
-					<input type="text" class="bankAccount" th:field="*{bankAccount}"
-				th:value="${bankAccount.bic}" 
-					th:text="${bankAccount.bic}" placeholder="BIC">
-						
-					<input type="text" class="bankAccount" th:field="*{bankAccount}"
-				th:value="${bankAccount.swift}" 
-					th:text="${bankAccount.swift}"placeholder="SWIFT">	
-					
-					<button type="submit" class="btn_connection">Register</button>
+					<button type="submit" class="btn_register">Register</button>
 				</form>
 			</div>
 		</div>

@@ -11,6 +11,6 @@ public class BankAccountNameRowMapper implements RowMapper<BankAccount> {
 
 	@Override
 	public BankAccount mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new BankAccount(rs.getString("bank_accountName"));
+		return new BankAccount(rs.getString("bankAccountName"));
 	}
 }
