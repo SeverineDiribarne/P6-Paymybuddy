@@ -40,17 +40,22 @@ public class ConnectionController {
 		return "redirect:/transfer";
 	}
 	
-//	@PostMapping("/delete")
-//	public String deleteAConnection (Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute String email) {
-//		connectionService.deleteAConnection(user.getCustomer().getCustomerId(), email);
-//		List<Customer> customers =  customerService.getAllFriends(user.getCustomer().getCustomerId());
-//		model.addAttribute("customers", customers);
-//		return "redirect:/transfer";
-//	}
-	
-	@GetMapping("/add")
-	public String addConnectionForm(Model model) {
-	  model.addAttribute("customer", new Customer());
-	  return "connection";
+	@PostMapping("/delete")
+	public String deleteAConnection (Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
+		connectionService.deleteAConnection(user.getCustomer().getCustomerId(), customer.getEmail());
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
+		model.addAttribute("customers", customers);
+		return "redirect:/transfer";
 	}
+	
+//	@GetMapping("/add")
+//	public String addConnectionForm(Model model) {
+//	  model.addAttribute("customer", new Customer());
+//	  return "connection";
+//	}
+//	@GetMapping("/delete")
+//	public String deleteConnectionForm(Model model) {
+//	  model.addAttribute("customer", new Customer());
+//	  return "connection";
+//	}
 }

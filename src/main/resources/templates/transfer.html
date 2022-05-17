@@ -50,15 +50,20 @@
 			<form th:action="@{/transfer}" th:object="${transfer}" method="POST">
 				<div class="money_frame2">
 					<div>
-	 				<input type="date" class="date" th:field="*{date}">     
+						<input type="date" class="date" th:field="*{date}">
 					</div>
 					<div class="frame_select">
 						<select class="select" th:field="*{connection}">
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
+<<<<<<< HEAD
 						 th:value="${connection.customerRecipient}" 
 								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName} " >
 							</option>
+=======
+								th:value="${connection.customerRecipient}"
+								th:text="${connection.customerRecipient.email}"></option>
+>>>>>>> feature/connection
 						</select>
 					</div>
 					<div>
@@ -139,8 +144,7 @@
 						<td><span th:text="${bankTransferDisplay.recipientName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.description}"></span></td>
 						<td><span th:text="${bankTransferDisplay.amount}"></span></td>
-
-				</tbody>
+					</tr>
 			</table>
 		</div>
 		<div class="pages">
