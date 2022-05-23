@@ -25,37 +25,29 @@ public class ConnectionController {
 	@Autowired
 	CustomerService customerService;
 	
+	private static final String USERNAME = "username";
+
 	
 	@GetMapping
-	public String getConnection(Model model) {
+	public String getConnection(Model model, @AuthenticationPrincipal MyMainUser user) {
 		model.addAttribute("customer", new Customer());
+		model.addAttribute(USERNAME, user.getCustomer().getFirstName());
 		return "connection";
 	}
 	
 	@PostMapping("/add")
 	public String addAConnection(Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
-		connectionService.addAConnection(user.getCustomer().getCustomerId(), customer.getEmail());
-		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
+		connectionService.addAConnection(user, customer);
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		model.addAttribute("customers", customers);
 		return "redirect:/transfer";
 	}
 	
 	@PostMapping("/delete")
 	public String deleteAConnection (Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
-		connectionService.deleteAConnection(user.getCustomer().getCustomerId(), customer.getEmail());
-		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
+		connectionService.deleteAConnection(user, customer);
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		model.addAttribute("customers", customers);
 		return "redirect:/transfer";
 	}
-	
-//	@GetMapping("/add")
-//	public String addConnectionForm(Model model) {
-//	  model.addAttribute("customer", new Customer());
-//	  return "connection";
-//	}
-//	@GetMapping("/delete")
-//	public String deleteConnectionForm(Model model) {
-//	  model.addAttribute("customer", new Customer());
-//	  return "connection";
-//	}
 }

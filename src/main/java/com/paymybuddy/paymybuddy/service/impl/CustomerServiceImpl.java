@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.model.Customer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.CustomerService;
 
 @Service
@@ -23,18 +24,18 @@ public class CustomerServiceImpl implements CustomerService {
 	 * 
 	 */
 	@Override
-	public List<Customer> getAllCustomerRecipients(int customerId) {
-		return customerDao.getAllCustomerRecipients(customerId);
+	public List<Customer> getAllCustomerRecipients(MyMainUser user) {
+		return customerDao.getAllCustomerRecipients(user);
 	}
 
 	@Override
-	public Customer getCustomerRecipientIdAndNameById(int connection) {
-		return customerDao.getCustomerRecipientIdAndNameById(connection);
+	public Customer getCustomerRecipientNameById(Customer customer) {
+		return customerDao.getCustomerRecipientNameById(customer);
 	}
 
 	@Override
-	public int getCustomerIdByEmail(String email) {
-		return customerDao.getCustomerIdByEmail(email);
+	public int getCustomerIdByName(Customer customer) {
+		return customerDao.getCustomerIdByName(customer);
 	}
 
 	@Override
@@ -42,4 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
 		String encryptionPassword = passwordEncoder.encode(customer.getAccount().getPassword());
 		customerDao.registerNewCustomerIntoDatabase(customer, encryptionPassword);
 	}
+
+//	@Override
+//	public int getCustomerIdByEmail(String email) {
+//		return customerDao.getCustomerIdByName(email);
+//	}
 }

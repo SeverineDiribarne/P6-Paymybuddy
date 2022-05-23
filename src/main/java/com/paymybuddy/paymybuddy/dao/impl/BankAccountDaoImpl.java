@@ -9,6 +9,7 @@ import com.paymybuddy.paymybuddy.dao.contract.BankAccountDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BankAccountAllElementsRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BankIdRowMapper;
 import com.paymybuddy.paymybuddy.model.BankAccount;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 
 @Repository
@@ -27,8 +28,8 @@ public class BankAccountDaoImpl implements BankAccountDao{
 	 * @return bankAccountId
 	 */
 	@Override
-	public int getBankAccountId(int customerId) {
-	return jdbcTemplate.queryForObject(SELECT_BANK_ID_QUERY, new BankIdRowMapper(), customerId);	
+	public int getBankAccountId(MyMainUser user) {
+	return jdbcTemplate.queryForObject(SELECT_BANK_ID_QUERY, new BankIdRowMapper(), user.getCustomer().getCustomerId());	
 	}
 	
 	private static final String GET_BANK_ACCOUNT_ELEMENTS_QUERY = "SELECT ba.bankAccount_id, ba.bankAccountName, ba.iban, ba.bic, ba.swift, ba.customer_id"
@@ -38,7 +39,7 @@ public class BankAccountDaoImpl implements BankAccountDao{
 			+ " WHERE cust.id = ?;";
 	
 	@Override
-	public List<BankAccount> getAllElementsOfBankAccount(int customerId) {
-		return jdbcTemplate.query(GET_BANK_ACCOUNT_ELEMENTS_QUERY, new BankAccountAllElementsRowMapper(), customerId);
+	public List<BankAccount> getAllElementsOfBankAccount(MyMainUser user) {
+		return jdbcTemplate.query(GET_BANK_ACCOUNT_ELEMENTS_QUERY, new BankAccountAllElementsRowMapper(), user.getCustomer().getCustomerId());
 	}
 }

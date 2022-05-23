@@ -44,9 +44,10 @@ h3{
 
 /*MAIL FRAME*/
 .group0{
-	margin-top: 200px;
-	margin-left: 100px;
-	height:500px;
+	margin-top: 10%;
+	margin-left: 22.5%;
+	margin-right: 50%;
+	height:250px;
 }
 .group1 span {
 	position: absolute;
@@ -55,8 +56,8 @@ h3{
 }
 
 .group1{
-	margin-left: 300px;
-	margin-top: 100px;
+	margin-left: 22.5%;
+	margin-top: 15%;
 	width:900px;
 }
 .email1{
@@ -68,7 +69,7 @@ h3{
 	padding-bottom: 3px;
 	padding-right: 490px;
 }
-.btns{
+.btn-add{
 	margin-top: -35px;
 	margin-left: 560px;
 }
@@ -87,8 +88,9 @@ h3{
 }
 
 .group2{
-	margin-left: 300px;
+	margin-left: 22.5%;
 	margin-top: 100px;
+	height:35px;
 	width:900px;
 }
 .email2{
@@ -100,9 +102,10 @@ h3{
 	padding-bottom: 3px;
 	padding-right: 490px;
 }
-.btns{
+.btn-delete{
 	margin-top: -35px;
 	margin-left: 560px;
+	height:35px;
 }
 
 .btn_delete {
@@ -110,5 +113,4 @@ h3{
 	background-color: rgb(233, 18, 18);
 	border-radius: 5px;
 	padding: 5px 70px 5px 50px;
-	
 }

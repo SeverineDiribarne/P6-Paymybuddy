@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.paymybuddy.dao.contract.BankAccountDao;
 import com.paymybuddy.paymybuddy.dao.impl.BankAccountDaoImpl;
 import com.paymybuddy.paymybuddy.model.BankAccount;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.BankAccountService;
 
 @Service
@@ -18,11 +19,11 @@ public class BankAccountServiceImpl implements BankAccountService {
 	BankAccountDao bankAccountDao = new BankAccountDaoImpl();
 	
 	@Override
-	public int getBankAccountId(int customerId) {
-		return bankAccountDao.getBankAccountId(customerId);
+	public int getBankAccountId(MyMainUser user) {
+		return bankAccountDao.getBankAccountId(user);
 	}
 	@Override
-	public List<BankAccount> getAllElementsOfBankAccount(int customerId) {
-		return bankAccountDao.getAllElementsOfBankAccount(customerId);
+	public List<BankAccount> getAllElementsOfBankAccount(MyMainUser user) {
+		return bankAccountDao.getAllElementsOfBankAccount(user);
 	}
 }

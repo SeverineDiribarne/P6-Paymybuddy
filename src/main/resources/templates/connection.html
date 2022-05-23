@@ -21,7 +21,7 @@
 			<nav style="-bs-breadcrumb-divider: '';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="/home">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Transfer</li>
+					<li class="breadcrumb-item"><a href="/transfer">Transfer</a></li>
 					<li class="breadcrumb-item"><a href="/profile">Profile</a></li>
 					<li class="breadcrumb-item"><a href="/contact">Contact</a></li>
 					<li class="breadcrumb-item"><a href="/logoff">Log off</a></li>
@@ -33,8 +33,8 @@
 	<div class="nav">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item" aria-current="page">Transfer</li>
+				<li class="breadcrumb-item"><a href="/home">Home</a></li>
+				<li class="breadcrumb-item"><a href="/transfer">Transfer</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Add Connection</li>
 			</ol>
 		</nav>
@@ -46,7 +46,7 @@
 				<span> <img src="/img/enveloppe.png" alt="enveloppe" class="mail1"/></span> 
 				<input type="text" class="email1" th:field="*{email}" placeholder="Email">
 			</div>
-			<div class="btns">
+			<div class="btn-add">
 				<input type="submit"  name="add" value="Add" class="btn_add"></input>
 			</div>
 		</div>
@@ -57,14 +57,11 @@
 				<span> <img src="/img/enveloppe.png" alt="enveloppe" class="mail2" /></span> 
 				<input type="text" class="email2" th:field="*{email}" placeholder="Email">	
 			</div>
-			<div class="btns">
+			<div class="btn-delete">
 				<input type="submit"  name="delete" value="Delete" class="btn_delete" />
 			</div>
 		</div>
 	</form>
 	</div>
-	<div class="btn_goTransfer">
-			<a href="/transfer" class="button">Return to Transfer page</a>
-		</div>
 </body>
 </html>

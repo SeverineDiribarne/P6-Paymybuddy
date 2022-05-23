@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdAndNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.InformationsOfCustomerByIdRowMapper;
-import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByEmailRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdentityRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
@@ -29,30 +30,31 @@ public class CustomerDaoImpl implements CustomerDao {
 	 * @return list of friends
 	 */
 	@Override
-	public List<Customer> getAllCustomerRecipients(int customerId) {
-		return jdbcTemplate.query(GET_ALL_CUSTOMER_RECIPIENTS_QUERY, new CustomerIdentityRowMapper(), customerId);
+	public List<Customer> getAllCustomerRecipients(MyMainUser user) {
+		return jdbcTemplate.query(GET_ALL_CUSTOMER_RECIPIENTS_QUERY, new CustomerIdentityRowMapper(), user.getCustomer().getCustomerId());
 	}
-	private static final String GET_CUSTOMER_ID_AND_EMAIL_QUERY = "SELECT cust.id, cust.firstName, cust.lastName"
+	private static final String GET_CUSTOMER_ID_AND_EMAIL_QUERY = "SELECT cust.firstName, cust.lastName"
 			+ " FROM customer cust"
 			+ " WHERE cust.id = ?;";
 	/**
 	 * get CustomerRecipientName By Id
 	 * @Return list of customer recipient with firstName and lastName
 	 */
-	public Customer getCustomerRecipientIdAndNameById (int connection){
-		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_AND_EMAIL_QUERY, new CustomerRecipientIdAndNameRowMapper(), connection);
+	public Customer getCustomerRecipientNameById (Customer customer){
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_AND_EMAIL_QUERY, new CustomerRecipientIdAndNameRowMapper(), customer.getCustomerId());
 	}
 
-	private static final String GET_CUSTOMER_ID_BY_EMAIL_QUERY ="SELECT cust.id"
-			+ " FROM customer cust"
-			+ " WHERE email = ? ;";
-	/**
-	 * get CustomerId By Email
-	 */
-	@Override
-	public int getCustomerIdByEmail(String email) {
-		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_EMAIL_QUERY, new CustomerIdByEmailRowMapper(), email);
-	}
+//	private static final String GET_CUSTOMER_ID_BY_CONNECTION_EMAIL_QUERY ="SELECT cust.id"
+//			+ " FROM customer cust"
+//			+ " WHERE cust.email = ?;";
+//	/**
+//	 * get CustomerId By Email
+//	 */
+//	@Override
+//	public int getCustomerIdByEmail(Customer customer) {
+//		
+//		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CONNECTION_NAME_QUERY, new CustomerIdByEmailRowMapper(), customer.getEmail());
+//	}
 
 	private static final String GET_ALL_INFORMATIONS_OF_CUSTOMER_BY_ID_QUERY ="SELECT cust.firstName, cust.lastName, cust.email, cust.balance"
 			+ " FROM customer cust"
@@ -136,14 +138,39 @@ public class CustomerDaoImpl implements CustomerDao {
 	public static final String REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE = "INSERT INTO bankaccount"
 			+ " (bankAccountName, iban, bic, swift, customer_Id)"
 			+ " VALUES (?,?,?,?,?);";
-
+	/**
+	 * register New Customer Into Database
+	 */
 	@Override
 	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword) {
 		double balance = 0;
 		jdbcTemplate.update(REGISTER_NEW_CUSTOMER_INTO_DATABASE, customer.getLastName(), customer.getFirstName(), customer.getEmail(), balance);
-		int customerId = getCustomerIdByEmail(customer.getEmail());
+		int customerId = getCustomerIdByName(customer);
 		jdbcTemplate.update(REGISTER_NEW_ACCOUNT_INTO_DATABASE, customer.getEmail(), encryptionPassword, customerId);
 		jdbcTemplate.update(REGISTER_NEW_BANK_ACCOUNT_INTO_DATABASE, customer.getBankAccount().getBankAccountName(), customer.getBankAccount().getIban(),
 				customer.getBankAccount().getBic(), customer.getBankAccount().getSwift(), customerId);
 	}
+
+	private static final String GET_CUSTOMER_ID_BY_CUSTOMER_NAME_QUERY ="SELECT cust.id"
+			+ " FROM customer cust"
+			+ " WHERE cust.firstName = ? "
+			+ " AND cust.lastName = ?;";
+	/**
+	 * get Customer Id by Name
+	 * @param customer
+	 * @return
+	 */
+	public int getCustomerIdByName(Customer customer) {
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_NAME_QUERY, new CustomerIdByNameRowMapper(),customer.getFirstName(),customer.getLastName());
+	}
+	
+//	private static final String GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY ="SELECT cust.id"
+//			+ " FROM customer cust"
+//			+ " WHERE cust.email = ?;";
+//	
+//	@Override
+//	public int getCustomerIdByName(String email) {
+//		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY, new CustomerIdByEmailRowMapper(), email);
+//
+//	}
 }

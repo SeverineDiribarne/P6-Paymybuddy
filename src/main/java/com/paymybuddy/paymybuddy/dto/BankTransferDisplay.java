@@ -1,4 +1,4 @@
-package com.paymybuddy.paymybuddy.model;
+package com.paymybuddy.paymybuddy.dto;
 
 import java.util.Date;
 

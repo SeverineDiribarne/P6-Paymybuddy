@@ -12,6 +12,7 @@ public class Customer implements Serializable{
 	 * 	User Attributes
 	 */
 	private int customerId;
+	private String completeName;
 	private String lastName;
 	private String firstName;
 	private String email;
@@ -79,13 +80,23 @@ public class Customer implements Serializable{
 		this.lastName = lastName;
 	}
 
+//	/**
+//	 * constructor with only email
+//	 * @param email
+//	 */
+//	public Customer(String email) {
+//		this.email = email;
+//	}
+	
 	/**
-	 * constructor with only email
+	 * constructor with only completeName
 	 * @param email
 	 */
-	public Customer(String email) {
-		this.email = email;
+	public Customer(int customerId, String completeName) {
+		this.customerId = customerId;
+		this.completeName = completeName;
 	}
+	
 	/**
 	 * constructor pour CustomerRecipientIdAndNameRowMapper
 	 * @param customerId
@@ -105,6 +116,7 @@ public class Customer implements Serializable{
 	public Customer(int customerId) {
 		this.customerId = customerId;
 	}
+	
 	/**
 	 * Constructor with firstName and lastName
 	 * @param firstName
@@ -115,16 +127,6 @@ public class Customer implements Serializable{
 		this.lastName = lastName;
 	}
 
-//	/**
-//	 * constructor with id and email only
-//	 * @param customerId
-//	 * @param email
-//	 */
-//	public Customer(int customerId, String email) {
-//		this.customerId = customerId;
-//		this.email = email;
-//	}
-	
 	/**
 	 * Constructor with only balance
 	 * @param balance
@@ -133,6 +135,7 @@ public class Customer implements Serializable{
 		this.balance = balance;
 	}
 
+	
 	/**
 	 * Getter Id
 	 * @return the id
@@ -148,6 +151,21 @@ public class Customer implements Serializable{
 		this.customerId = customerId;
 	}
 
+	/**
+	 * Getter completeName
+	 * @return completeName
+	 */
+	public String getCompleteName() {
+		return completeName;
+	}
+	/**
+	 * Setter completeName
+	 * @param completeName
+	 */
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+	
 	/**
 	 * Getter lastName
 	 * @return the lastName

@@ -3,11 +3,12 @@ package com.paymybuddy.paymybuddy.dao.contract;
 import java.util.List;
 
 import com.paymybuddy.paymybuddy.model.BankAccount;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 public interface BankAccountDao {
 
-	int getBankAccountId(int customerId);
+	int getBankAccountId(MyMainUser user);
 
-	List<BankAccount> getAllElementsOfBankAccount(int customerId);
+	List<BankAccount> getAllElementsOfBankAccount(MyMainUser user);
 
 }

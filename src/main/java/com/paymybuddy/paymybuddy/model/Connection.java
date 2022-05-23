@@ -2,6 +2,8 @@ package com.paymybuddy.paymybuddy.model;
 
 import java.io.Serializable;
 
+import com.paymybuddy.paymybuddy.security.MyMainUser;
+
 public class Connection implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +13,12 @@ public class Connection implements Serializable{
 	transient Customer  customerSource;
 	transient Customer customerRecipient;
 	
+	//TODO patch
+	public Connection(String completeName) {
+		this.connectionId = 0;
+		this.customerRecipient = new Customer(connectionId, completeName);
+	}
+
 	/**
 	 * Constructor with only connexionId
 	 * @param connectionId
@@ -42,12 +50,23 @@ public class Connection implements Serializable{
 	 */
 	public Connection() {}
 	
+//	/**
+//	 * constructor with only name
+//	 * @param name
+//	 */
+//	public Connection(String email) {
+//	 this.customerRecipient = new Customer(email); 
+//	}
 	/**
-	 * constructor with only name
-	 * @param name
+	 * Constructor with Customers objects
+	 * @param connectionId
+	 * @param customerSource
+	 * @param customerRecipient
 	 */
-	public Connection(String email) {
-	 this.customerRecipient = new Customer(email); 
+	public Connection(int connectionId, MyMainUser user, Customer customerRecipient) {
+		this.connectionId = connectionId;
+		this.customerSource = user.getCustomer();
+		this.customerRecipient = customerRecipient;
 	}
 	
 	/**

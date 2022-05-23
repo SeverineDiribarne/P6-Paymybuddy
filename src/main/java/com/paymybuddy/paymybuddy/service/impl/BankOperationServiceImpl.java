@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.contract.HomeDao;
 import com.paymybuddy.paymybuddy.model.BankAccount;
 import com.paymybuddy.paymybuddy.model.BankOperation;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.BankOperationService;
 
 @Service
@@ -28,31 +28,29 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 * 
 	 */
 	@Override
-	public List<BankOperation> getBankOperations(int customerId) {
-		return bankOperationDao.getBankOperations(customerId);
+	public List<BankOperation> getBankOperations(MyMainUser user) {
+		return bankOperationDao.getBankOperations(user);
 	}
 
 	/**
 	 * Add Payment From app To Bank
 	 */
 	@Override
-	public void addPaymentFromBankToApp(Date date, String description, double amount,int source, int recipient) {
-		bankOperationDao.addPaymentFromBankToApp(date, description, amount, source, recipient);	
-		BankOperation bankOperation = bankOperationDao.getLastOperationId();
-		customerDao.updateCustomerBalanceAfterPaymentFromBankToApp(bankOperation.getBankOperationId());
-		//homeDao.monetizationAppFromBankToApp(source, bankOperation.getBankOperationId());
+	public void addPaymentFromBankToApp(BankOperation bankOperation) {
+		bankOperationDao.addPaymentFromBankToApp(bankOperation);	
+		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();
+		customerDao.updateCustomerBalanceAfterPaymentFromBankToApp(lastBankOperation.getBankOperationId());
 	}
 
 	/**
 	 * Add payment From App To bank
 	 */
 	@Override
-	public void addPaymentFromAppToBank(Date date, String description, double bankOperationAmount, int source,
-			int recipient) {
-		bankOperationDao.addPaymentFromAppToBank(date, description, bankOperationAmount, source, recipient);	
-		BankOperation bankOperation = bankOperationDao.getLastOperationId();
-		customerDao.updateCustomerBalanceAfterPaymentFromAppToBank(bankOperation.getBankOperationId());
-		homeDao.monetizationAppFromAppToBank(source, bankOperation.getBankOperationId());
+	public void addPaymentFromAppToBank(BankOperation bankOperation) {
+		bankOperationDao.addPaymentFromAppToBank(bankOperation);	
+		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();
+		customerDao.updateCustomerBalanceAfterPaymentFromAppToBank(lastBankOperation.getBankOperationId());
+		homeDao.monetizationAppFromAppToBank(bankOperation.getSource(), bankOperation.getBankOperationId());
 	}
 	
 	/**
@@ -64,7 +62,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 	}
 
 	@Override
-	public List<BankAccount> getName(int id) {
-		return bankOperationDao.getName(id);
+	public List<BankAccount> getName(BankOperation bankOperation) {
+		return bankOperationDao.getName(bankOperation);
 	}
 }

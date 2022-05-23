@@ -1,21 +1,21 @@
 package com.paymybuddy.paymybuddy.dao.contract;
 
-import java.util.Date;
 import java.util.List;
 
 import com.paymybuddy.paymybuddy.model.BankAccount;
 import com.paymybuddy.paymybuddy.model.BankOperation;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 public interface BankOperationDao {
 
-	List<BankOperation> getBankOperations(int customerId);
+	List<BankOperation> getBankOperations(MyMainUser user);
 
-	void addPaymentFromBankToApp(Date date, String description, double amount, int source, int recipient);
+	void addPaymentFromBankToApp(BankOperation bankOperation);
 
 	BankOperation getLastOperationId();
 
-	void addPaymentFromAppToBank(Date date, String description, double bankOperationAmount, int source, int recipient);
+	void addPaymentFromAppToBank(BankOperation bankOperation);
 
-	List<BankAccount> getName(int id);
+	List<BankAccount> getName(BankOperation bankOperation);
 
 }

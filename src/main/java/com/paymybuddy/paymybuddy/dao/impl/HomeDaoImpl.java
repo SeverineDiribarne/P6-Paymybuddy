@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.HomeDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.BalanceRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 
 @Repository
@@ -22,8 +23,8 @@ public class HomeDaoImpl implements HomeDao{
 	 * Get balance
 	 */
 	@Override
-	public Customer getBalance(int customerId) {
-		return jdbcTemplate.queryForObject(GET_BALANCE_QUERY, new BalanceRowMapper(), customerId);	
+	public Customer getBalance(MyMainUser user) {
+		return jdbcTemplate.queryForObject(GET_BALANCE_QUERY, new BalanceRowMapper(), user.getCustomer().getCustomerId());	
 	}
 	 
 	public static final String MONETIZATION_APPLICATION_BANK_OPERATION_FROM_SOURCE_TO_RECIPIENT_ON_ONLY_SOURCE = "UPDATE customer cust"

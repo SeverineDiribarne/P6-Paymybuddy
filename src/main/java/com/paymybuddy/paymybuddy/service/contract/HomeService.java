@@ -1,14 +1,11 @@
 package com.paymybuddy.paymybuddy.service.contract;
 
-import java.util.List;
 
-import com.paymybuddy.paymybuddy.model.BankTransferDisplay;
 import com.paymybuddy.paymybuddy.model.Customer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 public interface HomeService {
 
-	Customer getBalance(int customerId);
-
-	List<BankTransferDisplay> getBankOperations(int customerId);
+	Customer getBalance(MyMainUser user);
 
 }
