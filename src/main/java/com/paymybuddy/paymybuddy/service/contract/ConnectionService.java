@@ -16,4 +16,5 @@ public interface ConnectionService {
 	
 	Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient);
 
+	int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId);
 }

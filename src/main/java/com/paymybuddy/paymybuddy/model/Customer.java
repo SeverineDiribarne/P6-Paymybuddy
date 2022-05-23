@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Customer implements Serializable{
 
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 	User Attributes
@@ -27,7 +27,7 @@ public class Customer implements Serializable{
 	 * Empty constructor
 	 */
 	public Customer() {}
-	
+
 	/**
 	 * Complete Constructor
 	 */
@@ -80,23 +80,41 @@ public class Customer implements Serializable{
 		this.lastName = lastName;
 	}
 
+
+	/**
+	 * Constructor with customer personal informations
+	 * @param customerId
+	 * @param lastName
+	 * @param firstName
+	 * @param email
+	 * @param balance
+	 */
+	public Customer(int customerId, String lastName, String firstName, String email, double balance) {
+		super();
+		this.customerId = customerId;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.balance = balance;
+	}
+
+		/**
+		 * constructor with only email
+		 * @param email
+		 */
+		public Customer(String email) {
+			this.email = email;
+		}
+
 //	/**
-//	 * constructor with only email
+//	 * constructor with only completeName
 //	 * @param email
 //	 */
-//	public Customer(String email) {
-//		this.email = email;
+//	public Customer(int customerId, String completeName) {
+//		this.customerId = customerId;
+//		this.completeName = completeName;
 //	}
-	
-	/**
-	 * constructor with only completeName
-	 * @param email
-	 */
-	public Customer(int customerId, String completeName) {
-		this.customerId = customerId;
-		this.completeName = completeName;
-	}
-	
+
 	/**
 	 * constructor pour CustomerRecipientIdAndNameRowMapper
 	 * @param customerId
@@ -116,7 +134,7 @@ public class Customer implements Serializable{
 	public Customer(int customerId) {
 		this.customerId = customerId;
 	}
-	
+
 	/**
 	 * Constructor with firstName and lastName
 	 * @param firstName
@@ -135,7 +153,7 @@ public class Customer implements Serializable{
 		this.balance = balance;
 	}
 
-	
+
 	/**
 	 * Getter Id
 	 * @return the id
@@ -165,7 +183,7 @@ public class Customer implements Serializable{
 	public void setCompleteName(String completeName) {
 		this.completeName = completeName;
 	}
-	
+
 	/**
 	 * Getter lastName
 	 * @return the lastName
@@ -284,10 +302,9 @@ public class Customer implements Serializable{
 	public void setTransfers(List<Transfer> transfers) {
 		this.transfers = transfers;
 	}
-	/**
-	 * toString method
-	 */
+	@Override
 	public String toString() {
-		   return  this.email;
-		}
+		return "Customer [customerId=" + customerId + ", lastName=" + lastName + ", firstName=" + firstName + ", email="
+				+ email + ", balance=" + balance + "]";
+	}
 }

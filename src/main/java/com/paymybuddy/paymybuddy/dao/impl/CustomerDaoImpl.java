@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdAndNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.InformationsOfCustomerByIdRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByEmailRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdentityRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
@@ -20,7 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	private JdbcTemplate jdbcTemplate;
 
 
-	private static final String GET_ALL_CUSTOMER_RECIPIENTS_QUERY = "SELECT cust.id, cust.firstName, cust.lastName"
+	private static final String GET_ALL_CUSTOMER_RECIPIENTS_QUERY = "SELECT cust.id, cust.firstName, cust.lastName, cust.email, cust.balance"
 			+ " FROM customer cust "
 			+ " JOIN connection con ON cust.id = con.connectionRecipient"
 			+ " WHERE con.connectionSource = ?;";
@@ -164,13 +165,13 @@ public class CustomerDaoImpl implements CustomerDao {
 		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_NAME_QUERY, new CustomerIdByNameRowMapper(),customer.getFirstName(),customer.getLastName());
 	}
 	
-//	private static final String GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY ="SELECT cust.id"
-//			+ " FROM customer cust"
-//			+ " WHERE cust.email = ?;";
-//	
-//	@Override
-//	public int getCustomerIdByName(String email) {
-//		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY, new CustomerIdByEmailRowMapper(), email);
-//
-//	}
+	private static final String GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY ="SELECT cust.id"
+			+ " FROM customer cust"
+			+ " WHERE cust.email = ?;";
+	
+	@Override
+	public int getCustomerIdByName(String email) {
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY, new CustomerIdByEmailRowMapper(), email);
+
+	}
 }

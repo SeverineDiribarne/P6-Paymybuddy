@@ -42,4 +42,10 @@ public class ConnectionServiceImpl implements ConnectionService {
 	public Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient) {
 		return connectionDao.getConnectionByCustomers( customerSource, customerRecipient);
 	}
+
+	//TODO Voir si a garder
+	@Override
+	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
+		return connectionDao.getConnectionIdByCustomersId(customerSourceId, customerRecipientId);
+	}
 }

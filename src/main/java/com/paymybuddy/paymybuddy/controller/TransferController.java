@@ -103,22 +103,24 @@ public class TransferController {
 		Connection connection = new Connection();
 		connection.setCustomerSource(user.getCustomer());
 		connection.setCustomerRecipient(transfer.getConnection().getCustomerRecipient());
-		int customerRecipientId = customerService.getCustomerIdByName(connection.getCustomerRecipient());
+		int customerRecipientId = customerService.getCustomerIdByEmail(connection.getCustomerRecipient().getEmail());
 		connection.getCustomerRecipient().setCustomerId(customerRecipientId); 
-		connection.setConnectionId(connectionService.getConnectionIdByCustomersIdWithMainUser(user, connection.getCustomerRecipient()));
+		connection.setConnectionId(connectionService.getConnectionIdByCustomersId(user.getCustomer().getCustomerId(), customerRecipientId));
 
-		transferService.addPayment(transfer,connection);
-		List<Transfer> transfers = transferService.getListOfTransfers(user);
+		transferService.addPayment(transfer.getDate(),connection.getCustomerSource().getCustomerId(), connection.getCustomerRecipient().getCustomerId(), transfer.getDescription(), transfer.getAmount());
+		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId());
 		List<TransferDisplay> transferDisplayList = new ArrayList<>();
-		String userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
 		for(Transfer transferOfTheList : transfers) {
-			TransferDisplay transferDisplay = new TransferDisplay(transferOfTheList.getDate(),userMainName, transferOfTheList.getConnection().getCustomerRecipient().getEmail(), transferOfTheList.getDescription(), transferOfTheList.getAmount());
+			String customerSourceName = transferOfTheList.getConnection().getCustomerSource().getFirstName() + " " + transferOfTheList.getConnection().getCustomerSource().getLastName();
+			String customerRecipientName = transferOfTheList.getConnection().getCustomerRecipient().getFirstName() + " " + transferOfTheList.getConnection().getCustomerRecipient().getLastName();
+			TransferDisplay transferDisplay = new TransferDisplay(transferOfTheList.getDate(), customerSourceName, customerRecipientName, transferOfTheList.getDescription(), transferOfTheList.getAmount());
 			transferDisplayList.add(transferDisplay);			
 		}
 		model.addAttribute( "transferDisplayList", transferDisplayList);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		return TRANSFER;
 	}
+	
 //	@PostMapping
 //	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer, @ModelAttribute Customer customerRecipient) {
 //		Connection connection = new Connection();

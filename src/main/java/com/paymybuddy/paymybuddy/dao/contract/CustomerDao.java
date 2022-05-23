@@ -25,6 +25,6 @@ public interface CustomerDao {
 
 	public void registerNewCustomerIntoDatabase(Customer customer, String encryptionPassword);
 
-//	public int getCustomerIdByName(String email);
+	public int getCustomerIdByName(String email);
 
 }

@@ -89,17 +89,33 @@ public class ConnectionDaoImpl implements ConnectionDao{
 		return jdbcTemplate.queryForObject(GET_COMPLETE_NAME_OF_RECIPIENT_BY_HIS_CONNECTION_ID_QUERY, new GetRecipientCompleteNameRowMapper() , connection.getCustomerRecipient().getCustomerId());
 	}
 	
+	
+	//TODO fait en cherchant le bug de addPayment
 	private static final String GET_CONNECTION_BY_CUSTOMERS_QUERY = "select con.connectionId"
 			+ " FROM connection con"
 			//+ " JOIN customer cust"
 			//+ " ON cust.id  = con.connectionSource"
 			+ " WHERE con.connectionSource = ?"
 			+ " AND con.connectionRecipient= ?;";
-	
 	@Override
 	public Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient) {
-		
 		return jdbcTemplate.queryForObject(GET_CONNECTION_BY_CUSTOMERS_QUERY, new ConnectionByCustomersRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
 	}
-
+	
+	//TODO methode de retour en arriere pour la methode addPayment
+	@Override
+	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
+		return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
+	}
+	
+	@Override
+	public int getConnectionIdWithCustomersIdByConnection(double amount,int customerSourceId, int customerRecipientId) {
+		if (amount <= 0) {
+			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
+		}
+		else {
+			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
+		}
+	}
+	
 }

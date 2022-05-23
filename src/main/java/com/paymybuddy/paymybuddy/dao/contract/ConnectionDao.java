@@ -18,4 +18,10 @@ public interface ConnectionDao {
 
 	Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient);
 
+	
+	
+	//TODO voir si a garder toutes methodes en dessous
+	int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId);
+
+	int getConnectionIdWithCustomersIdByConnection(double amount, int customerSourceId, int customerRecipientId);
 }

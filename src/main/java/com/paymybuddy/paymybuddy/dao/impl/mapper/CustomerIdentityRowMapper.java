@@ -11,6 +11,6 @@ public class CustomerIdentityRowMapper implements RowMapper<Customer>{
 
 	@Override
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new Customer(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"));
+		return new Customer(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getDouble("balance"));
 	}
 }

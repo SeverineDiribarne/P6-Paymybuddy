@@ -1,5 +1,6 @@
 package com.paymybuddy.paymybuddy.dao.contract;
 
+import java.util.Date;
 import java.util.List;
 
 import com.paymybuddy.paymybuddy.model.Connection;
@@ -14,4 +15,10 @@ public interface TransferDao {
 
 	Transfer getLastTransferId();
 
+	
+	
+	//TODO voir si a garder toutes methodes en dessous
+	void addPayment(Date date, Connection connection, String description, double amount);
+	
+	List<Transfer> getListOfTransfers(int customerSourceId );
 }
