@@ -1,16 +1,16 @@
 package com.paymybuddy.paymybuddy.dao.contract;
 
-import java.util.Date;
 import java.util.List;
 
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Transfer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 public interface TransferDao {
 
-	List<Transfer> getListOfTransfers(int mainUserId);
+	List<Transfer> getListOfTransfers(MyMainUser user);
 
-	void addPayment(Date date, Connection connection, String description, double amount);
+	void addPayment(Transfer transfer, Connection connection, double amount);
 
 	Transfer getLastTransferId();
 

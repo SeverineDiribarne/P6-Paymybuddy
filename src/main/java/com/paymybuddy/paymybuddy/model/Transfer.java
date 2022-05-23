@@ -10,10 +10,33 @@ public class Transfer {
 	private int transferId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
+	private Customer customerRecipient;
 	private Connection connection;
 	private String description;
 	private double amount;
 	private TransferType transferType;
+	
+	
+	
+	public Transfer(int transferId, Date date, Customer customerRecipient, Connection connection, String description,
+			double amount, TransferType transferType) {
+		super();
+		this.transferId = transferId;
+		this.date = date;
+		this.customerRecipient = customerRecipient;
+		this.connection = connection;
+		this.description = description;
+		this.amount = amount;
+		this.transferType = transferType;
+	}
+
+	public Customer getCustomerRecipient() {
+		return customerRecipient;
+	}
+
+	public void setCustomerRecipient(Customer customerRecipient) {
+		this.customerRecipient = customerRecipient;
+	}
 
 	/**
 	 * Complete Constructor
@@ -31,6 +54,19 @@ public class Transfer {
 		}
 	}
 
+	//	public Transfer ( String name, Date date, String description, double amount) {
+	//		this.connection = new Connection ();
+	//		//TODO faire mieux
+	//		this.date = date;
+	//		this.description = description;
+	//		this.amount = amount;
+	//		if(amount <0) {
+	//			this.transferType = TransferType.DEBIT;
+	//		}
+	//		else {
+	//			this.transferType = TransferType.CREDIT;
+	//		}
+	//	}
 	/**
 	 * empty constructor
 	 */
@@ -70,7 +106,7 @@ public class Transfer {
 	public int getTransferId() {
 		return transferId;
 	}
-	
+
 	/**
 	 * Getter date
 	 * @return date
@@ -148,5 +184,12 @@ public class Transfer {
 	 */
 	public void setTransferType(TransferType transferType) {
 		this.transferType = transferType;
+	}
+
+	@Override
+	public String toString() {
+		return "Transfer [transferId=" + transferId + ", date=" + date + ", customerRecipient=" + customerRecipient
+				+ ", connection=" + connection + ", description=" + description + ", amount=" + amount
+				+ ", transferType=" + transferType + "]";
 	}
 }

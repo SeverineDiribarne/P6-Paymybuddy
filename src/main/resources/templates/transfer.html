@@ -24,7 +24,7 @@
 					<li class="breadcrumb-item active" aria-current="page">Transfer</li>
 					<li class="breadcrumb-item"><a href="/profile">Profile</a></li>
 					<li class="breadcrumb-item"><a href="/contact">Contact</a></li>
-					<li class="breadcrumb-item"><a href="/logoof">Log off</a></li>
+					<li class="breadcrumb-item"><a href="/logoff">Log off</a></li>
 				</ol>
 			</nav>
 		</div>
@@ -56,14 +56,9 @@
 						<select class="select" th:field="*{connection}">
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
-<<<<<<< HEAD
-						 th:value="${connection.customerRecipient}" 
-								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName} " >
-							</option>
-=======
 								th:value="${connection.customerRecipient}"
-								th:text="${connection.customerRecipient.email}"></option>
->>>>>>> feature/connection
+								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName}">
+							</option>
 						</select>
 					</div>
 					<div>
@@ -114,7 +109,7 @@
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 					<li class="page-item"><a class="page-link" href="#">1</a></li>
-
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
 					<li class="page-item"><a class="page-link" href="#"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
@@ -150,14 +145,12 @@
 		<div class="pages">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
+					<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> 
+						<span aria-hidden="true">&laquo;</span></a></li>
 					<li class="page-item"><a class="page-link" href="#">1</a></li>
-
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+						 <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
 		</div>

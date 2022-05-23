@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.paymybuddy.paymybuddy.dto.BankTransferDisplay;
+import com.paymybuddy.paymybuddy.dto.TransferDisplay;
 import com.paymybuddy.paymybuddy.model.BankAccount;
 import com.paymybuddy.paymybuddy.model.BankOperation;
-import com.paymybuddy.paymybuddy.model.BankTransferDisplay;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
-import com.paymybuddy.paymybuddy.model.TransferDisplay;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.BankOperationService;
 import com.paymybuddy.paymybuddy.service.contract.ConnectionService;
@@ -46,39 +46,48 @@ public class TransferController {
 	@GetMapping 
 	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user) {
 		//for the arraylist of relationships'transfers 
-		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId()); 
-		String userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
+		String customerRecipientName = "";
+		List<Transfer> transfers = transferService.getListOfTransfers(user); 
+		String userMainName = "";
 		List<TransferDisplay> transferDisplayList = new ArrayList<>();
 		for(Transfer transfer : transfers) {
 			Connection connection = transfer.getConnection();
-			Customer customerRecipient = customerService.getCustomerRecipientIdAndNameById(connection.getCustomerRecipient().getCustomerId());
-			String customerRecipientName = customerRecipient.getFirstName() + " " + customerRecipient.getLastName();
+			userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
+			Customer customerRecipient = customerService.getCustomerRecipientNameById(connection.getCustomerRecipient());
+			customerRecipientName = customerRecipient.getFirstName() + " " + customerRecipient.getLastName();	
+			if (transfer.getAmount()>=0) {
+				String temp = "";
+				temp = userMainName;
+				userMainName = customerRecipientName;
+				customerRecipientName = temp;	
+			}
 			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(),userMainName, customerRecipientName, transfer.getDescription(), transfer.getAmount());
 			transferDisplayList.add(transferDisplay);			
 		}
 		//For the arraylist of bank transfers
-		List<BankOperation> bankOperations = bankOperationService.getBankOperations(user.getCustomer().getCustomerId());
+		List<BankOperation> bankOperations = bankOperationService.getBankOperations(user);
 		List<BankTransferDisplay> bankTransferDisplayList = new ArrayList<>();
 		for(BankOperation bankOperation : bankOperations) {
-			if(bankOperation.getDescription().equals("Payment from bank to App")) {
-				List<BankAccount> sourceName =  bankOperationService.getName(bankOperation.getSource());
+			if(bankOperation.getDescription().equals("Payment from Bank to App")) {
+				List<BankAccount> sourceName =  bankOperationService.getName(bankOperation);
 				String recipientName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
 				BankTransferDisplay bankTransferDisplay = new BankTransferDisplay(bankOperation.getDate(),sourceName.get(0).getBankAccountName(), recipientName, bankOperation.getDescription(), bankOperation.getBankOperationAmount());
 				bankTransferDisplayList.add(bankTransferDisplay);
 			}
 			else {
 				String sourceName =  user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
-				List<BankAccount> recipientName = bankOperationService.getName(bankOperation.getRecipient());
+				List<BankAccount> recipientName = bankOperationService.getName(bankOperation);
+				
 				BankTransferDisplay bankTransferDisplay = new BankTransferDisplay(bankOperation.getDate(),sourceName, recipientName.get(0).getBankAccountName(), bankOperation.getDescription(), bankOperation.getBankOperationAmount());
 				bankTransferDisplayList.add(bankTransferDisplay);
 			}
-
 		}
 		//for drop-down list of relationships
-		List<Customer> customers =  customerService.getAllCustomerRecipients(user.getCustomer().getCustomerId());
+		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		List<Connection> connections = new ArrayList<>();
 		for(Customer customer : customers) {
-			Connection connection = new Connection(customer);
+			int connectionId = connectionService.getConnectionIdByCustomersIdWithMainUser(user, customer);
+			Connection connection = new Connection(connectionId, user, customer);
 			connections.add(connection);
 		}
 		model.addAttribute("transferDisplayList", transferDisplayList);
@@ -94,12 +103,12 @@ public class TransferController {
 		Connection connection = new Connection();
 		connection.setCustomerSource(user.getCustomer());
 		connection.setCustomerRecipient(transfer.getConnection().getCustomerRecipient());
-		int customerRecipientId = customerService.getCustomerIdByEmail(connection.getCustomerRecipient().getEmail());
+		int customerRecipientId = customerService.getCustomerIdByName(connection.getCustomerRecipient());
 		connection.getCustomerRecipient().setCustomerId(customerRecipientId); 
-		connection.setConnectionId(connectionService.getConnectionIdByCustomersId(user.getCustomer().getCustomerId(), customerRecipientId));
+		connection.setConnectionId(connectionService.getConnectionIdByCustomersIdWithMainUser(user, connection.getCustomerRecipient()));
 
-		transferService.addPayment(transfer.getDate(),connection.getCustomerSource().getCustomerId(), connection.getCustomerRecipient().getCustomerId(), transfer.getDescription(), transfer.getAmount());
-		List<Transfer> transfers = transferService.getListOfTransfers(user.getCustomer().getCustomerId());
+		transferService.addPayment(transfer,connection);
+		List<Transfer> transfers = transferService.getListOfTransfers(user);
 		List<TransferDisplay> transferDisplayList = new ArrayList<>();
 		String userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
 		for(Transfer transferOfTheList : transfers) {
@@ -110,4 +119,28 @@ public class TransferController {
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		return TRANSFER;
 	}
+//	@PostMapping
+//	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer, @ModelAttribute Customer customerRecipient) {
+//		Connection connection = new Connection();
+//		List<TransferDisplay> transferDisplayList = new ArrayList<>();
+////		connection.setCustomerSource(user.getCustomer());
+//		transfer.setConnection(connection);
+//		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
+//		for(Customer customer : customers) {
+//			connection.setCustomerRecipient(customer);
+//			connection.setConnectionId(connectionService.getConnectionIdByCustomersIdWithMainUser(user, customer));
+//		}
+//		transferService.addPayment(transfer, connection);
+//		List<Transfer> transfers = transferService.getListOfTransfers(user);
+//		String userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
+//		Customer recipient = connectionService.getRecipientNameByRecipientId(connection);
+//		String recipientName = recipient.getFirstName() + " " + recipient.getLastName();
+//		for(Transfer transferOfTheList : transfers) {
+//				TransferDisplay transferDisplay = new TransferDisplay(transferOfTheList.getDate(),userMainName, recipientName, transferOfTheList.getDescription(), transferOfTheList.getAmount());
+//				transferDisplayList.add(transferDisplay);			
+//		}
+//		model.addAttribute( "transferDisplayList", transferDisplayList);
+//		model.addAttribute("username", user.getCustomer().getFirstName());
+//		return TRANSFER;
+//	}
 }

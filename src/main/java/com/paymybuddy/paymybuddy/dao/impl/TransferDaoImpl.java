@@ -1,7 +1,6 @@
 package com.paymybuddy.paymybuddy.dao.impl;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import com.paymybuddy.paymybuddy.dao.impl.mapper.TransferRowMapper;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Transfer;
 import com.paymybuddy.paymybuddy.model.TransferType;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 @Repository
 public class TransferDaoImpl implements TransferDao {
@@ -32,8 +32,8 @@ public class TransferDaoImpl implements TransferDao {
 	 * Get all transfers in the list
 	 */
 	@Override
-	public List<Transfer> getListOfTransfers(int mainUserId) {
-	 return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), mainUserId);	
+	public List<Transfer> getListOfTransfers(MyMainUser user) {
+	 return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), user.getCustomer().getCustomerId());	
 	}
 	
 	private static final String INSERT_TRANSFER = "INSERT INTO transfer "
@@ -43,8 +43,8 @@ public class TransferDaoImpl implements TransferDao {
 	 * add a payment in database
 	 */
 	@Override
-	public void addPayment(Date date, Connection connection, String description, double amount) {
-		jdbcTemplate.update(INSERT_TRANSFER, date, connection.getConnectionId(), description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
+	public void addPayment(Transfer transfer, Connection connection, double amount) {
+		jdbcTemplate.update(INSERT_TRANSFER, transfer.getDate(), connection.getConnectionId(), transfer.getDescription(), amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
 	}
 	
 	public static final String GET_LAST_TRANSFER_ID_QUERY = "select max(t.transferId) AS transferId  FROM transfer t;";

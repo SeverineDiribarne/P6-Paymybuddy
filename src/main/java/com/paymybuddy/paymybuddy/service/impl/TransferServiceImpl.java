@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
+import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.TransferService;
 
 @Service
@@ -25,16 +25,17 @@ public class TransferServiceImpl implements TransferService{
 	
 	@Autowired
 	CustomerDao customerDao;
+	
 
 	/**
 	 * get List Of transfers
 	 * @param mainUserId
 	 */
 	@Override
-	public List<Transfer> getListOfTransfers(int mainUserId) {
-		return transferDao.getListOfTransfers(mainUserId);
+	public List<Transfer> getListOfTransfers(MyMainUser user) {
+		return transferDao.getListOfTransfers(user);
 	}
-
+ //TODO factoriser les 2 methodes en dessous
 	/**
 	 * Save Customer Source Attributes
 	 * @param customerSourceId
@@ -73,30 +74,32 @@ public class TransferServiceImpl implements TransferService{
 	 * @param amount
 	 */
 	@Override
-	public void addPayment(Date date, int customerSourceId, int customerRecipientId, String description, double amount) {
-		if(amount > 0) {
+	public void addPayment(Transfer transfer, Connection connection) {
+		if(transfer.getAmount() > 0) {
 			//negative amount for main user
-			double negativeAmount = amount * (-1);
-			int connectionId = connectionDao.getConnectionIdByCustomersId(customerSourceId,customerRecipientId);
-			Connection connection = new Connection(connectionId, customerSourceId, customerRecipientId);
-			saveCustomerSourceAttributes(customerSourceId, connection);
-			saveCustomerRecipientAttributes(customerRecipientId, connection);
+			double negativeAmount = transfer.getAmount() * (-1);
+			int connectionId = connectionDao.getConnectionIdWithCustomersIdByConnection(negativeAmount,connection.getCustomerSource(), connection.getCustomerRecipient());
+			Connection newConnection = new Connection(connectionId, connection.getCustomerSource().getCustomerId(), connection.getCustomerRecipient().getCustomerId());
+			saveCustomerSourceAttributes(connection.getCustomerSource().getCustomerId(), newConnection);
+			saveCustomerRecipientAttributes(connection.getCustomerRecipient().getCustomerId(), newConnection);
 			//add negative payment
-			transferDao.addPayment (date, connection, description, negativeAmount);
+			transferDao.addPayment (transfer, newConnection, negativeAmount);
 			// balance calculation for customerSource
-			Transfer transfer = transferDao.getLastTransferId();
-			customerDao.updateCustomerBalance(customerSourceId, transfer.getTransferId());
-			customerDao.monetizationApp(customerSourceId, transfer.getTransferId());
+			Transfer numTransfer = transferDao.getLastTransferId();
+			customerDao.updateCustomerBalance(connection.getCustomerSource().getCustomerId(), numTransfer.getTransferId());
+			customerDao.monetizationApp(connection.getCustomerSource().getCustomerId(), numTransfer.getTransferId());
 			
 			//positive amount for recipient customer
-			int secondConnectionId = connectionDao.getConnectionIdByCustomersId(customerRecipientId, customerSourceId);
-			Connection reverseConnection = new Connection(secondConnectionId, customerRecipientId, customerSourceId);
-			saveCustomerRecipientAttributes(customerRecipientId, reverseConnection);
-			saveCustomerSourceAttributes(customerSourceId, reverseConnection);
-			transferDao.addPayment (date, reverseConnection, description, amount);
-			// balance calculation for customerSource
+			int secondConnectionId = connectionDao.getConnectionIdWithCustomersIdByConnection(transfer.getAmount(),
+					connection.getCustomerRecipient(), connection.getCustomerSource());
+			Connection reverseConnection = new Connection(secondConnectionId, connection.getCustomerRecipient().getCustomerId(),
+					connection.getCustomerSource().getCustomerId());
+			saveCustomerRecipientAttributes(connection.getCustomerRecipient().getCustomerId(), reverseConnection);
+			saveCustomerSourceAttributes(connection.getCustomerSource().getCustomerId(), reverseConnection);
+			transferDao.addPayment (transfer, reverseConnection, transfer.getAmount());
+			// balance calculation for customerRecipient
 			transfer = transferDao.getLastTransferId();
-			customerDao.updateCustomerBalance(customerRecipientId, transfer.getTransferId());	
+			customerDao.updateCustomerBalance(connection.getCustomerRecipient().getCustomerId(), transfer.getTransferId());	
 		}
 	}
 }
