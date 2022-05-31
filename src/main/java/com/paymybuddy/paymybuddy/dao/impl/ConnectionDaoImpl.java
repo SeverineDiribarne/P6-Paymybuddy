@@ -70,15 +70,15 @@ public class ConnectionDaoImpl implements ConnectionDao{
 			}
 		}
 	}
-	@Override
-	public int getConnectionIdWithCustomersIdByConnection(double amount,Customer customerSource, Customer customerRecipient) {
-		if (amount <= 0) {
-			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
-		}
-		else {
-			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
-		}
-	}
+//	@Override
+//	public int getConnectionIdWithCustomersIdByConnection(double amount,Customer customerSource, Customer customerRecipient) {
+//		if (amount <= 0) {
+//			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
+//		}
+//		else {
+//			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
+//		}
+//	}
 	
 	private static final String GET_COMPLETE_NAME_OF_RECIPIENT_BY_HIS_CONNECTION_ID_QUERY = "select cust.firstName, cust.lastName"
 			+ " FROM customer cust"

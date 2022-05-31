@@ -15,6 +15,6 @@ public interface CustomerService {
 
 	public void registerNewCustomerIntoDatabase(Customer customer);
 
-	public int getCustomerIdByEmail(String email);
-
+	public void updateBalance(double balance, MyMainUser user);
+		
 }

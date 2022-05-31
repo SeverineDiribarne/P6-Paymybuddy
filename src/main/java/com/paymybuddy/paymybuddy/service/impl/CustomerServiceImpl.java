@@ -44,10 +44,8 @@ public class CustomerServiceImpl implements CustomerService {
 		customerDao.registerNewCustomerIntoDatabase(customer, encryptionPassword);
 	}
 
-	
-//TODO voir si a garder methode en dessous
 	@Override
-	public int getCustomerIdByEmail(String email) {
-		return customerDao.getCustomerIdByName(email);
+	public void updateBalance(double balance, MyMainUser user) {
+	customerDao.updateBalance(balance, user);
 	}
 }

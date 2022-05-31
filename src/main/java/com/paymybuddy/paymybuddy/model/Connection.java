@@ -13,11 +13,6 @@ public class Connection implements Serializable{
 	transient Customer  customerSource;
 	transient Customer customerRecipient;
 	
-//	//TODO patch
-//	public Connection(String completeName) {
-//		this.connectionId = 0;
-//		this.customerRecipient = new Customer(connectionId, completeName);
-//	}
 
 	/**
 	 * Constructor with only connexionId
@@ -39,24 +34,11 @@ public class Connection implements Serializable{
 	}
 	
 	/**
-	 * Constructor with customerRecipient
-	 * @param customerRecipient
-	 */
-	public Connection(Customer customerRecipient) {
-		this.customerRecipient = customerRecipient;
-	}
-	/**
 	 * Empty constructor
 	 */
 	public Connection() {}
 	
-//	/**
-//	 * constructor with only name
-//	 * @param name
-//	 */
-//	public Connection(String email) {
-//	 this.customerRecipient = new Customer(email); 
-//	}
+
 	/**
 	 * Constructor with Customers objects
 	 * @param connectionId

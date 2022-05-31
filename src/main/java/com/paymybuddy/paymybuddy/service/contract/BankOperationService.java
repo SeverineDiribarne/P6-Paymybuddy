@@ -12,7 +12,7 @@ public interface BankOperationService {
 
 	void addPaymentFromBankToApp(BankOperation bankOperation);
 
-	void addPaymentFromAppToBank(BankOperation bankOperation);
+	void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation);
 	
 	BankOperation getLastOperationId();
 

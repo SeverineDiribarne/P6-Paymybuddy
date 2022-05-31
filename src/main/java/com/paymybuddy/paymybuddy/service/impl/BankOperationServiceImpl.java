@@ -46,7 +46,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 * Add payment From App To bank
 	 */
 	@Override
-	public void addPaymentFromAppToBank(BankOperation bankOperation) {
+	public void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) {
 		bankOperationDao.addPaymentFromAppToBank(bankOperation);	
 		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();
 		customerDao.updateCustomerBalanceAfterPaymentFromAppToBank(lastBankOperation.getBankOperationId());

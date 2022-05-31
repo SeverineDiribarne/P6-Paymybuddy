@@ -13,18 +13,6 @@ public class Account implements Serializable{
 	
 	
 	/**
-	 * Constructor
-	 * @param id
-	 * @param password
-	 * @param userId
-	 * @param state
-	 */
-	public Account (int id, String password) {
-		this.accountId = id;
-		this.password = password;
-	}
-	
-	/**
 	 * Empty contructor
 	 */
 	public Account() {

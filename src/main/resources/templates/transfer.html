@@ -53,11 +53,11 @@
 						<input type="date" class="date" th:field="*{date}">
 					</div>
 					<div class="frame_select">
-						<select class="select" th:field="*{connection}">
+						<select class="select" th:field="*{customerRecipient}">
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
 								th:value="${connection.customerRecipient}"
-								th:text="${connection.customerRecipient.email}"> 
+								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName}"> 
 							</option>
 						</select>
 					</div>

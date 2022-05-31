@@ -27,4 +27,6 @@ public interface CustomerDao {
 
 	public int getCustomerIdByName(String email);
 
+	public void updateBalance(double balance, MyMainUser user);
+
 }

@@ -29,11 +29,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 
 		.authorizeRequests()
-		.antMatchers("/").authenticated()
+		.antMatchers("/login").permitAll()
+		.anyRequest().authenticated()
 		.and()
 .formLogin()
-		.loginPage("/login")
-		.permitAll()
+	/**	.loginPage("/login")*/
 		.defaultSuccessUrl("/home",true)
 		.and()
 		.rememberMe()

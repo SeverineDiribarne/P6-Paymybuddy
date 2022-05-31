@@ -20,6 +20,7 @@ import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.BankAccountService;
 import com.paymybuddy.paymybuddy.service.contract.BankOperationService;
+import com.paymybuddy.paymybuddy.service.contract.CustomerService;
 import com.paymybuddy.paymybuddy.service.contract.HomeService;
 
 @Controller
@@ -35,12 +36,16 @@ public class HomeController {
 	@Autowired
 	private BankAccountService bankAccountService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 	private static final String USERNAME = "username";
 
 	@GetMapping 
 	public String showbalance(Model model,  @AuthenticationPrincipal MyMainUser user) {
 		Customer customer = homeService.getBalance(user);
-		double balance = customer.getBalance();
+		double balance = Math.round ((customer.getBalance()*100.0)/100.0);
+		customerService.updateBalance(balance, user);
 		model.addAttribute("bankOperation", new BankOperation());
 		model.addAttribute( "balance", balance);
 		model.addAttribute(USERNAME, user.getCustomer().getFirstName());
@@ -78,7 +83,7 @@ public class HomeController {
 		bankOperation.setDescription(description);
 		bankOperation.setSource(user.getCustomer().getCustomerId());
 		bankOperation.setRecipient(bankAccountService.getBankAccountId(user));
-		bankOperationService.addPaymentFromAppToBank(bankOperation);
+		bankOperationService.addPaymentFromAppToBank(user, bankOperation);
 		List<BankOperation> operations = bankOperationService.getBankOperations(user);
 		List<BankTransferDisplay> bankTransferDisplayList = new ArrayList<>();
 		for(BankOperation operationOfTheList : operations) {

@@ -29,24 +29,6 @@ public class Customer implements Serializable{
 	public Customer() {}
 
 	/**
-	 * Complete Constructor
-	 */
-	public Customer(String lastName, String firstName, String email, String password, String bankAccountName, String iban, String bic, String swift) {
-		this.customerId = 0;
-		this.lastName= lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.balance = 0;
-		this.account = new Account();
-		this.account.setPassword(password);
-		this.bankAccount = new BankAccount();
-		this.bankAccount.setBankAccountName(bankAccountName);
-		this.bankAccount.setIban(iban);
-		this.bankAccount.setBic(bic);
-		this.bankAccount.setSwift(swift);	
-	}
-
-	/**
 	 * Constructor with id, lastName, firstName, email, balance and bankAccount
 	 * @param id
 	 * @param lastName
@@ -64,7 +46,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
-	 * Constructor with id and password
+	 * Constructor with customer personal informations + password
 	 * @param customerId
 	 * @param email
 	 * @param password
@@ -89,7 +71,7 @@ public class Customer implements Serializable{
 	 * @param email
 	 * @param balance
 	 */
-	public Customer(int customerId, String lastName, String firstName, String email, double balance) {
+	public Customer(int customerId, String firstName, String lastName, String email, double balance) {
 		super();
 		this.customerId = customerId;
 		this.lastName = lastName;
@@ -99,33 +81,28 @@ public class Customer implements Serializable{
 	}
 
 		/**
-		 * constructor with only email
-		 * @param email
+		 * Constructor with allData in field email
+		 * @param allData
 		 */
-		public Customer(String email) {
-			this.email = email;
+		public Customer(String allData) {
+			String[] fields = allData.split(",");
+			for( String field : fields)
+			{
+				String[] splittedField = field.split("=");
+				if( splittedField[0].compareTo("customerId")==0)
+					customerId = Integer.parseInt(splittedField[1]);
+				else if( splittedField[0].compareTo("completeName")==0)
+					completeName = splittedField[1];
+				else if (splittedField[0].compareTo("lastName") == 0)
+					lastName = splittedField[1];
+				else if (splittedField[0].compareTo("firstName") == 0)
+					firstName = splittedField[1];
+				else if (splittedField[0].compareTo("email") == 0)
+					email = splittedField[1];
+				else if (splittedField[0].compareTo("balance") == 0)
+					balance = Double.parseDouble(splittedField[1]);
+			}
 		}
-
-//	/**
-//	 * constructor with only completeName
-//	 * @param email
-//	 */
-//	public Customer(int customerId, String completeName) {
-//		this.customerId = customerId;
-//		this.completeName = completeName;
-//	}
-
-	/**
-	 * constructor pour CustomerRecipientIdAndNameRowMapper
-	 * @param customerId
-	 * @param firstName
-	 * @param lastName
-	 */
-	public Customer(int customerId, String firstName, String lastName) {
-		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 
 	/**
 	 * constructor with only customerId
@@ -152,7 +129,6 @@ public class Customer implements Serializable{
 	public Customer(double balance) {
 		this.balance = balance;
 	}
-
 
 	/**
 	 * Getter Id
@@ -304,7 +280,11 @@ public class Customer implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", lastName=" + lastName + ", firstName=" + firstName + ", email="
-				+ email + ", balance=" + balance + "]";
+		return "customerId=" + customerId + "," +
+		"completeName=" + completeName + "," +
+		"lastName=" + lastName  +"," +
+		"firstName=" + firstName +"," +
+		"email="  + email +"," +
+		"balance=" + balance;
 	}
 }

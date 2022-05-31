@@ -174,4 +174,13 @@ public class CustomerDaoImpl implements CustomerDao {
 		return jdbcTemplate.queryForObject(GET_CUSTOMER_ID_BY_CUSTOMER_EMAIL_QUERY, new CustomerIdByEmailRowMapper(), email);
 
 	}
+
+	private static final String UPDATE_BALANCE_QUERY = "UPDATE customer cust "
+			+ " SET cust.balance = ? "
+			+ " WHERE CUST.id = ?";
+	
+	@Override
+	public void updateBalance(double balance, MyMainUser user) {
+		jdbcTemplate.update(UPDATE_BALANCE_QUERY, balance, user.getCustomer().getCustomerId());
+	}
 }

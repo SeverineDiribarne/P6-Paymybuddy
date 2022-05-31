@@ -15,58 +15,8 @@ public class Transfer {
 	private String description;
 	private double amount;
 	private TransferType transferType;
-	
-	
-	
-	public Transfer(int transferId, Date date, Customer customerRecipient, Connection connection, String description,
-			double amount, TransferType transferType) {
-		super();
-		this.transferId = transferId;
-		this.date = date;
-		this.customerRecipient = customerRecipient;
-		this.connection = connection;
-		this.description = description;
-		this.amount = amount;
-		this.transferType = transferType;
-	}
 
-	public Customer getCustomerRecipient() {
-		return customerRecipient;
-	}
 
-	public void setCustomerRecipient(Customer customerRecipient) {
-		this.customerRecipient = customerRecipient;
-	}
-
-	/**
-	 * Complete Constructor
-	 */
-	public Transfer ( Connection connection, Date date, String description, double amount) {
-		this.connection = connection;
-		this.date = date;
-		this.description = description;
-		this.amount = amount;
-		if(amount <0) {
-			this.transferType = TransferType.DEBIT;
-		}
-		else {
-			this.transferType = TransferType.CREDIT;
-		}
-	}
-
-	//	public Transfer ( String name, Date date, String description, double amount) {
-	//		this.connection = new Connection ();
-	//		//TODO faire mieux
-	//		this.date = date;
-	//		this.description = description;
-	//		this.amount = amount;
-	//		if(amount <0) {
-	//			this.transferType = TransferType.DEBIT;
-	//		}
-	//		else {
-	//			this.transferType = TransferType.CREDIT;
-	//		}
-	//	}
 	/**
 	 * empty constructor
 	 */
@@ -120,8 +70,22 @@ public class Transfer {
 	 */
 	public void setDate(Date date) {
 		this.date = date;
-	}
+	} 
 
+	/**
+	 * 
+	 * @return
+	 */
+	public Customer getCustomerRecipient() {
+		return customerRecipient;
+	}
+	/**
+	 * 
+	 * @param customerRecipient
+	 */
+	public void setCustomerRecipient(Customer customerRecipient) {
+		this.customerRecipient = customerRecipient;
+	}
 	/**
 	 * Getter connection 
 	 * @return connection
@@ -188,8 +152,14 @@ public class Transfer {
 
 	@Override
 	public String toString() {
-		return "Transfer [transferId=" + transferId + ", date=" + date + ", customerRecipient=" + customerRecipient
-				+ ", connection=" + connection + ", description=" + description + ", amount=" + amount
-				+ ", transferType=" + transferType + "]";
+		return "Transfer ["
+				+ "transferId=" + transferId + 
+				", date=" + date + 
+				", customerRecipient=" + customerRecipient
+				+ ", connection=" + connection + 
+				", description=" + description + 
+				", amount=" + amount
+				+ ", transferType=" + transferType + 
+				"]";
 	}
 }

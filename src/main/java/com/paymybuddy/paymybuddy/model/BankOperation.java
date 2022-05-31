@@ -44,14 +44,6 @@ public class BankOperation {
 	}
 	
 	/**
-	 * Constructor with only bankOperationAmount
-	 * @param bankOperationAmount
-	 */
-	public BankOperation(double bankOperationAmount) {
-		this.bankOperationAmount = bankOperationAmount;
-		}
-	
-	/**
 	 * Getter bankOperationId
 	 * @return the bankOperationId
 	 */

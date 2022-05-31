@@ -16,28 +16,6 @@ public class BankAccount {
 	public BankAccount() {}
 	
 	/**
-	 * Constructor with bankAccountName, iban, bic, swift, and userId
-	 * @param bankAccountName
-	 * @param iban
-	 * @param bic
-	 * @param swift
-	 * @param userId
-	 */
-	public BankAccount(String bankAccountName, String iban, String bic, String swift, int userId) {
-		this.bankAccountName = bankAccountName;
-		this.iban = iban;
-		this.bic = bic;
-		this.swift = swift;
-		this.userId = userId;
-	}
-	/**
-	 * constructor with only bankAccountId
-	 * @param bankAccountId
-	 */
-	public BankAccount(int bankAccountId) {
-		this.bankAccountId = bankAccountId;
-	}
-	/**
 	 * Complete Constructor
 	 * @param bankAccountId
 	 * @param bankAccountName

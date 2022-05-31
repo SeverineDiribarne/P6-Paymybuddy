@@ -1,7 +1,5 @@
 package com.paymybuddy.paymybuddy.dao.impl;
 
-
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,12 @@ public class TransferDaoImpl implements TransferDao {
 
 
 	private static final String GET_TRANSFERS_QUERY =  
-			"SELECT con.connectionId, con.connectionSource, con.connectionRecipient, t.transferDate, t.description, t.amount "
-					+ "FROM transfer t "
-					+ "JOIN connection con ON t.connection = con.connectionId "
-					+ "JOIN customer cust ON con.connectionSource = cust.id "
-					+ "WHERE cust.id = ?;";
+			"SELECT t.transferDate, con.connectionId, con.connectionSource, con.connectionRecipient, t.description, t.amount"
+			+ " FROM transfer t"
+			+ " JOIN connection con ON t.connection = con.connectionId"
+			+ " JOIN customer cust ON con.connectionSource = cust.id"
+			+ " WHERE cust.id = ?"
+			+ " ORDER BY t.transferId;";
 	/**
 	 * Get all transfers in the list
 	 */
@@ -54,17 +53,4 @@ public class TransferDaoImpl implements TransferDao {
 	public Transfer getLastTransferId() {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
-
-
-	//TODO voir si a garder methodes en dessous
-	@Override
-	public void addPayment(Date date, Connection connection, String description, double amount) {
-		jdbcTemplate.update(INSERT_TRANSFER, date, connection, description, amount, (amount < 0) ? TransferType.DEBIT.getValue() : TransferType.CREDIT.getValue());	 
-	}
-	@Override
-	public List<Transfer> getListOfTransfers(int customerSourceId) {
-		return jdbcTemplate.query(GET_TRANSFERS_QUERY, new TransferRowMapper(), customerSourceId );	
-	}
-
-	
 }
