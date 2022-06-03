@@ -47,6 +47,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 */
 	@Override
 	public void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) {
+		bankOperation.setBankOperationAmount(bankOperation.getBankOperationAmount()*(-1));
 		bankOperationDao.addPaymentFromAppToBank(bankOperation);	
 		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();
 		customerDao.updateCustomerBalanceAfterPaymentFromAppToBank(lastBankOperation.getBankOperationId());
@@ -61,6 +62,9 @@ public class BankOperationServiceImpl implements BankOperationService {
 		return bankOperationDao.getLastOperationId();
 	}
 
+	/**
+	 * Get BankAccount Name for display
+	 */
 	@Override
 	public List<BankAccount> getName(BankOperation bankOperation) {
 		return bankOperationDao.getName(bankOperation);

@@ -77,7 +77,6 @@ public class TransferController {
 			else {
 				String sourceName =  user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
 				List<BankAccount> recipientName = bankOperationService.getName(bankOperation);
-				
 				BankTransferDisplay bankTransferDisplay = new BankTransferDisplay(bankOperation.getDate(),sourceName, recipientName.get(0).getBankAccountName(), bankOperation.getDescription(), bankOperation.getBankOperationAmount());
 				bankTransferDisplayList.add(bankTransferDisplay);
 			}
@@ -111,6 +110,7 @@ public class TransferController {
 			TransferDisplay transferDisplay = new TransferDisplay(transferOfTheList.getDate(), customerSourceName, customerRecipientName, transferOfTheList.getDescription(), transferOfTheList.getAmount());
 			transferDisplayList.add(transferDisplay);			
 		}
+		showTransfersAndFriends( model, user);
 		model.addAttribute( "transferDisplayList", transferDisplayList);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		return TRANSFER;

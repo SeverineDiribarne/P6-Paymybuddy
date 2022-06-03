@@ -16,6 +16,13 @@
 		<div class="titre">
 			<h3>Pay My Buddy</h3>
 		</div>
+		<div class="menu">
+			<nav style="-bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active"><a href ="/login">Return to login page</a></li>
+				</ol>
+			</nav>
+		</div>
 	</div>
 	<!-- nav -->
 	<div class="nav">
@@ -28,46 +35,33 @@
 	<div class="register_frame">
 		<div class="register_frame1">
 			<div class="frame">
-				<label class="label_register">Register</label>
-				<br>
-				<label class="label_underTitle">Personal informations</label>
-				<br>
+				<label class="label_register">Register</label> <br> <label
+					class="label_underTitle">Personal informations</label> <br>
 				<form th:action="@{/register}" th:object="${customer}" method="POST">
-					<label class="labels">LastName : </label> 
-					<input type="text" class="lastName" th:field="*{lastName}"> 
-						<br> 
-						<label class="labels">FirstName : </label> 
-						<input type="text"
-						class="firstName" th:field="*{firstName}"> 
-						<br> 
-						<label class="labels">Email : </label> 
-						<input type="email" class="email" th:field="*{email}">
-						<br> 
-						<label class="labels">Password : </label> 
-						<input type="password" class="password"
+					<label class="labels">LastName : </label> <input type="text"
+						class="lastName" th:field="*{lastName}"> <br> <label
+						class="labels">FirstName : </label> <input type="text"
+						class="firstName" th:field="*{firstName}"> <br> <label
+						class="labels">Email : </label> <input type="email" class="email"
+						th:field="*{email}"> <br> <label class="labels">Password
+						: </label> <input type="password" class="password"
 						th:field="*{account.password}" th:value="${account.password}"
-						th:text="${account.password}">
-						<br>
-				 	<label class="label_underTitle">Bank Data</label>
-						<br>
-						<label class="labels">Bank Name : </label>
-						<input type="text" class="bankAccountName" th:field="*{bankAccount.bankAccountName}"
+						th:text="${account.password}"> <br> <label
+						class="label_underTitle">Bank Data</label> <br> <label
+						class="labels">Bank Name : </label> <input type="text"
+						class="bankAccountName" th:field="*{bankAccount.bankAccountName}"
 						th:value="${bankAccount.bankAccountName}"
-						th:text="${bankAccount.bankAccountName}"> 
-						<br>
-						<label class="labels">Iban : </label>
-						<input type="text" class="bankAccountIban" th:field="*{bankAccount.iban}"
-						th:value="${bankAccount.iban}" th:text="${bankAccount.iban}"> 
-						<br>
-						<label class="labels">BIC :</label>
-						<input type="text" class="bankAccountBic"
-						th:field="*{bankAccount.bic}" th:value="${bankAccount.bic}"
-						th:text="${bankAccount.bic}">
-						<br>
-						<label class="labels">Swift : </label>
-						<input type="text" class="bankAccountSwift" th:field="*{bankAccount.swift}"
-						th:value="${bankAccount.swift}" th:text="${bankAccount.swift}">  
-						
+						th:text="${bankAccount.bankAccountName}"> <br> <label
+						class="labels">Iban : </label> <input type="text"
+						class="bankAccountIban" th:field="*{bankAccount.iban}"
+						th:value="${bankAccount.iban}" th:text="${bankAccount.iban}">
+					<br> <label class="labels">BIC :</label> <input type="text"
+						class="bankAccountBic" th:field="*{bankAccount.bic}"
+						th:value="${bankAccount.bic}" th:text="${bankAccount.bic}">
+					<br> <label class="labels">Swift : </label> <input type="text"
+						class="bankAccountSwift" th:field="*{bankAccount.swift}"
+						th:value="${bankAccount.swift}" th:text="${bankAccount.swift}">
+
 					<button type="submit" class="btn_register">Register</button>
 				</form>
 			</div>

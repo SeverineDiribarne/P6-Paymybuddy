@@ -56,7 +56,7 @@ public class HomeController {
 	public String addPaymentFromBankToApp(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute BankOperation bankOperation) {
 		java.util.Date date = Calendar.getInstance().getTime();
 		bankOperation.setDate(date);
-		String description = "Payment from bank to App";
+		String description = "Payment from Bank to App";
 		bankOperation.setDescription(description);
 		bankOperation.setSource(bankAccountService.getBankAccountId(user));
 		bankOperation.setRecipient(user.getCustomer().getCustomerId());

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LogoffController {
 	
         @GetMapping
-        public String logoff(HttpServletRequest request){
+        public String getLogoff(HttpServletRequest request){
             HttpSession httpSession = request.getSession();
             httpSession.invalidate();
             return "redirect:/login";

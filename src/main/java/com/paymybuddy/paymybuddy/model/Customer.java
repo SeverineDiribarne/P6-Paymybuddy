@@ -12,7 +12,6 @@ public class Customer implements Serializable{
 	 * 	User Attributes
 	 */
 	private int customerId;
-	private String completeName;
 	private String lastName;
 	private String firstName;
 	private String email;
@@ -91,8 +90,6 @@ public class Customer implements Serializable{
 				String[] splittedField = field.split("=");
 				if( splittedField[0].compareTo("customerId")==0)
 					customerId = Integer.parseInt(splittedField[1]);
-				else if( splittedField[0].compareTo("completeName")==0)
-					completeName = splittedField[1];
 				else if (splittedField[0].compareTo("lastName") == 0)
 					lastName = splittedField[1];
 				else if (splittedField[0].compareTo("firstName") == 0)
@@ -143,21 +140,6 @@ public class Customer implements Serializable{
 	 */
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}
-
-	/**
-	 * Getter completeName
-	 * @return completeName
-	 */
-	public String getCompleteName() {
-		return completeName;
-	}
-	/**
-	 * Setter completeName
-	 * @param completeName
-	 */
-	public void setCompleteName(String completeName) {
-		this.completeName = completeName;
 	}
 
 	/**
@@ -281,7 +263,6 @@ public class Customer implements Serializable{
 	@Override
 	public String toString() {
 		return "customerId=" + customerId + "," +
-		"completeName=" + completeName + "," +
 		"lastName=" + lastName  +"," +
 		"firstName=" + firstName +"," +
 		"email="  + email +"," +

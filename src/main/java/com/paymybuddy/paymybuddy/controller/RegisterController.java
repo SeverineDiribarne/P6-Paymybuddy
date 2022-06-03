@@ -32,7 +32,12 @@ public class RegisterController {
 
 	@PostMapping
 	public String registerNewCustomerIntoDatabase(@ModelAttribute Customer customer ) {
-		customerService.registerNewCustomerIntoDatabase(customer);
+		if( !customer.getFirstName().equals("") && !customer.getLastName().equals("") &&
+				!customer.getEmail().equals("") && !customer.getAccount().getPassword().equals("") &&
+				!customer.getBankAccount().getBankAccountName().equals("") && !customer.getBankAccount().getIban().equals("") &&
+				!customer.getBankAccount().getBic().equals("") && !customer.getBankAccount().getSwift().equals("")) {
+			customerService.registerNewCustomerIntoDatabase(customer);
+		}
 		return REDIRECT_LOGIN;
 	}
 }
