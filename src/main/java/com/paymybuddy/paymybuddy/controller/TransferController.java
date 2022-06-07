@@ -55,7 +55,7 @@ public class TransferController {
 			@RequestParam("size") Optional<Integer> size,
 			@RequestParam("bankPage") Optional<Integer> bankPage,
 			@RequestParam("bankSize") Optional<Integer> bankSize) {
-		int currentPage = page.orElse(1);
+		int currentPage = (page.orElse(1))-1;
 		int pageSize = size.orElse(3);
 
 		//for the arraylist of relationships'transfers 
@@ -70,7 +70,7 @@ public class TransferController {
 		}
 
 		//For the arraylist of bank transfers
-		int bankCurrentPage = bankPage.orElse(1);
+		int bankCurrentPage = (bankPage.orElse(1))-1;
 		int bankPageSize = bankSize.orElse(3);
 		Page<BankTransferDisplay> bankOperationsDisplayListPage = bankOperationService.getBankOperationsPaginated(PageRequest.of(bankCurrentPage, bankPageSize), user); 
 
@@ -91,9 +91,9 @@ public class TransferController {
 			connections.add(connection);
 		}
 
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("currentPage", currentPage + 1);
 		model.addAttribute("transferDisplayListPage", transferDisplayListPage);
-		model.addAttribute("bankCurrentPage", bankCurrentPage);
+		model.addAttribute("bankCurrentPage", bankCurrentPage + 1);
 		model.addAttribute("bankOperationsDisplayListPage", bankOperationsDisplayListPage);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		model.addAttribute("connections", connections);
