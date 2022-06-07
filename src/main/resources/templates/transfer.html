@@ -106,21 +106,27 @@
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 
-					<li class="page-item"><a class="page-link" 
+					<li th:if="${currentPage}>1" class="page-item"><a
+						class="page-link"
 						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} -1, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-
+					<li th:unless="${currentPage}>1" class="page-item"><a
+						class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 
 					<th:block th:if="${transferDisplayListPage.totalPages > 0}"
 						th:each="pageNumber : ${pageNumbers}">
 						<li class="page-item"><a class="page-link"
 							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${pageNumber}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
-							th:text=${pageNumber}></a>
-						</li>
+							th:text=${pageNumber}></a></li>
 					</th:block>
 
-					<li class="page-item"><a class="page-link"
+					<li th:if="${currentPage} < ${transferDisplayListPage.totalPages}" class="page-item"><a class="page-link"
 						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} +1, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+					<li th:unless="${currentPage} < ${transferDisplayListPage.totalPages}" class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
@@ -156,21 +162,25 @@
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 
-					<li class="page-item"><a class="page-link"
+					<li th:if="${bankCurrentPage}>1" class="page-item"><a class="page-link"
 						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage} -1)}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-
+					<li th:unless="${bankCurrentPage}>1" class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 
 					<th:block th:if="${bankOperationsDisplayListPage.totalPages > 0}"
 						th:each="bankPageNumber : ${bankPageNumbers}">
 						<li class="page-item"><a class="page-link"
 							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankPageNumber})}"
-							th:text=${bankPageNumber}></a>
-						</li>
+							th:text=${bankPageNumber}></a></li>
 					</th:block>
 
-					<li class="page-item"><a class="page-link"
+					<li th:if="${bankCurrentPage} < ${bankOperationsDisplayListPage.totalPages}" class="page-item"><a class="page-link"
 						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage} +1)}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+					<li th:unless="${bankCurrentPage} < ${bankOperationsDisplayListPage.totalPages}" class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
