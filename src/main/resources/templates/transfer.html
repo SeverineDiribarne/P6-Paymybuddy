@@ -107,20 +107,20 @@
 				<ul class="pagination justify-content-center">
 
 					<li class="page-item"><a class="page-link"
-						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} -1)}"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} -1, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 
 
 					<th:block th:if="${transferDisplayListPage.totalPages > 0}"
 						th:each="pageNumber : ${pageNumbers}">
 						<li class="page-item"><a class="page-link"
-							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${pageNumber})}"
+							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${pageNumber}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 							th:text=${pageNumber}></a>
 						</li>
 					</th:block>
 
 					<li class="page-item"><a class="page-link"
-						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} +1)}"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} +1, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage})}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
@@ -143,7 +143,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="bankTransferDisplay: ${bankTransferDisplayList}">
+					<tr th:each="bankTransferDisplay: ${bankOperationsDisplayListPage}">
 						<td><span th:text="${bankTransferDisplay.date}"></span></td>
 						<td><span th:text="${bankTransferDisplay.sourceName}"></span></td>
 						<td><span th:text="${bankTransferDisplay.recipientName}"></span></td>
@@ -152,14 +152,25 @@
 					</tr>
 			</table>
 		</div>
-		<div class="pages">
+		<div>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
+
+					<li class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage} -1)}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#"
+
+
+					<th:block th:if="${bankOperationsDisplayListPage.totalPages > 0}"
+						th:each="bankPageNumber : ${bankPageNumbers}">
+						<li class="page-item"><a class="page-link"
+							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankPageNumber})}"
+							th:text=${bankPageNumber}></a>
+						</li>
+					</th:block>
+
+					<li class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage}, bankSize=${bankOperationsDisplayListPage.size}, bankPage=${bankCurrentPage} +1)}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>

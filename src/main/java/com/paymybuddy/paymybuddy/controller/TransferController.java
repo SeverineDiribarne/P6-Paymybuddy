@@ -47,36 +47,41 @@ public class TransferController {
 
 	private static final String TRANSFER = "transfer";
 	private static final String PAGE_NUMBERS = "pageNumbers";
+	private static final String BANK_PAGE_NUMBERS = "bankPageNumbers";
 
 	@GetMapping
-	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user, @RequestParam("page") Optional<Integer> page, 
-		      @RequestParam("size") Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(3);
+	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user,
+			@RequestParam("page") Optional<Integer> page, 
+			@RequestParam("size") Optional<Integer> size,
+			@RequestParam("bankPage") Optional<Integer> bankPage,
+			@RequestParam("bankSize") Optional<Integer> bankSize) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(3);
 
 		//for the arraylist of relationships'transfers 
 		Page<TransferDisplay> transferDisplayListPage = transferService.getTransfersPaginated(PageRequest.of(currentPage, pageSize), user); 
 
-		 int transferTotalPages = transferDisplayListPage.getTotalPages();
-	        if (transferTotalPages > 0) {
-	            List<Integer> pageNumbers = IntStream.rangeClosed(1, transferTotalPages)
-	                .boxed()
-	                .collect(Collectors.toList());
-	            model.addAttribute(PAGE_NUMBERS, pageNumbers);
-	        }
-		
-		//For the arraylist of bank transfers
-		
-		Page<BankTransferDisplay> bankOperationsDisplayListPage = bankOperationService.getBankOperationsPaginated(PageRequest.of(currentPage, pageSize), user); 
+		int transferTotalPages = transferDisplayListPage.getTotalPages();
+		if (transferTotalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, transferTotalPages)
+					.boxed()
+					.collect(Collectors.toList());
+			model.addAttribute(PAGE_NUMBERS, pageNumbers);
+		}
 
-		 int bankTotalPages = bankOperationsDisplayListPage.getTotalPages();
-	        if (bankTotalPages > 0) {
-	            List<Integer> pageNumbers = IntStream.rangeClosed(1, bankTotalPages)
-	                .boxed()
-	                .collect(Collectors.toList());
-	            model.addAttribute(PAGE_NUMBERS, pageNumbers);
-	        }
-		
+		//For the arraylist of bank transfers
+		int bankCurrentPage = bankPage.orElse(1);
+		int bankPageSize = bankSize.orElse(3);
+		Page<BankTransferDisplay> bankOperationsDisplayListPage = bankOperationService.getBankOperationsPaginated(PageRequest.of(bankCurrentPage, bankPageSize), user); 
+
+		int bankTotalPages = bankOperationsDisplayListPage.getTotalPages();
+		if (bankTotalPages > 0) {
+			List<Integer> bankPageNumber = IntStream.rangeClosed(1, bankTotalPages)
+					.boxed()
+					.collect(Collectors.toList());
+			model.addAttribute(BANK_PAGE_NUMBERS, bankPageNumber);
+;		}
+
 		//for drop-down list of relationships
 		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		List<Connection> connections = new ArrayList<>();
@@ -85,10 +90,10 @@ public class TransferController {
 			Connection connection = new Connection(connectionId, user, customer);
 			connections.add(connection);
 		}
-		
-      
-        model.addAttribute("currentPage", currentPage);
+
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("transferDisplayListPage", transferDisplayListPage);
+		model.addAttribute("bankCurrentPage", bankCurrentPage);
 		model.addAttribute("bankOperationsDisplayListPage", bankOperationsDisplayListPage);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		model.addAttribute("connections", connections);
@@ -98,20 +103,20 @@ public class TransferController {
 
 	@PostMapping
 	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer, @RequestParam("page") Optional<Integer> page, 
-		      @RequestParam("size") Optional<Integer> size) {
+			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(1);
-	    int pageSize = size.orElse(5);
+		int pageSize = size.orElse(5);
 		transferService.addPayment(transfer,user);
 		Page<TransferDisplay> transferDisplayListPage = transferService.getTransfersPaginated(PageRequest.of(currentPage - 1, pageSize), user);
-	
-		 int totalPages = transferDisplayListPage.getTotalPages();
-	        if (totalPages > 0) {
-	            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-	                .boxed()
-	                .collect(Collectors.toList());
-	            model.addAttribute(PAGE_NUMBERS, pageNumbers);
-	        }
-		showTransfersAndFriends( model, user, page, size);
+
+		int totalPages = transferDisplayListPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+					.boxed()
+					.collect(Collectors.toList());
+			model.addAttribute(PAGE_NUMBERS, pageNumbers);
+		}
+		showTransfersAndFriends( model, user, page, size, page, size);
 		model.addAttribute("transferDisplayListPage", transferDisplayListPage);
 		model.addAttribute("username", user.getCustomer().getFirstName());
 		return TRANSFER;
