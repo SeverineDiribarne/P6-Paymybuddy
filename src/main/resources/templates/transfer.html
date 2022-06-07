@@ -57,7 +57,7 @@
 							<option class="option" value="0">Select A Connection</option>
 							<option class="option" th:each="connection : ${connections}"
 								th:value="${connection.customerRecipient}"
-								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName}"> 
+								th:text="${connection.customerRecipient.firstName} + ' ' + ${connection.customerRecipient.lastName}">
 							</option>
 						</select>
 					</div>
@@ -92,7 +92,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="transferDisplay: ${transferDisplayList}">
+					<tr th:each="transferDisplay: ${transferDisplayListPage}">
 						<td><span th:text="${transferDisplay.date}"></span></td>
 						<td><span th:text="${transferDisplay.sourceName}"></span></td>
 						<td><span th:text="${transferDisplay.recipientName}"></span></td>
@@ -102,21 +102,31 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="pages">
+		<div>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
+
+					<li class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} -1)}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+
+
+					<th:block th:if="${transferDisplayListPage.totalPages > 0}"
+						th:each="pageNumber : ${pageNumbers}">
+						<li class="page-item"><a class="page-link"
+							th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${pageNumber})}"
+							th:text=${pageNumber}></a>
+						</li>
+					</th:block>
+
+					<li class="page-item"><a class="page-link"
+						th:href="@{/transfer(size=${transferDisplayListPage.size}, page=${currentPage} +1)}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
+
 	<div class="transactions">
 		<div class="title_transactions">
 			<label class="label_transaction">My Banking Transactions</label>
@@ -145,12 +155,12 @@
 		<div class="pages">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> 
-						<span aria-hidden="true">&laquo;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 					<li class="page-item"><a class="page-link" href="#">1</a></li>
 					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-						 <span aria-hidden="true">&raquo;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 				</ul>
 			</nav>
 		</div>

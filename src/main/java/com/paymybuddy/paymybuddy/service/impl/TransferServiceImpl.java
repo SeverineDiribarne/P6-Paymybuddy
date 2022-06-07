@@ -1,13 +1,20 @@
 package com.paymybuddy.paymybuddy.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
+import com.paymybuddy.paymybuddy.dto.TransferDisplay;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.model.Transfer;
@@ -91,5 +98,40 @@ public class TransferServiceImpl implements TransferService{
 				connection.getCustomerRecipient().setCustomerId(customerRecipientId);
 			}
 		}	
+	}
+	
+	@Override
+	public Page<TransferDisplay> getTransfersPaginated(Pageable pageable, MyMainUser user) {
+		int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Transfer> allTransfers = getListOfTransfers(user);
+        
+		String userMainName = "";
+		List<TransferDisplay> allTransfersDisplayList = new ArrayList<>();
+		for(Transfer transfer : allTransfers) {
+			Connection connection = transfer.getConnection();
+			userMainName = user.getCustomer().getFirstName() + " " + user.getCustomer().getLastName();
+			Customer customerRecipient = customerDao.getCustomerRecipientNameById(connection.getCustomerRecipient());
+			String customerRecipientName = customerRecipient.getFirstName() + " " + customerRecipient.getLastName();	
+			if (transfer.getAmount()>=0) {
+				String temp = "";
+				temp = userMainName;
+				userMainName = customerRecipientName;
+				customerRecipientName = temp;	
+			}
+			TransferDisplay transferDisplay = new TransferDisplay(transfer.getDate(),userMainName, customerRecipientName, transfer.getDescription(), transfer.getAmount());
+			allTransfersDisplayList.add(transferDisplay);			
+		}
+
+        List<TransferDisplay> filteredTransfers = null;
+        
+        if (allTransfersDisplayList.size() < startItem) {
+        	filteredTransfers = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, allTransfersDisplayList.size());
+            filteredTransfers = allTransfersDisplayList.subList(startItem, toIndex);
+        }
+        return new PageImpl<>(filteredTransfers, PageRequest.of(currentPage, pageSize), allTransfersDisplayList.size());
 	}
 }
