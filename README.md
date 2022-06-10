@@ -5,7 +5,7 @@ Diagramme de Use Case
 #
 Diagramme de classe
 #
-<img src="https://user-images.githubusercontent.com/75072149/173114816-2d39fc2e-edb4-4874-a000-b6c94948d759.png" width="60%"></img> 
+<img src="https://user-images.githubusercontent.com/75072149/173115591-044661fc-e104-47bd-bb63-b9ddcb662fd1.png" width="60%"></img> 
 #
 schema de modelisation de la base de données
 #
