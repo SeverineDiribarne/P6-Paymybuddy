@@ -90,7 +90,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 * get bank Operation paginated
 	 * @param pageable
 	 * @param user
-	 * @return new page of bank operations paginated in bankTransferDisplay 
+	 * @return  pagination of bank operations 
 	 */
 	@Override
 	public Page<BankTransferDisplay> getBankOperationsPaginated(Pageable pageable, MyMainUser user) {

@@ -110,7 +110,7 @@ public class TransferServiceImpl implements TransferService{
 	 * get Transfers Paginated
 	 * @param pageable
 	 * @param user
-	 * @return new page of transfers paginated in transferDisplay
+	 * @return pagination of all transfers 
 	 */
 	@Override
 	public Page<TransferDisplay> getTransfersPaginated(Pageable pageable, MyMainUser user) {
