@@ -16,8 +16,6 @@ public interface ConnectionDao {
 
 	Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient);
 
-	int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId);
-
 	int getConnectionIdWithCustomersIdByConnection(double amount, int customerSourceId, int customerRecipientId);
 
 }

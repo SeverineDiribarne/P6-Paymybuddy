@@ -37,12 +37,18 @@ public class TransferServiceImpl implements TransferService{
 	/**
 	 * get List Of transfers
 	 * @param mainUserId
+	 * @return list of all transfers
 	 */
 	@Override
 	public List<Transfer> getListOfTransfers(MyMainUser user) {
 		return transferDao.getListOfTransfers(user);
 	}
 
+	/**
+	 * add payment
+	 * @param transfer
+	 * @param user
+	 */
 	@Override
 	public void addPayment(Transfer transfer, MyMainUser user) {
 		if(transfer.getAmount() > 0) {
@@ -100,6 +106,12 @@ public class TransferServiceImpl implements TransferService{
 		}	
 	}
 	
+	/**
+	 * get Transfers Paginated
+	 * @param pageable
+	 * @param user
+	 * @return new page of transfers paginated in transferDisplay
+	 */
 	@Override
 	public Page<TransferDisplay> getTransfersPaginated(Pageable pageable, MyMainUser user) {
 		int pageSize = pageable.getPageSize();

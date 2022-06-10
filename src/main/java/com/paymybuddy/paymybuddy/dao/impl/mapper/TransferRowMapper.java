@@ -14,9 +14,11 @@ public class TransferRowMapper  implements RowMapper<Transfer>{
 	@Autowired
 	ConnectionDao connectionDaoImpl;
 	
+	/**
+	 * retrieves the information of the connectionId, connectionSource, connectionRecipient, transferDate, description and amount in the database
+	 */
 	@Override
 	public Transfer mapRow(ResultSet rs, int rowNum) throws SQLException {
 		return new Transfer(rs.getInt("connectionId"), rs.getInt("connectionSource"), rs.getInt("connectionRecipient"), rs.getDate("transferDate"), rs.getString("description") , rs.getDouble("amount"));
 		}
 	}
-

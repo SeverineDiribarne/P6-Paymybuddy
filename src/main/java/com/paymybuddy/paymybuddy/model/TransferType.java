@@ -7,10 +7,18 @@ public enum TransferType {
 
 	private final int value;
 	
+	/***
+	 * Constructor
+	 * @param value
+	 */
 	private TransferType(int value) {
 	    this.value = value;
 	}
 
+	/**
+	 * getter value
+	 * @return value
+	 */
 	public int getValue() {
 	    return value;
 	}

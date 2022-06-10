@@ -26,6 +26,8 @@ public class BankOperationDaoImpl implements BankOperationDao {
 			+ " WHERE ba.customer_id = ?;";
 	/**
 	 * Get all bank operations 
+	 * @param user
+	 * @return list of all bankOperations
 	 */
 	@Override
 	public List<BankOperation> getBankOperations(MyMainUser user) {
@@ -37,6 +39,7 @@ public class BankOperationDaoImpl implements BankOperationDao {
 			+ " VALUES (?,?,?,?);";
 	/**
 	 * Add a payment from bank to application
+	 * @param bankOperation
 	 */
 	@Override
 	public void addPaymentFromBankToApp(BankOperation bankOperation) {
@@ -48,6 +51,7 @@ public class BankOperationDaoImpl implements BankOperationDao {
 			+ " VALUES (?,?,?,?);";
 	/**
 	 * Add a payment from application to bank
+	 * @param bankOperation
 	 */
 	@Override
 	public void addPaymentFromAppToBank(BankOperation bankOperation) {
@@ -57,6 +61,7 @@ public class BankOperationDaoImpl implements BankOperationDao {
 	public static final String GET_LAST_OPERATION_ID_QUERY = "SELECT max(bo.operationId) AS operationId FROM bank_operation bo;";
 	/**
 	 * get last operation id
+	 * @return last OperationId
 	 */
 	@Override
 	public BankOperation getLastOperationId() {
@@ -67,7 +72,11 @@ public class BankOperationDaoImpl implements BankOperationDao {
 			+ " JOIN bank_operation bo"
 			+ " ON bo.bank_accountId = ba.bankAccount_id"
 			+ " WHERE bo.bank_accountId = ?; ";
-
+	/**
+	 * Get BankAccount name
+	 * @param bankOperation
+	 * @return list of bankAccount name
+	 */
 	@Override
 	public List<BankAccount> getName(BankOperation bankOperation) {
 		return jdbcTemplate.query(GET_BANK_ACCOUNT_NAME_QUERY,new BankAccountNameRowMapper(), bankOperation.getRecipient());

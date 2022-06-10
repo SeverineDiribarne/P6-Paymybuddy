@@ -18,9 +18,12 @@ public class HomeDaoImpl implements HomeDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
 	private static final String GET_BALANCE_QUERY ="SELECT balance FROM customer WHERE id = ?;";
 	/**
-	 * Get balance
+	 * Get mainUser balance
+	 * @param user
+	 * @return customer balance
 	 */
 	@Override
 	public Customer getBalance(MyMainUser user) {
@@ -36,6 +39,8 @@ public class HomeDaoImpl implements HomeDao{
 			+ " WHERE cust.id = ? AND bo.operationId  = ?;";
 	/**
 	 * Monetization 0.5% for application From Application To bank method
+	 * @param sourceId
+	 * @param bankOperationId
 	 */
 	@Override
 	public void monetizationAppFromAppToBank(int sourceId, int bankOperationId) {

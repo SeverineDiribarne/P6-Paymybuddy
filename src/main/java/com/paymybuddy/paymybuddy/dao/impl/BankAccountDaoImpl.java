@@ -24,7 +24,7 @@ public class BankAccountDaoImpl implements BankAccountDao{
 			+ " WHERE cust.id = ?;"; 
 	/**
 	 * get bank account id
-	 * @param customerId
+	 * @param user
 	 * @return bankAccountId
 	 */
 	@Override
@@ -38,6 +38,11 @@ public class BankAccountDaoImpl implements BankAccountDao{
 			+ " ON cust.id = ba.customer_id"
 			+ " WHERE cust.id = ?;";
 	
+	/**
+	 * get all elements of bank account
+	 * @param user
+	 * @return list of all elements of bank account
+	 */
 	@Override
 	public List<BankAccount> getAllElementsOfBankAccount(MyMainUser user) {
 		return jdbcTemplate.query(GET_BANK_ACCOUNT_ELEMENTS_QUERY, new BankAccountAllElementsRowMapper(), user.getCustomer().getCustomerId());

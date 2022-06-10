@@ -30,6 +30,8 @@ public class TransferDaoImpl implements TransferDao {
 			+ " ORDER BY t.transferId;";
 	/**
 	 * Get all transfers in the list
+	 * @param user
+	 * @return list of transfers
 	 */
 	@Override
 	public List<Transfer> getListOfTransfers(MyMainUser user) {
@@ -41,6 +43,9 @@ public class TransferDaoImpl implements TransferDao {
 			+ " VALUES (?,?,?,?,?);" ;
 	/**
 	 * add a payment in database
+	 * @param transfer
+	 * @param connection
+	 * @param amount
 	 */
 	@Override
 	public void addPayment(Transfer transfer, Connection connection, double amount) {
@@ -48,7 +53,10 @@ public class TransferDaoImpl implements TransferDao {
 	}
 
 	public static final String GET_LAST_TRANSFER_ID_QUERY = "select max(t.transferId) AS transferId  FROM transfer t;";
-
+	/**
+	 * Get Last TransferId
+	 * @return last transferId
+	 */
 	@Override
 	public Transfer getLastTransferId() {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());

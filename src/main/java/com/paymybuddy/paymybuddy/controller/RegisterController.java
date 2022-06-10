@@ -22,6 +22,11 @@ public class RegisterController {
 	@Autowired
 	CustomerService customerService;
 
+	/**
+	 * get register
+	 * @param model
+	 * @return register page
+	 */
 	@GetMapping
 	public String getRegister(Model model) {
 		model.addAttribute("customer", new Customer());
@@ -30,6 +35,11 @@ public class RegisterController {
 		return "register";
 	}
 
+	/**
+	 * register new Customer into database
+	 * @param customer
+	 * @return login page
+	 */
 	@PostMapping
 	public String registerNewCustomerIntoDatabase(@ModelAttribute Customer customer ) {
 		if( !customer.getFirstName().equals("") && !customer.getLastName().equals("") &&

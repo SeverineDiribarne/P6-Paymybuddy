@@ -23,6 +23,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	/**
 	 * configure HTTP security
+	 * @param http
 	 */
 	@Override
 	protected void configure (HttpSecurity http) throws Exception {
@@ -44,6 +45,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	/**
 	 * configure method with AuthenticationManagerBuilder
+	 * @param auth
 	 */
 	 @Override
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {

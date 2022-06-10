@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BankTransferDisplay {
 
+	//Attributes
 	private Date date;
 	private String sourceName;
 	private String recipientName;
@@ -23,12 +24,14 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * getter date
 	 * @return the date
 	 */
 	public Date getDate() {
 		return date;
 	}
 	/**
+	 * setter date
 	 * @param date the date to set
 	 */
 	public void setDate(Date date) {
@@ -36,6 +39,7 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * getter sourceName
 	 * @return the sourceName
 	 */
 	public String getSourceName() {
@@ -43,6 +47,7 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * setter sourceName
 	 * @param sourceName the sourceName to set
 	 */
 	public void setSourceName(String sourceName) {
@@ -50,6 +55,7 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * getter recipientName
 	 * @return the recipientName
 	 */
 	public String getRecipientName() {
@@ -57,6 +63,7 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * setter recipientName
 	 * @param recipientName the recipientName to set
 	 */
 	public void setRecipientName(String recipientName) {
@@ -64,29 +71,37 @@ public class BankTransferDisplay {
 	}
 
 	/**
+	 * getter description
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
+	
 	/**
+	 * setter description
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	/**
+	 * getter amount
 	 * @return the amount
 	 */
 	public double getAmount() {
 		return amount;
 	}
+	
 	/**
+	 * setter amount
 	 * @param amount the amount to set
 	 */
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+	
 	/**
 	 * toString method
 	 */

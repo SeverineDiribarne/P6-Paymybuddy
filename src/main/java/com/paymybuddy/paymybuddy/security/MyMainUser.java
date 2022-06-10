@@ -12,6 +12,7 @@ public class MyMainUser implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
+	// Attributes
 	private transient Customer customer;
 	
 	/**
@@ -23,7 +24,7 @@ public class MyMainUser implements UserDetails {
 	}
 
 	/**
-	 * get Authorities method
+	 * get Authorities 
 	 * @return empty list
 	 */
 	@Override
@@ -32,7 +33,7 @@ public class MyMainUser implements UserDetails {
 	}
 
 	/**
-	 * get Password Method
+	 * get Password
 	 * @return password
 	 */
 	@Override

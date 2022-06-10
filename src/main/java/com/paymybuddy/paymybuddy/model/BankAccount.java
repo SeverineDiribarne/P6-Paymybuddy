@@ -2,8 +2,8 @@ package com.paymybuddy.paymybuddy.model;
 
 public class BankAccount {
 
+	//Attributes 
 	private int bankAccountId;
-
 	private String bankAccountName;
 	private String iban;
 	private String bic;
@@ -41,7 +41,6 @@ public class BankAccount {
 		this.bankAccountName = bankAccountName;
 	}
 
-
 	/**
 	 * @return the bankAccountId
 	 */
@@ -71,6 +70,7 @@ public class BankAccount {
 	}
 
 	/**
+	 * getter iban
 	 * @return the iban
 	 */
 	public String getIban() {
@@ -78,6 +78,7 @@ public class BankAccount {
 	}
 	
 	/**
+	 * setter iban
 	 * @param iban the iban to set
 	 */
 	public void setIban(String iban) {
@@ -85,6 +86,7 @@ public class BankAccount {
 	}
 	
 	/**
+	 * getter bic
 	 * @return the bic
 	 */
 	public String getBic() {
@@ -92,6 +94,7 @@ public class BankAccount {
 	}
 	
 	/**
+	 * setter bic
 	 * @param bic the bic to set
 	 */
 	public void setBic(String bic) {
@@ -99,6 +102,7 @@ public class BankAccount {
 	}
 	
 	/**
+	 * getter swift
 	 * @return the swift
 	 */
 	public String getSwift() {
@@ -106,25 +110,27 @@ public class BankAccount {
 	}
 	
 	/**
+	 * setter swift
 	 * @param swift the swift to set
 	 */
 	public void setSwift(String swift) {
 		this.swift = swift;
 	}
 	/**
+	 * getter userId
 	 * @return the userId
 	 */
 	public int getUserId() {
 		return userId;
 	}
 	/**
+	 * setter userId
 	 * @param userId the userId to set
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	
 	/**
 	 * toString method
 	 */

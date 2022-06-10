@@ -9,11 +9,11 @@ import com.paymybuddy.paymybuddy.model.Customer;
 
 public class UserIdRowMapper implements RowMapper<Customer>{
 
+	/**
+	 * retrieves the information of customerId in the database
+	 */
 	@Override
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 		return new Customer( rs.getInt("id"));
 	}
-
-	
-
 }

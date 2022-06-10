@@ -49,6 +49,16 @@ public class TransferController {
 	private static final String PAGE_NUMBERS = "pageNumbers";
 	private static final String BANK_PAGE_NUMBERS = "bankPageNumbers";
 
+	/**
+	 * Show Transfers and Friends
+	 * @param model
+	 * @param user
+	 * @param page
+	 * @param size
+	 * @param bankPage
+	 * @param bankSize
+	 * @return transfer page
+	 */
 	@GetMapping
 	public String showTransfersAndFriends(Model model,  @AuthenticationPrincipal MyMainUser user,
 			@RequestParam("page") Optional<Integer> page, 
@@ -101,6 +111,15 @@ public class TransferController {
 		return TRANSFER;
 	}
 
+	/**
+	 * add Payment
+	 * @param model
+	 * @param user
+	 * @param transfer
+	 * @param page
+	 * @param size
+	 * @return transfer page
+	 */
 	@PostMapping
 	public String addPayment(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute Transfer transfer, @RequestParam("page") Optional<Integer> page, 
 			@RequestParam("size") Optional<Integer> size) {

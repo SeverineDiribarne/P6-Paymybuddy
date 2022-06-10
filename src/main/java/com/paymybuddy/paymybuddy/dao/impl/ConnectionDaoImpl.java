@@ -24,9 +24,10 @@ public class ConnectionDaoImpl implements ConnectionDao{
 	private static final String SELECT_CUSTOMER_ID_QUERY =  "SELECT cust.id FROM customer cust WHERE cust.email = ? ;"; 
 	private static final String ADD_CONNECTION_QUERY =  "INSERT INTO connection (connectionSource, connectionRecipient) VALUES (?,?);"; 
 	private static final String SELECT_COUNT_QUERY =  "SELECT count(*) FROM connection con WHERE con.connectionSource = ? AND con.connectionRecipient = ?;"; 
-
 	/**
 	 * Add a connection in dropdown list
+	 * @param user
+	 * @param customer
 	 */
 	@Override
 	public void addAConnection(MyMainUser user, Customer customer) {
@@ -46,6 +47,9 @@ public class ConnectionDaoImpl implements ConnectionDao{
 			+ " AND con.connectionRecipient = ? ;";
 	/**
 	 * Get ConnectionId by CustomerSourceId and CustomerRecipientId
+	 * @param user
+	 * @param customer
+	 * @return connectionId
 	 */
 	@Override
 	public int getConnectionIdByCustomersIdWithMainUser(MyMainUser user, Customer customer) {
@@ -55,6 +59,8 @@ public class ConnectionDaoImpl implements ConnectionDao{
 	private static final String DELETE_CONNECTION_QUERY =  "DELETE FROM connection con WHERE con.connectionId = ?;"; 
 	/**
 	 * Delete a connection in dropdown list
+	 * @param user
+	 * @param customer
 	 */
 	@Override
 	public void deleteAConnection(MyMainUser user, Customer customer) {
@@ -70,44 +76,44 @@ public class ConnectionDaoImpl implements ConnectionDao{
 			}
 		}
 	}
-//	@Override
-//	public int getConnectionIdWithCustomersIdByConnection(double amount,Customer customerSource, Customer customerRecipient) {
-//		if (amount <= 0) {
-//			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
-//		}
-//		else {
-//			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
-//		}
-//	}
-	
+
 	private static final String GET_COMPLETE_NAME_OF_RECIPIENT_BY_HIS_CONNECTION_ID_QUERY = "select cust.firstName, cust.lastName"
 			+ " FROM customer cust"
 			+ " WHERE cust.id = ?;";
-	
+	/**
+	 * get RecipientName By RecipientId
+	 * @param connection
+	 * @return name of customerRecipient
+	 */
 	@Override
 	public Customer getRecipientNameByRecipientId(Connection connection) {
 		return jdbcTemplate.queryForObject(GET_COMPLETE_NAME_OF_RECIPIENT_BY_HIS_CONNECTION_ID_QUERY, new GetRecipientCompleteNameRowMapper() , connection.getCustomerRecipient().getCustomerId());
 	}
 	
-	
-	//TODO fait en cherchant le bug de addPayment
 	private static final String GET_CONNECTION_BY_CUSTOMERS_QUERY = "select con.connectionId"
 			+ " FROM connection con"
 			//+ " JOIN customer cust"
 			//+ " ON cust.id  = con.connectionSource"
 			+ " WHERE con.connectionSource = ?"
 			+ " AND con.connectionRecipient= ?;";
+	/**
+	 * get connection by customers 
+	 * @param customerSource
+	 * @param customerRecipient
+	 * @return connectionId
+	 */
 	@Override
 	public Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient) {
 		return jdbcTemplate.queryForObject(GET_CONNECTION_BY_CUSTOMERS_QUERY, new ConnectionByCustomersRowMapper(), customerSource.getCustomerId(), customerRecipient.getCustomerId());
 	}
 	
-	//TODO methode de retour en arriere pour la methode addPayment
-	@Override
-	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
-		return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
-	}
-	
+	/**
+	 * get ConnectionId With CustomersId By Connection
+	 * @param amount
+	 * @param customerSourceId
+	 * @param customerRecipientId
+	 * @return the connectionId according to the positive or negative amount
+	 */
 	@Override
 	public int getConnectionIdWithCustomersIdByConnection(double amount,int customerSourceId, int customerRecipientId) {
 		if (amount <= 0) {
@@ -117,5 +123,4 @@ public class ConnectionDaoImpl implements ConnectionDao{
 			return jdbcTemplate.queryForObject(GET_CONNECTION_ID_BY_CUSTOMERS_ID_QUERY, new ConnectionIdByCustomersIdRowMapper(), customerSourceId, customerRecipientId);
 		}
 	}
-	
 }

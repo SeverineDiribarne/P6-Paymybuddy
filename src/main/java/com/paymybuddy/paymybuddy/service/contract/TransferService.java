@@ -17,6 +17,4 @@ public interface TransferService {
 
 	Page<TransferDisplay> getTransfersPaginated(Pageable pageable, MyMainUser user);
 
-	
-
 }

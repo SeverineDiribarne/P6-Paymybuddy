@@ -11,5 +11,4 @@ public interface BankAccountService {
 
 	List<BankAccount> getAllElementsOfBankAccount(MyMainUser user);
 	
-	
 }

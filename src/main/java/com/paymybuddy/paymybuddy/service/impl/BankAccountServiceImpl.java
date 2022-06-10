@@ -18,10 +18,21 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Autowired
 	BankAccountDao bankAccountDao = new BankAccountDaoImpl();
 	
+	/**
+	 * get bankaccountId
+	 * @param user
+	 * @return bankaccountId
+	 */
 	@Override
 	public int getBankAccountId(MyMainUser user) {
 		return bankAccountDao.getBankAccountId(user);
 	}
+	
+	/**
+	 * get all elements of bankAccount
+	 * @param user
+	 * @return list of all elements of bankAccount
+	 */
 	@Override
 	public List<BankAccount> getAllElementsOfBankAccount(MyMainUser user) {
 		return bankAccountDao.getAllElementsOfBankAccount(user);

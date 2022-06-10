@@ -6,13 +6,14 @@ import com.paymybuddy.paymybuddy.model.TransferType;
 
 public class TransferDisplay  {
 
+	//Attributes
 	private Date date;
 	private String sourceName;
 	private String recipientName;
 	private String description;
 	private double amount;
 	private TransferType transferType;
-	
+
 	/**
 	 * Complete constructor
 	 * @param date
@@ -30,10 +31,10 @@ public class TransferDisplay  {
 		this.amount = amount;
 		if(amount <0) {
 			this.transferType = TransferType.DEBIT;
-			}
-			else {
-				this.transferType = TransferType.CREDIT;
-			}
+		}
+		else {
+			this.transferType = TransferType.CREDIT;
+		}
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class TransferDisplay  {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	/**
 	 * Setter date
 	 * @param date the date to set
@@ -51,7 +52,7 @@ public class TransferDisplay  {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	/**
 	 * Getter sourceName
 	 * @return sourceName

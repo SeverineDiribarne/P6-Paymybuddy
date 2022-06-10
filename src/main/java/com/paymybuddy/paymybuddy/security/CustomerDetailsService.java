@@ -14,6 +14,11 @@ public class CustomerDetailsService implements UserDetailsService {
 	@Autowired
 	private CustomerDetailsDao customerDetailsDao;
 	
+	/**
+	 * load user by username
+	 * @param username
+	 * @return new MyMainUser 
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Customer customer = customerDetailsDao.getCustomer(username);

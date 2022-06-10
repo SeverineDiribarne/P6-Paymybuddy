@@ -12,9 +12,14 @@ import com.paymybuddy.paymybuddy.service.contract.HomeService;
 @Service
 public class HomeServiceImpl implements HomeService {
 
-@Autowired
-public HomeDao homeDao;
-	
+	@Autowired
+	public HomeDao homeDao;
+
+	/**
+	 * get balance
+	 * @param user
+	 * @return balance of customer
+	 */
 	@Override
 	public Customer getBalance(MyMainUser user) {
 		return homeDao.getBalance(user);	

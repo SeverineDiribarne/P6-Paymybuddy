@@ -8,9 +8,8 @@ public class Customer implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 	User Attributes
-	 */
+	
+	//Attributes
 	private int customerId;
 	private String lastName;
 	private String firstName;
@@ -18,9 +17,7 @@ public class Customer implements Serializable{
 	private double balance;
 	private transient BankAccount bankAccount;
 	private transient Account account;
-	private List<Customer> friends = new ArrayList<>();
 	private transient List<Transfer> transfers = new ArrayList<>();
-
 
 	/**
 	 * Empty constructor
@@ -134,6 +131,7 @@ public class Customer implements Serializable{
 	public int getCustomerId() {
 		return customerId;
 	}
+	
 	/**
 	 * Setter customerId
 	 * @param customerId
@@ -149,6 +147,7 @@ public class Customer implements Serializable{
 	public String getLastName() {
 		return lastName;
 	}
+	
 	/**
 	 * Setter lastName
 	 * @param lastName
@@ -164,6 +163,7 @@ public class Customer implements Serializable{
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	/**
 	 * Setter firstName
 	 * @param firstName
@@ -179,6 +179,7 @@ public class Customer implements Serializable{
 	public String getEmail() {
 		return email;
 	}
+	
 	/**
 	 * Setter Email
 	 * @param email
@@ -204,6 +205,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
+	 * getter bankAccount
 	 * @return the bankAccount
 	 */
 	public BankAccount getBankAccount() {
@@ -211,6 +213,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
+	 * setter bankAccount
 	 * @param bankAccount the bankAccount to set
 	 */
 	public void setBankAccount(BankAccount bankAccount) {
@@ -218,6 +221,7 @@ public class Customer implements Serializable{
 	}
 
 	/**
+	 * getter account
 	 * @return the account
 	 */
 	public Account getAccount() {
@@ -230,21 +234,6 @@ public class Customer implements Serializable{
 	 */
 	public void setAccount(Account account) {
 		this.account = account;
-	}
-
-	/**
-	 * @return the friends
-	 */
-	public List<Customer> getFriends() {
-		return friends;
-	}
-	/**
-	 * Setter friends
-	 * @param friends
-	 */
-
-	public void setFriends(List<Customer> friends) {
-		this.friends = friends;
 	}
 
 	/**

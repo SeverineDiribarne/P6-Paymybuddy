@@ -14,38 +14,57 @@ public class ConnectionServiceImpl implements ConnectionService {
 
 	@Autowired
 	ConnectionDao connectionDao;
-	
+
+	/**
+	 * add A Connection
+	 * @param user
+	 * @param customer
+	 */
 	@Override
 	public void addAConnection(MyMainUser user, Customer customer) {
 		connectionDao.addAConnection( user, customer);
-		
+
 	}
 
+	/**
+	 * get ConnectionId By CustomersId With MainUser
+	 * @param user
+	 * @param customer
+	 * @return connectionId
+	 */
 	@Override
 	public int getConnectionIdByCustomersIdWithMainUser(MyMainUser user, Customer customer) {
 		return connectionDao.getConnectionIdByCustomersIdWithMainUser(user, customer);
 	}
 
-
+	/**
+	 * delete A Connection
+	 * @param user
+	 * @param customer
+	 */
 	@Override
 	public void deleteAConnection(MyMainUser user, Customer customer) {
 		connectionDao.deleteAConnection( user, customer);
-		
-	}
 
+	}
+	/**
+	 * get RecipientName By RecipientId
+	 * @param connection
+	 * @return name of customerRecipient
+	 */
 	@Override
 	public Customer getRecipientNameByRecipientId(Connection connection) {
 		return connectionDao.getRecipientNameByRecipientId( connection);
 	}
 
+	/**
+	 * get Connection By Customers
+	 * @param customerSource
+	 * @param customerRecipient
+	 * @return connection
+	 */
 	@Override
 	public Connection getConnectionByCustomers(Customer customerSource, Customer customerRecipient) {
 		return connectionDao.getConnectionByCustomers( customerSource, customerRecipient);
-	}
-
-	//TODO Voir si a garder
-	@Override
-	public int getConnectionIdByCustomersId(int customerSourceId, int customerRecipientId) {
-		return connectionDao.getConnectionIdByCustomersId(customerSourceId, customerRecipientId);
 	}
 }

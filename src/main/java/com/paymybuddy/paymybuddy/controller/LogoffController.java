@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/logoff")
 public class LogoffController {
 	
+		/**
+		 * get log off
+		 * @param request
+		 * @return login page
+		 */
         @GetMapping
         public String getLogoff(HttpServletRequest request){
             HttpSession httpSession = request.getSession();

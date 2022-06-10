@@ -75,8 +75,6 @@ public class BankOperation {
 		this.date = date;
 	}
 	
-	
-	
 	/**
 	 * Getter description
 	 * @return the description

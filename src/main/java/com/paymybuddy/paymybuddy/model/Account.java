@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class Account implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Account Attributes
-	 */
+	
+	
+	//Attributes
 	private int accountId;
 	private String password;
-	
 	
 	/**
 	 * Empty contructor
@@ -28,7 +27,6 @@ public class Account implements Serializable{
 		return accountId;
 	}
 	
-	
 	/**
 	 * Getter Password
 	 * @return the password
@@ -43,5 +41,13 @@ public class Account implements Serializable{
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * toString method
+	 */
+	@Override
+	public String toString() {
+		return "Account [accountId=" + accountId + ", password=" + password + "]";
 	}
 }

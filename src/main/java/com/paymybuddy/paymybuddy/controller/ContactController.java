@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/contact")
 public class ContactController {
 
-	
+	/**
+	 * get contact
+	 * @return contact page
+	 */
 	@GetMapping
 	public String getContact() {
 		return "contact";

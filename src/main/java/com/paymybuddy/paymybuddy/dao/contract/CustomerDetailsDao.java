@@ -6,5 +6,4 @@ public interface CustomerDetailsDao {
 
 	Customer getCustomer(String email);
 
-	
 }

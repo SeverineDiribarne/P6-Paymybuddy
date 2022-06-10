@@ -31,8 +31,11 @@ public class BankOperationServiceImpl implements BankOperationService {
 	
 	@Autowired
 	HomeDao homeDao;
+	
 	/**
-	 * 
+	 * Get bank Operations
+	 * @param user
+	 * @return list of bankOperations
 	 */
 	@Override
 	public List<BankOperation> getBankOperations(MyMainUser user) {
@@ -41,6 +44,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 
 	/**
 	 * Add Payment From app To Bank
+	 * @param bankOperation
 	 */
 	@Override
 	public void addPaymentFromBankToApp(BankOperation bankOperation) {
@@ -51,6 +55,8 @@ public class BankOperationServiceImpl implements BankOperationService {
 
 	/**
 	 * Add payment From App To bank
+	 * @param user
+	 * @param bankOperation
 	 */
 	@Override
 	public void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) {
@@ -63,6 +69,7 @@ public class BankOperationServiceImpl implements BankOperationService {
 	
 	/**
 	 * Get last Operation Id 
+	 * @return last OperationId
 	 */
 	@Override
 	public BankOperation getLastOperationId() {
@@ -71,12 +78,20 @@ public class BankOperationServiceImpl implements BankOperationService {
 
 	/**
 	 * Get BankAccount Name for display
+	 * @param bankOperation
+	 * @return list of bankAccount names
 	 */
 	@Override
 	public List<BankAccount> getName(BankOperation bankOperation) {
 		return bankOperationDao.getName(bankOperation);
 	}
 
+	/**
+	 * get bank Operation paginated
+	 * @param pageable
+	 * @param user
+	 * @return new page of bank operations paginated in bankTransferDisplay 
+	 */
 	@Override
 	public Page<BankTransferDisplay> getBankOperationsPaginated(Pageable pageable, MyMainUser user) {
 		int pageSize = pageable.getPageSize();

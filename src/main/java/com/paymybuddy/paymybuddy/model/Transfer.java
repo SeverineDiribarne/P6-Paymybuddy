@@ -16,12 +16,10 @@ public class Transfer {
 	private double amount;
 	private TransferType transferType;
 
-
 	/**
 	 * empty constructor
 	 */
 	public Transfer() {}
-
 
 	/**
 	 * Constructor with connectionId, description and amount
@@ -49,6 +47,7 @@ public class Transfer {
 	public Transfer(int transferId) {
 		this.transferId = transferId;
 	}
+	
 	/**
 	 * Getter transferId
 	 * @return transferId
@@ -64,6 +63,7 @@ public class Transfer {
 	public Date getDate() {
 		return date;
 	}
+	
 	/**
 	 * Setter date
 	 * @param date
@@ -73,19 +73,21 @@ public class Transfer {
 	} 
 
 	/**
-	 * 
-	 * @return
+	 * getter customerRecipient
+	 * @return customerRecipient
 	 */
 	public Customer getCustomerRecipient() {
 		return customerRecipient;
 	}
+	
 	/**
-	 * 
+	 * setter customerRecipient
 	 * @param customerRecipient
 	 */
 	public void setCustomerRecipient(Customer customerRecipient) {
 		this.customerRecipient = customerRecipient;
 	}
+	
 	/**
 	 * Getter connection 
 	 * @return connection
@@ -150,6 +152,9 @@ public class Transfer {
 		this.transferType = transferType;
 	}
 
+	/**
+	 * toString Method
+	 */
 	@Override
 	public String toString() {
 		return "Transfer ["

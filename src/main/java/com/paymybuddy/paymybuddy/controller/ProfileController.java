@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/profile")
 public class ProfileController {
 
-	
+	/**
+	 * get profile
+	 * @return profile page
+	 */
 	@GetMapping
 	public String getProfile() {
 		return "profile";

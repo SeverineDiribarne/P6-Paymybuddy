@@ -9,10 +9,11 @@ import com.paymybuddy.paymybuddy.model.Connection;
 
 public class ConnectionByCustomersRowMapper implements RowMapper<Connection> {
 
+	/**
+	 * retrieves the information of the connectionId in the database
+	 */
 	@Override
 	public Connection mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
 		return new Connection (rs.getInt("connectionId"));
 	}
-
 }

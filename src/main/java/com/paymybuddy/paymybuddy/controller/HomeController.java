@@ -41,17 +41,32 @@ public class HomeController {
 	
 	private static final String USERNAME = "username";
 
+	/**
+	 * Show balance
+	 * @param model
+	 * @param user
+	 * @return home page
+	 */
 	@GetMapping 
 	public String showbalance(Model model,  @AuthenticationPrincipal MyMainUser user) {
 		Customer customer = homeService.getBalance(user);
-		double balance = Math.round ((customer.getBalance()*100.0)/100.0);
-		customerService.updateBalance(balance, user);
+		double myBalance = customer.getBalance();
+		customerService.updateBalance(myBalance, user);
+		java.text.DecimalFormat decimalFormat = new java.text.DecimalFormat("0.00");
+		String balance = decimalFormat.format(myBalance);
 		model.addAttribute("bankOperation", new BankOperation());
 		model.addAttribute( "balance", balance);
 		model.addAttribute(USERNAME, user.getCustomer().getFirstName());
 		return "home";
 	}
 
+	/**
+	 * add Payment from Bank to App
+	 * @param model
+	 * @param user
+	 * @param bankOperation
+	 * @return home page
+	 */
 	@PostMapping("/paymentOnApp")
 	public String addPaymentFromBankToApp(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute BankOperation bankOperation) {
 		java.util.Date date = Calendar.getInstance().getTime();
@@ -75,6 +90,13 @@ public class HomeController {
 		return "redirect:/home";
 	}
 
+	/**
+	 * get Payment From App to Bank
+	 * @param model
+	 * @param user
+	 * @param bankOperation
+	 * @return home page
+	 */
 	@PostMapping("/paymentOnBank")
 	public String getPaymentFromAppToBank(Model model, @AuthenticationPrincipal MyMainUser user, @ModelAttribute BankOperation bankOperation) {
 		java.util.Date date = Calendar.getInstance().getTime();

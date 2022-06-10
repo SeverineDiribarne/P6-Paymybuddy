@@ -27,7 +27,12 @@ public class ConnectionController {
 	
 	private static final String USERNAME = "username";
 
-	
+	/**
+	 * get Connection
+	 * @param model
+	 * @param user
+	 * @return connection page
+	 */
 	@GetMapping
 	public String getConnection(Model model, @AuthenticationPrincipal MyMainUser user) {
 		model.addAttribute("customer", new Customer());
@@ -35,6 +40,13 @@ public class ConnectionController {
 		return "connection";
 	}
 	
+	/**
+	 * Add a connection
+	 * @param model
+	 * @param user
+	 * @param customer
+	 * @return transfer page
+	 */
 	@PostMapping("/add")
 	public String addAConnection(Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
 		connectionService.addAConnection(user, customer);
@@ -43,6 +55,13 @@ public class ConnectionController {
 		return "redirect:/transfer";
 	}
 	
+	/**
+	 * delete a connection
+	 * @param model
+	 * @param user
+	 * @param customer
+	 * @return transfer page
+	 */
 	@PostMapping("/delete")
 	public String deleteAConnection (Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
 		connectionService.deleteAConnection(user, customer);
