@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,9 @@ public class HomeController {
 	private CustomerService customerService;
 	
 	private static final String USERNAME = "username";
+	
+	private static final Logger log = LogManager.getLogger(); 
+
 
 	/**
 	 * Show balance
@@ -51,7 +56,11 @@ public class HomeController {
 	public String showbalance(Model model,  @AuthenticationPrincipal MyMainUser user) {
 		Customer customer = homeService.getBalance(user);
 		double myBalance = customer.getBalance();
-		customerService.updateBalance(myBalance, user);
+		try {
+			customerService.updateBalance(myBalance, user);
+		} catch (Exception e) {
+			log.debug("This balance cannot be updated");
+		}
 		java.text.DecimalFormat decimalFormat = new java.text.DecimalFormat("0.00");
 		String balance = decimalFormat.format(myBalance);
 		model.addAttribute("bankOperation", new BankOperation());
@@ -75,7 +84,11 @@ public class HomeController {
 		bankOperation.setDescription(description);
 		bankOperation.setSource(bankAccountService.getBankAccountId(user));
 		bankOperation.setRecipient(user.getCustomer().getCustomerId());
-		bankOperationService.addPaymentFromBankToApp(bankOperation);
+		try {
+			bankOperationService.addPaymentFromBankToApp(bankOperation);
+		} catch (Exception e) {
+			log.debug("This payment from Bank to App cannot be added");
+		}
 		List<BankOperation> operations = bankOperationService.getBankOperations(user);
 		List<BankTransferDisplay> bankTransferDisplayList = new ArrayList<>();
 		for(BankOperation operationOfTheList : operations) {
@@ -105,7 +118,11 @@ public class HomeController {
 		bankOperation.setDescription(description);
 		bankOperation.setSource(user.getCustomer().getCustomerId());
 		bankOperation.setRecipient(bankAccountService.getBankAccountId(user));
-		bankOperationService.addPaymentFromAppToBank(user, bankOperation);
+		try {
+			bankOperationService.addPaymentFromAppToBank(user, bankOperation);
+		} catch (Exception e) {
+			log.debug("This payment from App to Bank cannot be added");
+		}
 		List<BankOperation> operations = bankOperationService.getBankOperations(user);
 		List<BankTransferDisplay> bankTransferDisplayList = new ArrayList<>();
 		for(BankOperation operationOfTheList : operations) {

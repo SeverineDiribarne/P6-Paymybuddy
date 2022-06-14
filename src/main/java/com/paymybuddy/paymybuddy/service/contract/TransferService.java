@@ -13,7 +13,7 @@ public interface TransferService {
 
 	List<Transfer> getListOfTransfers(MyMainUser user);
 
-	void addPayment(Transfer transfer, MyMainUser user);
+	void addPayment(Transfer transfer, MyMainUser user) throws Exception;
 
 	Page<TransferDisplay> getTransfersPaginated(Pageable pageable, MyMainUser user);
 

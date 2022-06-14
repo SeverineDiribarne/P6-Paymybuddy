@@ -5,12 +5,12 @@
 			<PatternLayout
 				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
-		<File name = "logFile" fileName ="logs/SafetyNetAlert.log">
+		<File name = "logFile" fileName ="logs/payMyBuddy.log">
 			<PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</File>
 	</Appenders>
 	<Loggers>
-		<Logger name="com.safetynetalert" level="debug"
+		<Logger name="com.paymybuddy" level="debug"
 			additivity="false">
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="logFile" level="debug"/>

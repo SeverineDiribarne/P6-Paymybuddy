@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +50,9 @@ public class TransferController {
 	private static final String TRANSFER = "transfer";
 	private static final String PAGE_NUMBERS = "pageNumbers";
 	private static final String BANK_PAGE_NUMBERS = "bankPageNumbers";
+	
+	private static final Logger log = LogManager.getLogger(); 
+
 
 	/**
 	 * Show Transfers and Friends
@@ -90,7 +95,7 @@ public class TransferController {
 					.boxed()
 					.collect(Collectors.toList());
 			model.addAttribute(BANK_PAGE_NUMBERS, bankPageNumber);
-;		}
+		}
 
 		//for drop-down list of relationships
 		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
@@ -125,7 +130,12 @@ public class TransferController {
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(3);
-		transferService.addPayment(transfer,user);
+		try {
+			transferService.addPayment(transfer,user);
+		} catch (Exception e) {
+			log.debug("This new payment cannot be added");
+			
+		}
 		Page<TransferDisplay> transferDisplayListPage = transferService.getTransfersPaginated(PageRequest.of(currentPage - 1, pageSize), user);
 
 		int totalPages = transferDisplayListPage.getTotalPages();

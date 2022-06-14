@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.paymybuddy.dao.contract.BankOperationDao;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
@@ -47,7 +48,8 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 * @param bankOperation
 	 */
 	@Override
-	public void addPaymentFromBankToApp(BankOperation bankOperation) {
+	@Transactional(rollbackFor = Exception.class)
+	public void addPaymentFromBankToApp(BankOperation bankOperation) throws Exception {
 		bankOperationDao.addPaymentFromBankToApp(bankOperation);	
 		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();
 		customerDao.updateCustomerBalanceAfterPaymentFromBankToApp(lastBankOperation.getBankOperationId());
@@ -59,7 +61,8 @@ public class BankOperationServiceImpl implements BankOperationService {
 	 * @param bankOperation
 	 */
 	@Override
-	public void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) {
+	@Transactional(rollbackFor = Exception.class)
+	public void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) throws Exception {
 		bankOperation.setBankOperationAmount(bankOperation.getBankOperationAmount()*(-1));
 		bankOperationDao.addPaymentFromAppToBank(bankOperation);	
 		BankOperation lastBankOperation = bankOperationDao.getLastOperationId();

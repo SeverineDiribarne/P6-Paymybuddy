@@ -13,8 +13,8 @@ public interface CustomerService {
 	
 	public int getCustomerIdByName(Customer customer);
 
-	public void registerNewCustomerIntoDatabase(Customer customer);
+	public void registerNewCustomerIntoDatabase(Customer customer) throws Exception;
 
-	public void updateBalance(double balance, MyMainUser user);
+	public void updateBalance(double balance, MyMainUser user) throws Exception;
 		
 }

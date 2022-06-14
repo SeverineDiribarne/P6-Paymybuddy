@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
@@ -49,8 +50,9 @@ public class TransferServiceImpl implements TransferService{
 	 * @param transfer
 	 * @param user
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void addPayment(Transfer transfer, MyMainUser user) {
+	public void addPayment(Transfer transfer, MyMainUser user) throws Exception {
 		if(transfer.getAmount() > 0) {
 			//negative amount for main user
 			double negativeAmount = transfer.getAmount() * (-1);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.model.Customer;
@@ -55,7 +56,8 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param customer
 	 */
 	@Override
-	public void registerNewCustomerIntoDatabase(Customer customer) {
+	@Transactional(rollbackFor = Exception.class)
+	public void registerNewCustomerIntoDatabase(Customer customer) throws Exception {
 		String encryptionPassword = passwordEncoder.encode(customer.getAccount().getPassword());
 		customerDao.registerNewCustomerIntoDatabase(customer, encryptionPassword);
 	}
@@ -66,7 +68,8 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param user
 	 */
 	@Override
-	public void updateBalance(double balance, MyMainUser user) {
+	@Transactional(rollbackFor = Exception.class)
+	public void updateBalance(double balance, MyMainUser user) throws Exception {
 	customerDao.updateBalance(balance, user);
 	}
 }

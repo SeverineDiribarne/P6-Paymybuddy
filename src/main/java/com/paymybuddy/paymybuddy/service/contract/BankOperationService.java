@@ -14,9 +14,9 @@ public interface BankOperationService {
 	
 	List<BankOperation> getBankOperations(MyMainUser user);
 
-	void addPaymentFromBankToApp(BankOperation bankOperation);
+	void addPaymentFromBankToApp(BankOperation bankOperation) throws Exception;
 
-	void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation);
+	void addPaymentFromAppToBank(MyMainUser user, BankOperation bankOperation) throws Exception;
 	
 	BankOperation getLastOperationId();
 

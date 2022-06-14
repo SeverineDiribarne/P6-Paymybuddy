@@ -6,11 +6,11 @@ import com.paymybuddy.paymybuddy.security.MyMainUser;
 
 public interface ConnectionService {
 
-	void addAConnection(MyMainUser user, Customer customer);
+	void addAConnection(MyMainUser user, Customer customer)throws Exception;
 
 	int getConnectionIdByCustomersIdWithMainUser(MyMainUser user, Customer customer);
 
-	void deleteAConnection(MyMainUser user, Customer customer);
+	void deleteAConnection(MyMainUser user, Customer customer)throws Exception;
 
 	Customer getRecipientNameByRecipientId(Connection connection);
 	

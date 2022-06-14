@@ -15,6 +15,8 @@ import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
 import com.paymybuddy.paymybuddy.service.contract.ConnectionService;
 import com.paymybuddy.paymybuddy.service.contract.CustomerService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Controller
 @RequestMapping ("/connection")
@@ -26,6 +28,9 @@ public class ConnectionController {
 	CustomerService customerService;
 	
 	private static final String USERNAME = "username";
+	
+	private static final Logger log = LogManager.getLogger(); 
+
 
 	/**
 	 * get Connection
@@ -49,7 +54,11 @@ public class ConnectionController {
 	 */
 	@PostMapping("/add")
 	public String addAConnection(Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
-		connectionService.addAConnection(user, customer);
+		try {
+			connectionService.addAConnection(user, customer);
+		} catch (Exception e) {
+			log.debug("This user cannot be added");
+		}
 		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		model.addAttribute("customers", customers);
 		return "redirect:/transfer";
@@ -64,7 +73,11 @@ public class ConnectionController {
 	 */
 	@PostMapping("/delete")
 	public String deleteAConnection (Model model,  @AuthenticationPrincipal MyMainUser user, @ModelAttribute Customer customer) {
-		connectionService.deleteAConnection(user, customer);
+		try {
+			connectionService.deleteAConnection(user, customer);
+		} catch (Exception e) {
+			log.debug("This user cannot be deleted");
+		}
 		List<Customer> customers =  customerService.getAllCustomerRecipients(user);
 		model.addAttribute("customers", customers);
 		return "redirect:/transfer";

@@ -1,5 +1,7 @@
 package com.paymybuddy.paymybuddy.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ import com.paymybuddy.paymybuddy.service.contract.CustomerService;
 public class RegisterController {
 
 	private static final String REDIRECT_LOGIN = "redirect:/login";
+	
+	private static final Logger log = LogManager.getLogger(); 
+
 
 	@Autowired
 	CustomerService customerService;
@@ -46,7 +51,11 @@ public class RegisterController {
 				!customer.getEmail().equals("") && !customer.getAccount().getPassword().equals("") &&
 				!customer.getBankAccount().getBankAccountName().equals("") && !customer.getBankAccount().getIban().equals("") &&
 				!customer.getBankAccount().getBic().equals("") && !customer.getBankAccount().getSwift().equals("")) {
-			customerService.registerNewCustomerIntoDatabase(customer);
+			try {
+				customerService.registerNewCustomerIntoDatabase(customer);
+			} catch (Exception e) {
+				log.debug("This new user cannot be registered");
+			}
 		}
 		return REDIRECT_LOGIN;
 	}

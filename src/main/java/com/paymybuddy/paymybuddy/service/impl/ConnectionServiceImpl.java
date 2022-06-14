@@ -2,6 +2,7 @@ package com.paymybuddy.paymybuddy.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
 import com.paymybuddy.paymybuddy.model.Connection;
@@ -21,6 +22,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 	 * @param customer
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void addAConnection(MyMainUser user, Customer customer) {
 		connectionDao.addAConnection( user, customer);
 
@@ -43,7 +45,8 @@ public class ConnectionServiceImpl implements ConnectionService {
 	 * @param customer
 	 */
 	@Override
-	public void deleteAConnection(MyMainUser user, Customer customer) {
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteAConnection(MyMainUser user, Customer customer)throws Exception {
 		connectionDao.deleteAConnection( user, customer);
 
 	}
