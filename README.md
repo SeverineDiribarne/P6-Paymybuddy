@@ -39,7 +39,7 @@ password : RTY645
 #
 email : babou.bibi@gmail.com
 password : LMN123
-
+#
 # Application.properties
 #
 Create this file into src/main/resources.
