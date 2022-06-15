@@ -39,3 +39,18 @@ mot de passe : RTY645
 #
 email : babou.bibi@gmail.com
 mot de passe : LMN123
+
+# Application.properties
+#
+Create this file into src/main/resources.
+Here is the contain example :
+spring.datasource.url=jdbc:mysql://localhost:3306/db-paymybuddy
+spring.datasource.username= your root username 
+spring.datasource.password= your root password
+
+spring.thymeleaf.cache=false
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.prefix=file:src/main/resources/templates/
+
+spring.sql.init.mode=always
+spring.jpa.hibernate.ddl-auto=none
