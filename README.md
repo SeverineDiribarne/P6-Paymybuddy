@@ -1,49 +1,50 @@
-# paymybuddy
-Diagramme de Use Case
+# Pay my buddy
+Use Case Diagram
 #
 <img src="https://user-images.githubusercontent.com/75072149/167119364-3e764ab2-4ffa-4b66-9bce-e815ff3fab19.png" width="60%"></img>
 #
-Diagramme de classe
+Class Diagram  
 #
 <img src="https://user-images.githubusercontent.com/75072149/173115591-044661fc-e104-47bd-bb63-b9ddcb662fd1.png" width="60%"></img> 
 #
-schema de modelisation de la base de données
+Database modeling schema
 #
 <img src="https://user-images.githubusercontent.com/75072149/171674113-e9f97ca4-74ca-4629-a974-94e70f7eb364.png" width="60%"></img> 
 
-# Mot de passe des utilisateurs
+# Users email and password
 #
 email : aurelie.dupont@gmail.com
-mot de passe : ABC123
+password : ABC123
 #
 email : harry.martin@gmail.com
-mot de passe : DEF456
+password : DEF456
 #
 email : marion.deltiny@gmail.com
-mot de passe : GHI789
+password : GHI789
 #
 email : marina.dupond@gmail.com
-mot de passe : BCD234
+password : BCD234
 #
 email : olivier.herriberry@gmail.com
-mot de passe : EFG567
+password : EFG567
 #
 email : pierre.albane@gmail.com
-mot de passe : IJH890
+password : IJH890
 #
 email : severine.diribarne@gmail.com
-mot de passe : AZE987
+password : AZE987
 #
 email : enzo.smith@gmail.com
-mot de passe : RTY645
+password : RTY645
 #
 email : babou.bibi@gmail.com
-mot de passe : LMN123
+password : LMN123
 
 # Application.properties
 #
 Create this file into src/main/resources.
 Here is the contain example :
+#
 spring.datasource.url=jdbc:mysql://localhost:3306/db-paymybuddy
 spring.datasource.username= your root username 
 spring.datasource.password= your root password
