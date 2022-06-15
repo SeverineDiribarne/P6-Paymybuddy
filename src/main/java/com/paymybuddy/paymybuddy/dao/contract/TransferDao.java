@@ -14,4 +14,6 @@ public interface TransferDao {
 
 	Transfer getLastTransferId();
 
+	void deleteTransfersOfCustomer(Connection connectionIdFromUserToCustomer);
+
 }

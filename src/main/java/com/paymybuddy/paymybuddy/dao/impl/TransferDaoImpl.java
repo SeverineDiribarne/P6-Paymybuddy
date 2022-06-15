@@ -62,7 +62,9 @@ public class TransferDaoImpl implements TransferDao {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
 	
-	public static final String FIND_TRANSFERS_QUERY = " ";
-	
-	
+	public static final String DELETE_TRANSFER_QUERY = "DELETE FROM transfer t WHERE t.connection = ?; ";
+	@Override
+	public void deleteTransfersOfCustomer(Connection connection) {
+		jdbcTemplate.update(DELETE_TRANSFER_QUERY,connection.getConnectionId());
+	}
 }

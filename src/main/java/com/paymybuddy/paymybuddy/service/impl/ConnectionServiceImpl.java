@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.paymybuddy.dao.contract.ConnectionDao;
+import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
+import com.paymybuddy.paymybuddy.dao.contract.TransferDao;
 import com.paymybuddy.paymybuddy.model.Connection;
 import com.paymybuddy.paymybuddy.model.Customer;
 import com.paymybuddy.paymybuddy.security.MyMainUser;
@@ -15,6 +17,12 @@ public class ConnectionServiceImpl implements ConnectionService {
 
 	@Autowired
 	ConnectionDao connectionDao;
+	
+	@Autowired
+	TransferDao transferDao;
+	
+	@Autowired
+	CustomerDao customerDao;
 
 	/**
 	 * add A Connection
@@ -47,7 +55,11 @@ public class ConnectionServiceImpl implements ConnectionService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteAConnection(MyMainUser user, Customer customer)throws Exception {
-		
+		Customer customerRecipient = customerDao.getCustomerByEmail(customer.getEmail());
+		Connection connectionIdFromUserToCustomer = connectionDao.getConnectionByCustomers(user.getCustomer(), customerRecipient);
+		Connection connectionIdFromCustomerToUser = connectionDao.getConnectionByCustomers(customerRecipient, user.getCustomer());
+		transferDao.deleteTransfersOfCustomer(connectionIdFromUserToCustomer);
+		transferDao.deleteTransfersOfCustomer(connectionIdFromCustomerToUser);
 		connectionDao.deleteAConnection( user, customer);
 
 	}

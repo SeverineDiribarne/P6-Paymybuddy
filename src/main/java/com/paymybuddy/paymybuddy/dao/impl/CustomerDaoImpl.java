@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.paymybuddy.paymybuddy.dao.contract.CustomerDao;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerRecipientIdAndNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.InformationsOfCustomerByIdRowMapper;
+import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerByEmailRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdByNameRowMapper;
 import com.paymybuddy.paymybuddy.dao.impl.mapper.CustomerIdentityRowMapper;
 import com.paymybuddy.paymybuddy.model.Customer;
@@ -173,5 +174,14 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void updateBalance(double balance, MyMainUser user) {
 		jdbcTemplate.update(UPDATE_BALANCE_QUERY, balance, user.getCustomer().getCustomerId());
+	}
+	
+	private static final String GET_CUSTOMER_RECIPIENT_QUERY = "SELECT cust.id, cust.firstName, cust.lastName, cust.email, cust.balance"
+			+ " FROM customer cust "
+			+ " WHERE cust.email = ?;";
+	
+	@Override
+	public Customer getCustomerByEmail(String email) {
+		return jdbcTemplate.queryForObject(GET_CUSTOMER_RECIPIENT_QUERY, new CustomerByEmailRowMapper(), email);
 	}
 }
