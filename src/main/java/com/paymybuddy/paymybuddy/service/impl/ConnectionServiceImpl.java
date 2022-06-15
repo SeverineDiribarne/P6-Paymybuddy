@@ -47,6 +47,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void deleteAConnection(MyMainUser user, Customer customer)throws Exception {
+		
 		connectionDao.deleteAConnection( user, customer);
 
 	}

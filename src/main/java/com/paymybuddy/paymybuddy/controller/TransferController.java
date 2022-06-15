@@ -133,8 +133,7 @@ public class TransferController {
 		try {
 			transferService.addPayment(transfer,user);
 		} catch (Exception e) {
-			log.debug("This new payment cannot be added");
-			
+			log.debug("This new payment cannot be added");	
 		}
 		Page<TransferDisplay> transferDisplayListPage = transferService.getTransfersPaginated(PageRequest.of(currentPage - 1, pageSize), user);
 

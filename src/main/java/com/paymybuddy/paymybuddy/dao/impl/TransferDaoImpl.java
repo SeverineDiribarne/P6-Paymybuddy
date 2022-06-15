@@ -61,4 +61,8 @@ public class TransferDaoImpl implements TransferDao {
 	public Transfer getLastTransferId() {
 		return jdbcTemplate.queryForObject(GET_LAST_TRANSFER_ID_QUERY, new LastTransferIdRowMapper());
 	}
+	
+	public static final String FIND_TRANSFERS_QUERY = " ";
+	
+	
 }
