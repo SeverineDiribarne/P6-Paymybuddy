@@ -42,7 +42,8 @@ password : LMN123
 #
 # Application.properties
 #
-Create this file into src/main/resources.
+Create a folder that you will name "config" at the root of the project then create this file that you will call "application.properties".
+This allows you to externalize login credentials to your database.
 Here is the contain example :
 #
 <img src="https://user-images.githubusercontent.com/75072149/173822380-d9976e8c-d569-4c57-b833-29dcd2b93f7f.png" width="90%"></img> 
