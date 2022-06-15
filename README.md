@@ -45,13 +45,5 @@ password : LMN123
 Create this file into src/main/resources.
 Here is the contain example :
 #
-spring.datasource.url=jdbc:mysql://localhost:3306/db-paymybuddy
-spring.datasource.username= your root username 
-spring.datasource.password= your root password
+<img src="https://user-images.githubusercontent.com/75072149/173822380-d9976e8c-d569-4c57-b833-29dcd2b93f7f.png" width="90%"></img> 
 
-spring.thymeleaf.cache=false
-spring.thymeleaf.mode=HTML
-spring.thymeleaf.prefix=file:src/main/resources/templates/
-
-spring.sql.init.mode=always
-spring.jpa.hibernate.ddl-auto=none
